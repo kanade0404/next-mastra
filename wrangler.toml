@@ -1,0 +1,240 @@
+# Cloudflare Wrangler Configuration
+# Next.js + Mastra Chat LLM テンプレート
+
+name = "next-mastra-chat"
+compatibility_date = "2024-12-15"
+compatibility_flags = ["nodejs_compat"]
+
+# ======================
+# Pages Configuration
+# ======================
+[build]
+command = "pnpm build:cf"
+cwd = "."
+watch_dir = "src"
+
+[build.upload]
+format = "modules"
+dir = ".vercel/output/static"
+main = ".vercel/output/functions/__nitro.func/index.js"
+
+# ======================
+# Environment Variables
+# ======================
+[env.development]
+ENVIRONMENT = "development"
+
+[env.production] 
+ENVIRONMENT = "production"
+
+# ======================
+# Cloudflare D1 Database
+# ======================
+[[d1_databases]]
+binding = "DB"
+database_name = "next-mastra-chat-db"
+database_id = "your_d1_database_id_here"
+migrations_dir = "./prisma/migrations"
+
+# Development用のローカルD1データベース
+[env.development.d1_databases]
+binding = "DB"
+database_name = "next-mastra-chat-db-dev"
+database_id = "your_dev_d1_database_id_here"
+
+# ======================
+# Cloudflare R2 Storage
+# ======================
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "next-mastra-chat-files"
+preview_bucket_name = "next-mastra-chat-files-preview"
+
+# ======================
+# Cloudflare KV Storage
+# ======================
+[[kv_namespaces]]
+binding = "KV_CACHE"
+id = "your_kv_namespace_id_here"
+preview_id = "your_kv_preview_id_here"
+
+# ユーザー設定用KV
+[[kv_namespaces]]
+binding = "KV_USER_SETTINGS"
+id = "your_user_settings_kv_id_here"
+preview_id = "your_user_settings_kv_preview_id_here"
+
+# セッションキャッシュ用KV
+[[kv_namespaces]]
+binding = "KV_SESSIONS"
+id = "your_sessions_kv_id_here"
+preview_id = "your_sessions_kv_preview_id_here"
+
+# ======================
+# Cloudflare Analytics Engine
+# ======================
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+dataset = "next_mastra_chat_analytics"
+
+# ======================
+# Functions Configuration
+# ======================
+[functions]
+# API Routes用の設定
+routes = [
+  { pattern = "/api/v1/*", zone_name = "your-domain.com" }
+]
+
+# ======================
+# Compatibility & Security
+# ======================
+[compatibility_date]
+compatibility_date = "2024-12-15"
+
+[security]
+# CSP設定
+content_security_policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.openai.com https://*.pinecone.io https://clerk.*.dev;"
+
+# ======================
+# Development Settings
+# ======================
+[dev]
+port = 8787
+local_protocol = "http"
+upstream_protocol = "https"
+
+# ローカル開発時のR2設定
+[[env.development.r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "next-mastra-chat-files-dev"
+
+# ======================
+# Variables (非機密情報)
+# ======================
+[vars]
+ENVIRONMENT = "production"
+APP_VERSION = "1.0.0"
+CLOUDFLARE_REGION = "auto"
+
+# ======================
+# Secrets (機密情報)
+# ======================
+# 以下のsecretsは `wrangler secret put` コマンドで設定
+# wrangler secret put OPENAI_API_KEY
+# wrangler secret put CLERK_SECRET_KEY
+# wrangler secret put PINECONE_API_KEY
+# wrangler secret put BREVO_API_KEY
+# wrangler secret put SENTRY_DSN
+# wrangler secret put GRAFANA_CLOUD_API_KEY
+# wrangler secret put CSRF_SECRET
+# wrangler secret put ENCRYPTION_KEY
+
+# ======================
+# Deployment Settings
+# ======================
+[deployment]
+# メインブランチのみ本番デプロイ
+compatibility_date = "2024-12-15"
+
+# ======================
+# Observability
+# ======================
+[observability]
+# ログレベル設定
+log_level = "info"
+
+# メトリクス収集
+[observability.metrics]
+enabled = true
+
+# トレーシング設定  
+[observability.tracing]
+enabled = true
+sampling_rate = 0.1
+
+# ======================
+# Resource Limits
+# ======================
+[limits]
+# CPU時間制限（ミリ秒）
+cpu_ms = 30000
+
+# メモリ制限（MB）
+memory_mb = 128
+
+# リクエストサイズ制限（MB）
+request_size_mb = 25
+
+# ======================
+# Custom Domains
+# ======================
+# 本番環境でのカスタムドメイン設定
+[custom_domains]
+# zones = ["your-domain.com"]
+# routes = [
+#   { pattern = "your-domain.com/*", zone_name = "your-domain.com" },
+#   { pattern = "api.your-domain.com/*", zone_name = "your-domain.com" }
+# ]
+
+# ======================
+# Cache Settings
+# ======================
+[cache]
+# 静的アセットのキャッシュ設定
+browser_ttl = 31536000  # 1年
+edge_ttl = 86400        # 1日
+
+# API レスポンスのキャッシュ設定
+[cache.api]
+browser_ttl = 0         # ブラウザキャッシュなし
+edge_ttl = 300          # 5分間エッジキャッシュ
+
+# ======================
+# Error Pages
+# ======================
+[error_pages]
+# カスタムエラーページ設定
+404 = "/404.html"
+500 = "/500.html"
+
+# ======================
+# Miniflare Development
+# ======================
+[miniflare]
+# ローカル開発環境設定
+kv_persist = true
+d1_persist = true
+r2_persist = true
+cache_persist = true
+
+# ======================
+# Migration Settings
+# ======================
+[migrations]
+# データベースマイグレーション設定
+tag = "v1.0.0"
+new_sqlite_wal = true
+
+# ======================
+# Build Configuration
+# ======================
+[build_config]
+# Next.js特有のビルド設定
+root_dir = "."
+build_caching = true
+build_watch_ignore = ["node_modules", ".git", ".next"]
+
+# ======================
+# Performance Optimization
+# ======================
+[optimization]
+# バンドル最適化
+minify = true
+source_maps = false
+tree_shaking = true
+
+# コード分割設定
+[optimization.code_splitting]
+enabled = true
+chunk_size_limit = 244  # KB

@@ -1,0 +1,17 @@
+{
+    "permissions": {
+        "allow": [
+            "Bash(mkdir:*)",
+            "Bash(pnpm test:*)",
+            "Bash(pnpm type-check:*)",
+            "Bash(pnpm lint:*)",
+            "Bash(pnpm install:*)",
+            "Bash(pnpm add:*)",
+            "Bash(rm:*)",
+            "Bash(pnpm build:*)",
+            "Bash(pnpm validate:*)",
+            "Bash(pnpm format:*)"
+        ],
+        "deny": []
+    }
+}
