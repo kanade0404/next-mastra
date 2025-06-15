@@ -50,9 +50,9 @@ describe('環境変数バリデーション', () => {
                 PINECONE_INDEX_NAME: 'test-index',
                 BREVO_API_KEY: 'test-brevo-key',
                 BREVO_SENDER_EMAIL: 'test@example.com',
-                SENTRY_DSN: 'https://test@sentry.io/123',
-                CSRF_SECRET: 'test-csrf-secret-at-least-32-chars-long',
-                ENCRYPTION_KEY: 'test-encryption-key-at-least-32-chars',
+                SENTRY_DSN: 'placeholder://sentry-dsn',
+                CSRF_SECRET: 'placeholder_csrf_secret_32_chars____',
+                ENCRYPTION_KEY: 'placeholder_encryption_key_32_chars',
             };
 
             Object.assign(process.env, validEnv);
@@ -179,9 +179,9 @@ describe('環境変数バリデーション', () => {
                 PINECONE_INDEX_NAME: 'test',
                 BREVO_API_KEY: 'test',
                 BREVO_SENDER_EMAIL: 'test@example.com',
-                SENTRY_DSN: 'https://test@sentry.io/123',
-                CSRF_SECRET: 'test-csrf-secret-at-least-32-chars-long',
-                ENCRYPTION_KEY: 'test-encryption-key-at-least-32-chars',
+                SENTRY_DSN: 'placeholder://sentry-dsn',
+                CSRF_SECRET: 'placeholder_csrf_secret_32_chars____',
+                ENCRYPTION_KEY: 'placeholder_encryption_key_32_chars',
                 SKIP_ENV_VALIDATION: 'true', // バリデーションをスキップ
             };
 
