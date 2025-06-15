@@ -92,6 +92,10 @@
         "vitest": "^3.2.3",
         "wrangler": "^4.20.0"
     },
+    "engines": {
+        "node": ">=18.0.0",
+        "pnpm": ">=8.0.0"
+    },
     "private": true,
     "scripts": {
         "build": "next build",
@@ -107,9 +111,11 @@
         "format:fixpack": "fixpack",
         "format:prettier": "prettier --write .",
         "lint": "run-p lint:*",
+        "lint:actionlint": "bash -c 'if which actionlint >/dev/null 2>&1 && actionlint --version >/dev/null 2>&1; then actionlint .github/workflows/*.yml; elif command -v docker >/dev/null 2>&1; then echo \"Docker経由でactionlintを実行します...\"; docker run --rm -v $(pwd):/repo --workdir /repo rhysd/actionlint:latest -color; else echo \"actionlintまたはDockerが見つかりません。インストールしてください\"; exit 1; fi'",
         "lint:cspell": "cspell lint .",
         "lint:eslint": "eslint .",
         "lint:prettier": "prettier --check .",
+        "lint:secretlint": "secretlint .",
         "start": "next start",
         "test": "vitest run",
         "test:coverage": "vitest run --coverage",

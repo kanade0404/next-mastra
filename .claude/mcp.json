@@ -1,0 +1,18 @@
+{
+    "mcpServers": {
+        "context7": {
+            "command": "npx",
+            "args": ["-y", "@upstash/context7-mcp"],
+            "env": {}
+        },
+        "eslint": {
+            "command": "pnpm",
+            "args": ["eslint", "--mcp"],
+            "env": {}
+        },
+        "prisma": {
+            "command": "pnpm",
+            "args": ["prisma", "mcp"]
+        }
+    }
+}

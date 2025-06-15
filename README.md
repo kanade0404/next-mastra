@@ -38,3 +38,32 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 This directory contains example API routes for the headless API app.
 
 For more details, see [route.js file convention](https://nextjs.org/docs/app/api-reference/file-conventions/route).
+
+## 開発環境設定
+
+### actionlint (GitHub Actionsワークフローのリント)
+
+GitHub Actionsワークフローの品質を保つため、actionlintをインストールすることを推奨します：
+
+```bash
+# macOS (Homebrew)
+brew install actionlint
+
+# Linux/Windows (手動インストール)
+curl -s https://api.github.com/repos/rhymond/actionlint/releases/latest \
+| grep "browser_download_url.*linux_amd64.tar.gz" \
+| cut -d '"' -f 4 \
+| xargs curl -L | tar xz -C /tmp && sudo mv /tmp/actionlint /usr/local/bin/
+
+# または Docker経由で実行
+docker run --rm -v .:/repo --workdir /repo rhymond/actionlint:latest
+
+# VSCode拡張
+# marketplace で "actionlint" を検索してインストール
+```
+
+インストール後、以下のコマンドでワークフローをチェックできます：
+
+```bash
+pnpm lint:actionlint
+```

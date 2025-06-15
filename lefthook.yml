@@ -15,6 +15,21 @@ pre-commit:
             glob: '*.{js,mjs,ts,tsx,jsx,json,md,yml,yaml,env,toml}'
             run: pnpm exec secretlint {staged_files}
 
+        actionlint:
+            glob: '.github/workflows/*.{yml,yaml}'
+            run: |
+                if which actionlint >/dev/null 2>&1 && actionlint --version >/dev/null 2>&1; then 
+                    actionlint {staged_files}
+                elif command -v docker >/dev/null 2>&1; then
+                    echo "Docker経由でactionlintを実行します..."
+                    docker run --rm -v $(pwd):/repo --workdir /repo rhysd/actionlint:latest -color
+                else 
+                    echo "actionlintまたはDockerが見つかりません。"
+                    echo "インストールしてください: https://github.com/rhymond/actionlint"
+                    echo "またはDocker: https://docs.docker.com/get-docker/"
+                    exit 1
+                fi
+
         # cspell:
         #     glob: '*.{js,mjs,ts,tsx,jsx,json,md,yml,yaml,toml}'
         #     run: pnpm exec cspell lint {staged_files}
