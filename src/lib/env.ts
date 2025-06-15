@@ -119,13 +119,11 @@ const envSchema = z.object({
     // =======================
     LOG_LEVEL: z.enum(['debug', 'info', 'warn', 'error']).default('info'),
     ENABLE_ANALYTICS: z
-        .string()
-        .transform((val) => val === 'true')
-        .default('true'),
+        .preprocess((v) => v === 'true', z.boolean())
+        .default(true),
     ENABLE_ERROR_REPORTING: z
-        .string()
-        .transform((val) => val === 'true')
-        .default('true'),
+        .preprocess((v) => v === 'true', z.boolean())
+        .default(true),
 
     // Rate Limiting
     RATE_LIMIT_REQUESTS_PER_MINUTE: z
@@ -152,9 +150,8 @@ const envSchema = z.object({
     // =======================
     NEXT_PUBLIC_VERCEL_URL: z.string().optional(),
     SKIP_ENV_VALIDATION: z
-        .string()
-        .transform((val) => val === 'true')
-        .default('false'),
+        .preprocess((v) => v === 'true', z.boolean())
+        .default(false),
 });
 
 /**
@@ -187,13 +184,13 @@ function validateEnv(): Env {
             console.error(errorMessages.join('\n'));
             console.error('\n💡 設定方法:');
             console.error(
-                '1. .env.local.example をコピーして .env.local を作成'
+                '1. .env.local.example をコピーして .env.local を作成',
             );
             console.error('2. 必要な環境変数を設定');
             console.error('3. 各サービスのAPIキーを取得して設定\n');
 
             throw new Error(
-                '環境変数の設定が不正です。上記のエラーを修正してください。'
+                '環境変数の設定が不正です。上記のエラーを修正してください。',
             );
         }
         throw error;
@@ -275,7 +272,7 @@ export function getEnvVar(key: keyof Env, fallback?: string): string {
     if (!value) {
         if (fallback !== undefined) {
             console.warn(
-                `⚠️  環境変数 ${key} が設定されていません。フォールバック値を使用: ${fallback}`
+                `⚠️  環境変数 ${key} が設定されていません。フォールバック値を使用: ${fallback}`,
             );
             return fallback;
         }
