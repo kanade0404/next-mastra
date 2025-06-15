@@ -12,7 +12,8 @@
         },
         "prisma": {
             "command": "pnpm",
-            "args": ["prisma", "mcp"]
+            "args": ["prisma", "mcp"],
+            "env": {}
         }
     }
 }
