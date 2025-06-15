@@ -2,20 +2,22 @@ pre-commit:
     parallel: true
     commands:
         eslint:
-            glob: '*.{js,ts,jsx,tsx}'
-            run: pnpm run lint:eslint {staged_files}
+            glob: '*.{js,mjs,ts,tsx,jsx}'
+            run: pnpm exec eslint {staged_files}
             stage_fixed: true
 
         prettier:
-            glob: '*.{js,ts,jsx,tsx,json,md,css}'
-            run: pnpm run format:prettier {staged_files}
+            glob: '*.{js,mjs,ts,tsx,jsx,json,md,css,yml,yaml,toml}'
+            run: pnpm exec prettier --write {staged_files}
             stage_fixed: true
 
         secretlint:
-            run: pnpm secretlint {staged_files}
+            glob: '*.{js,mjs,ts,tsx,jsx,json,md,yml,yaml,env,toml}'
+            run: pnpm exec secretlint {staged_files}
 
         cspell:
-            run: pnpm run lint:cspell {staged_files}
+            glob: '*.{js,mjs,ts,tsx,jsx,json,md,yml,yaml,toml}'
+            run: pnpm exec cspell lint {staged_files}
 
 pre-push:
     commands:
