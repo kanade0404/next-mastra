@@ -84,13 +84,25 @@ pnpm safe-amend
 
 ```bash
 # グローバル設定
-git config --global alias.safe-amend '!f() { CURRENT_BRANCH=$(git branch --show-current); HEAD_HASH=$(git rev-parse HEAD); if git show-ref --verify --quiet "refs/remotes/origin/$CURRENT_BRANCH" && git branch -r --contains "$HEAD_HASH" | grep -q "origin/$CURRENT_BRANCH"; then echo "🚫 エラー: 既にpush済みのコミットです！"; echo "新しいコミットを作成してください: git commit -m \"fix: 修正内容\""; exit 1; else git commit --amend "$@"; fi; }; f'
+git config --global alias.safe-amend '!./scripts/safe-amend.sh'
 
 # 使用方法
 git safe-amend
 ```
 
-#### 方法3: push済みコミットを修正する正しい手順
+#### 方法3: lefthookでスクリプト実行
+
+`lefthook.yml`に以下を追加してpre-commitフックで自動チェック：
+
+```yaml
+pre-commit:
+    commands:
+        safe-amend-check:
+            run: ./scripts/safe-amend.sh --check-only
+            stage_fixed: false
+```
+
+#### 方法4: push済みコミットを修正する正しい手順
 
 ```bash
 # 1. 修正ファイルをステージング
