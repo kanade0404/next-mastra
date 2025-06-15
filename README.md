@@ -39,78 +39,44 @@ This directory contains example API routes for the headless API app.
 
 For more details, see [route.js file convention](https://nextjs.org/docs/app/api-reference/file-conventions/route).
 
-## 開発環境設定
+## 開発環境
 
-### actionlint (GitHub Actionsワークフローのリント)
+### 必要な環境
 
-GitHub Actionsワークフローの品質を保つため、actionlintをインストールすることを推奨します：
+- Node.js 18+
+- pnpm 8+
+
+### セットアップ
 
 ```bash
-# macOS (Homebrew)
-brew install actionlint
+# 依存関係のインストール
+pnpm install
 
-# Linux/Windows (手動インストール)
-curl -s https://api.github.com/repos/rhymond/actionlint/releases/latest \
-| grep "browser_download_url.*linux_amd64.tar.gz" \
-| cut -d '"' -f 4 \
-| xargs curl -L | tar xz -C /tmp && sudo mv /tmp/actionlint /usr/local/bin/
+# 開発サーバー起動
+pnpm dev
 
-# または Docker経由で実行
-docker run --rm -v .:/repo --workdir /repo rhymond/actionlint:latest
+# リント・フォーマット実行
+pnpm lint
+pnpm format
 
-# VSCode拡張
-# marketplace で "actionlint" を検索してインストール
+# テスト実行
+pnpm test
+
+# ビルド
+pnpm build
 ```
 
-インストール後、以下のコマンドでワークフローをチェックできます：
+### Git安全機能
+
+push済みコミットの誤ったamendを防ぐため、`safe-amend`スクリプトを提供：
 
 ```bash
-pnpm lint:actionlint
-```
-
-### 安全なコミット修正
-
-push済みのコミットをamendしてしまうミスを防ぐため、以下の方法を推奨します：
-
-#### 方法1: safe-amendスクリプトを使用
-
-```bash
-# 危険: git commit --amend (push済みコミットの場合エラーになる可能性)
-# 安全:
+# 安全なamend実行
 pnpm safe-amend
 ```
 
-#### 方法2: Gitエイリアスを設定
+### 詳細なドキュメント
 
-```bash
-# グローバル設定
-git config --global alias.safe-amend '!./scripts/safe-amend.sh'
-
-# 使用方法
-git safe-amend
-```
-
-#### 方法3: lefthookでスクリプト実行
-
-`lefthook.yml`に以下を追加してpre-commitフックで自動チェック：
-
-```yaml
-pre-commit:
-    commands:
-        safe-amend-check:
-            run: ./scripts/safe-amend.sh --check-only
-            stage_fixed: false
-```
-
-#### 方法4: push済みコミットを修正する正しい手順
-
-```bash
-# 1. 修正ファイルをステージング
-git add 修正ファイル
-
-# 2. 新しいコミットを作成（amendではなく）
-git commit -m "fix: 修正内容"
-
-# 3. 通常通りpush
-git push
-```
+- [Git安全システム](./docs/archives/git-safety-implementation.md)
+- [actionlint統合](./docs/archives/actionlint-integration.md)
+- [ESLint最適化](./docs/archives/eslint-optimization.md)
