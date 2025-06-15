@@ -121,6 +121,7 @@
         "test:coverage": "vitest run --coverage",
         "test:watch": "vitest",
         "type-check": "tsc --noEmit",
-        "validate": "run-s type-check lint test build"
+        "validate": "run-s type-check lint test build",
+        "safe-amend": "bash -c 'CURRENT_BRANCH=$(git branch --show-current); HEAD_HASH=$(git rev-parse HEAD); if git show-ref --verify --quiet \"refs/remotes/origin/$CURRENT_BRANCH\" && git branch -r --contains \"$HEAD_HASH\" | grep -q \"origin/$CURRENT_BRANCH\"; then echo \"🚫 エラー: 既にpush済みのコミットです！\"; echo \"新しいコミットを作成してください: git commit -m \\\"fix: 修正内容\\\"\"; exit 1; else git commit --amend; fi'"
     }
 }

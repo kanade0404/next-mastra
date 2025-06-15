@@ -67,3 +67,38 @@ docker run --rm -v .:/repo --workdir /repo rhymond/actionlint:latest
 ```bash
 pnpm lint:actionlint
 ```
+
+### 安全なコミット修正
+
+push済みのコミットをamendしてしまうミスを防ぐため、以下の方法を推奨します：
+
+#### 方法1: safe-amendスクリプトを使用
+
+```bash
+# 危険: git commit --amend (push済みコミットの場合エラーになる可能性)
+# 安全:
+pnpm safe-amend
+```
+
+#### 方法2: Gitエイリアスを設定
+
+```bash
+# グローバル設定
+git config --global alias.safe-amend '!f() { CURRENT_BRANCH=$(git branch --show-current); HEAD_HASH=$(git rev-parse HEAD); if git show-ref --verify --quiet "refs/remotes/origin/$CURRENT_BRANCH" && git branch -r --contains "$HEAD_HASH" | grep -q "origin/$CURRENT_BRANCH"; then echo "🚫 エラー: 既にpush済みのコミットです！"; echo "新しいコミットを作成してください: git commit -m \"fix: 修正内容\""; exit 1; else git commit --amend "$@"; fi; }; f'
+
+# 使用方法
+git safe-amend
+```
+
+#### 方法3: push済みコミットを修正する正しい手順
+
+```bash
+# 1. 修正ファイルをステージング
+git add 修正ファイル
+
+# 2. 新しいコミットを作成（amendではなく）
+git commit -m "fix: 修正内容"
+
+# 3. 通常通りpush
+git push
+```
