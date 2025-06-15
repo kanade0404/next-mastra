@@ -242,7 +242,7 @@ export const clientEnv = {
 /**
  * 環境変数の設定状況を確認する関数
  */
-export function checkEnvHealth() {
+export function checkEnvHealth(): boolean {
     const requiredKeys = [
         'CLOUDFLARE_ACCOUNT_ID',
         'DATABASE_URL',
@@ -252,6 +252,7 @@ export function checkEnvHealth() {
         'PINECONE_API_KEY',
     ] as const;
 
+    // eslint-disable-next-line security/detect-object-injection
     const missing = requiredKeys.filter((key) => !env[key]);
 
     if (missing.length > 0) {
@@ -268,6 +269,7 @@ export function checkEnvHealth() {
  * エラーハンドリング付きの環境変数取得
  */
 export function getEnvVar(key: keyof Env, fallback?: string): string {
+    // eslint-disable-next-line security/detect-object-injection
     const value = env[key];
 
     if (!value) {
