@@ -62,7 +62,7 @@ jobs:
               run: |
                   echo "✅ All quality gates passed!"
                   echo "- Linting: ✓"
-                  echo "- Type checking: ✓" 
+                  echo "- Type checking: ✓"
                   echo "- Tests: ✓"
                   echo "- Build: ✓"
 

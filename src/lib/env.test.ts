@@ -235,9 +235,7 @@ describe('環境変数バリデーション', () => {
             };
 
             // バリデーションスキップ時はエラーが発生しない
-            expect(async () => {
-                await import('./env');
-            }).not.toThrow();
+            await expect(import('./env')).resolves.not.toThrow();
         });
     });
 
