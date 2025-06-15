@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { z } from 'zod';
 
 // モジュールをモック化
 vi.mock('./env', async () => {
@@ -71,7 +72,6 @@ describe('環境変数バリデーション', () => {
 
             // Act & Assert: zodスキーマを直接テスト
             expect(() => {
-                const { z } = require('zod');
                 const testSchema = z.object({
                     NODE_ENV: z.enum(['development', 'production', 'test']),
                     CLOUDFLARE_ACCOUNT_ID: z.string().min(1),
@@ -88,7 +88,6 @@ describe('環境変数バリデーション', () => {
 
             validValues.forEach((value) => {
                 expect(() => {
-                    const { z } = require('zod');
                     const envSchema = z.object({
                         NODE_ENV: z.enum(['development', 'production', 'test']),
                     });
@@ -99,7 +98,6 @@ describe('環境変数バリデーション', () => {
 
         it('無効なNODE_ENVの場合、バリデーションが失敗する', () => {
             expect(() => {
-                const { z } = require('zod');
                 const envSchema = z.object({
                     NODE_ENV: z.enum(['development', 'production', 'test']),
                 });
@@ -116,7 +114,6 @@ describe('環境変数バリデーション', () => {
 
             validUrls.forEach((url) => {
                 expect(() => {
-                    const { z } = require('zod');
                     const urlSchema = z.string().url();
                     urlSchema.parse(url);
                 }).not.toThrow();
@@ -128,7 +125,6 @@ describe('環境変数バリデーション', () => {
 
             invalidUrls.forEach((url) => {
                 expect(() => {
-                    const { z } = require('zod');
                     const urlSchema = z.string().url();
                     urlSchema.parse(url);
                 }).toThrow();
@@ -137,7 +133,6 @@ describe('環境変数バリデーション', () => {
 
         it('最小長要件を満たさない場合、バリデーションが失敗する', () => {
             expect(() => {
-                const { z } = require('zod');
                 const schema = z.string().min(32);
                 schema.parse('short-string'); // 32文字未満
             }).toThrow();
@@ -152,7 +147,6 @@ describe('環境変数バリデーション', () => {
 
             validEmails.forEach((email) => {
                 expect(() => {
-                    const { z } = require('zod');
                     const emailSchema = z.string().email();
                     emailSchema.parse(email);
                 }).not.toThrow();
@@ -270,7 +264,6 @@ describe('環境変数バリデーション', () => {
 // エッジケースのテスト
 describe('エッジケースとエラーハンドリング', () => {
     it('数値変換が正しく動作する', () => {
-        const { z } = require('zod');
         const numberSchema = z
             .string()
             .transform(Number)
@@ -282,7 +275,6 @@ describe('エッジケースとエラーハンドリング', () => {
     });
 
     it('ブール値変換が正しく動作する', () => {
-        const { z } = require('zod');
         const booleanSchema = z
             .string()
             .transform((val: string) => val === 'true');
@@ -293,7 +285,6 @@ describe('エッジケースとエラーハンドリング', () => {
     });
 
     it('オプショナル値の処理が正しく動作する', () => {
-        const { z } = require('zod');
         const optionalSchema = z.string().optional();
 
         expect(optionalSchema.parse(undefined)).toBeUndefined();
