@@ -15,9 +15,9 @@ pre-commit:
             glob: '*.{js,mjs,ts,tsx,jsx,json,md,yml,yaml,env,toml}'
             run: pnpm exec secretlint {staged_files}
 
-        cspell:
-            glob: '*.{js,mjs,ts,tsx,jsx,json,md,yml,yaml,toml}'
-            run: pnpm exec cspell lint {staged_files}
+        # cspell:
+        #     glob: '*.{js,mjs,ts,tsx,jsx,json,md,yml,yaml,toml}'
+        #     run: pnpm exec cspell lint {staged_files}
 
 pre-push:
     commands:

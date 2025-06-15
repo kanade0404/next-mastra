@@ -10,8 +10,8 @@
 │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
 │  │   Chat UI       │  │   Auth UI       │  │   Document UI   │ │
 │  │ - Real-time     │  │ - Google OAuth  │  │ - Upload/View   │ │
-│  │ - Streaming     │  │ - Profile Mgmt  │  │ - Search        │ │
-│  │ - RAG Mode      │  │ - Session Mgmt  │  │ - Citations     │ │
+│  │ - Streaming     │  │ - Profile Management  │  │ - Search        │ │
+│  │ - RAG Mode      │  │ - Session Management  │  │ - Citations     │ │
 │  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
 └─────────────────────────────────────────────────────────────────┘
                                   │

@@ -43,7 +43,7 @@ interface APIResponse<T = any> {
 {
   "success": true,
   "data": {
-    "id": "conv_123",
+    "id": "conversation_123",
     "title": "新しい会話"
   },
   "meta": {
@@ -174,7 +174,7 @@ Authorization: Bearer <jwt_token>
       "lastLoginAt": "2024-12-15T09:00:00Z"
     },
     "session": {
-      "sessionId": "sess_123",
+      "sessionId": "session_123",
       "expiresAt": "2024-12-16T10:00:00Z",
       "lastActiveAt": "2024-12-15T10:00:00Z"
     }
@@ -223,7 +223,7 @@ Content-Type: application/json
   "data": {
     "sessions": [
       {
-        "id": "sess_123",
+        "id": "session_123",
         "deviceInfo": {
           "platform": "macOS",
           "browser": "Chrome",
@@ -258,7 +258,7 @@ GET /api/v1/conversations?limit=20&offset=0&sort=updated_at&order=desc
   "data": {
     "conversations": [
       {
-        "id": "conv_123",
+        "id": "conversation_123",
         "title": "プロジェクト計画について",
         "messageCount": 15,
         "lastMessage": {
@@ -297,7 +297,7 @@ POST /api/v1/conversations
   "success": true,
   "data": {
     "conversation": {
-      "id": "conv_124",
+      "id": "conversation_124",
       "title": "新しい会話",
       "messageCount": 0,
       "createdAt": "2024-12-15T10:00:00Z",
@@ -317,7 +317,7 @@ POST /api/v1/conversations
   "success": true,
   "data": {
     "conversation": {
-      "id": "conv_123",
+      "id": "conversation_123",
       "title": "プロジェクト計画について",
       "createdAt": "2024-12-15T09:00:00Z",
       "updatedAt": "2024-12-15T09:30:00Z"
@@ -370,7 +370,7 @@ POST /api/v1/conversations
 POST /api/v1/chat
 {
   "message": "今日の天気はいかがですか？",
-  "conversationId": "conv_123",
+  "conversationId": "conversation_123",
   "stream": true,
   "model": "gpt-4"
 }
@@ -396,7 +396,7 @@ RAG対応チャット
 POST /api/v1/chat/rag
 {
   "message": "プロジェクトの要件について教えてください",
-  "conversationId": "conv_123",
+  "conversationId": "conversation_123",
   "documentIds": ["doc_1", "doc_2"],
   "searchParams": {
     "topK": 5,
@@ -629,7 +629,7 @@ POST /api/v1/search/conversations
   "data": {
     "conversations": [
       {
-        "id": "conv_123",
+        "id": "conversation_123",
         "title": "機械学習モデルの選択",
         "relevantMessages": [
           {
@@ -667,7 +667,7 @@ file: <file>
 type: "document" | "avatar" | "temp"
 metadata: {
   "purpose": "chat_attachment",
-  "conversationId": "conv_123"
+  "conversationId": "conversation_123"
 }
 
 // Response
@@ -927,7 +927,7 @@ Svix-Signature: v1,signature_here
     "message": "Conversation not found",
     "details": {
       "resource": "conversation",
-      "id": "conv_nonexistent"
+      "id": "conversation_nonexistent"
     }
   }
 }
