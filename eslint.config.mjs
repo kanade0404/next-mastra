@@ -28,7 +28,12 @@ export default [
     pluginSecurity.configs.recommended,
     {
         files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-        ignores: ['*.config.{js,mjs,ts}', '.prettierrc.js'],
+        ignores: [
+            '*.config.js',
+            '*.config.mjs',
+            '*.config.ts',
+            '.prettierrc.js',
+        ],
         languageOptions: {
             globals: {
                 ...globals.browser,
@@ -152,7 +157,7 @@ export default [
         },
     },
     {
-        files: ['**/*.{test,spec}.{ts,tsx,js,jsx}'],
+        files: ['**/*.{test,spec}.{js,jsx,ts,tsx}'],
         rules: {
             'no-console': 'off', // テストファイルではconsole.logを許可
             'fp/no-mutation': 'off', // テストファイルではミューテーションを許可
