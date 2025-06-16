@@ -20,7 +20,7 @@ actionlint:
 actionlintのローカルインストール状況に差があるため、以下の段階的フォールバック実装：
 
 1. **ローカルactionlint**: `which actionlint`でチェック
-2. **Docker実行**: `rhymd/actionlint:latest`コンテナ使用
+2. **Docker実行**: `rhysd/actionlint:latest`コンテナ使用
 3. **エラー表示**: インストール手順案内
 
 ### 3. 最終実装
@@ -30,7 +30,7 @@ if which actionlint >/dev/null 2>&1 && actionlint --version >/dev/null 2>&1; the
     actionlint {staged_files}
 elif command -v docker >/dev/null 2>&1; then
     echo "Docker経由でactionlintを実行します..."
-    docker run --rm -v $(pwd):/repo --workdir /repo rhymd/actionlint:latest -color
+    docker run --rm -v $(pwd):/repo --workdir /repo rhysd/actionlint:latest -color
 else
     echo "actionlintまたはDockerが見つかりません。"
     exit 1
@@ -71,7 +71,7 @@ node-version-file: 'package.json'
 ```json
 {
     "scripts": {
-        "lint:actionlint": "bash -c 'if which actionlint >/dev/null 2>&1 && actionlint --version >/dev/null 2>&1; then actionlint .github/workflows/*.yml; elif command -v docker >/dev/null 2>&1; then echo \"Docker経由でactionlintを実行します...\"; docker run --rm -v $(pwd):/repo --workdir /repo rhymd/actionlint:latest -color; else echo \"actionlintまたはDockerが見つかりません。インストールしてください\"; exit 1; fi'"
+        "lint:actionlint": "bash -c 'if which actionlint >/dev/null 2>&1 && actionlint --version >/dev/null 2>&1; then actionlint .github/workflows/*.yml; elif command -v docker >/dev/null 2>&1; then echo \"Docker経由でactionlintを実行します...\"; docker run --rm -v $(pwd):/repo --workdir /repo rhysd/actionlint:latest -color; else echo \"actionlintまたはDockerが見つかりません。インストールしてください\"; exit 1; fi'"
     }
 }
 ```

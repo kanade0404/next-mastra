@@ -28,26 +28,26 @@ pnpm lint
 
 #### 適用される厳格なルール
 
-**関数型プログラミング規約 (eslint-plugin-fp)**
+##### 関数型プログラミング規約 (eslint-plugin-fp)
 
 - `fp/no-mutation`: オブジェクト・配列のミューテーション禁止
 - `fp/no-let`: `let`宣言禁止（`const`を使用）
 - `fp/no-loops`: `for`/`while`ループ禁止（`map`/`filter`/`reduce`を使用）
 - `fp/no-mutating-methods`: ミューテーションメソッド禁止
 
-**TypeScript厳格設定**
+##### TypeScript厳格設定
 
 - `@typescript-eslint/explicit-function-return-type`: 明示的な関数戻り値型必須
 - `@typescript-eslint/explicit-module-boundary-types`: モジュール境界での型注釈必須
 - Next.jsルート（page.tsx, layout.tsx, route.ts）は例外適用
 
-**import整理 (eslint-plugin-import)**
+##### import整理 (eslint-plugin-import)
 
 - `import/order`: importグループの並び順とアルファベット順強制
 - `import/newline-after-import`: importグループ間の改行必須
 - `import/no-duplicates`: 重複import禁止
 
-**セキュリティ (eslint-plugin-security)**
+##### セキュリティ (eslint-plugin-security)
 
 - `security/detect-object-injection`: オブジェクトインジェクション検出
 - `security/detect-unsafe-regex`: 安全でない正規表現検出
