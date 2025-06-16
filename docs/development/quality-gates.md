@@ -184,7 +184,7 @@ test.describe('チャット機能', () => {
         await page.click('[data-testid="send-button"]');
 
         await expect(
-            page.locator('[data-testid="message"]').last()
+            page.locator('[data-testid="message"]').last(),
         ).toContainText('Hello, AI!');
         await expect(page.locator('[data-testid="ai-response"]')).toBeVisible();
     });
