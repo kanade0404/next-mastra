@@ -202,7 +202,7 @@ class DatabaseManager {
         for (let i = 0; i < records.length; i += batchSize) {
             const batch = records.slice(i, i + batchSize);
             const statements = batch.map((record) =>
-                this.prepareBatchInsertStatement(table, record)
+                this.prepareBatchInsertStatement(table, record),
             );
 
             await this.db.batch(statements);
@@ -274,7 +274,7 @@ class R2FileManager {
     async uploadFile(
         key: string,
         file: File | ArrayBuffer,
-        metadata?: Record<string, string>
+        metadata?: Record<string, string>,
     ): Promise<void> {
         await this.bucket.put(key, file, {
             httpMetadata: {
@@ -320,7 +320,7 @@ interface FileNamingStrategy {
     generateKey(
         userId: string,
         fileType: 'document' | 'avatar' | 'temp',
-        originalName: string
+        originalName: string,
     ): string;
 }
 
@@ -328,7 +328,7 @@ class FileKeyGenerator implements FileNamingStrategy {
     generateKey(
         userId: string,
         fileType: string,
-        originalName: string
+        originalName: string,
     ): string {
         const timestamp = Date.now();
         const sanitizedName = this.sanitizeFileName(originalName);
@@ -380,7 +380,7 @@ class KVCacheManager {
     async set<T>(
         key: string,
         value: T,
-        options?: { ttl?: number; expirationTtl?: number }
+        options?: { ttl?: number; expirationTtl?: number },
     ): Promise<void> {
         await this.kv.put(key, JSON.stringify(value), {
             expirationTtl: options?.ttl || options?.expirationTtl || 3600, // 1時間デフォルト
@@ -392,7 +392,7 @@ class KVCacheManager {
     }
 
     async list(
-        prefix?: string
+        prefix?: string,
     ): Promise<KVNamespaceListResult<unknown, string>> {
         return await this.kv.list({ prefix });
     }
@@ -401,7 +401,7 @@ class KVCacheManager {
     async cacheWithPattern<T>(
         pattern: string,
         generator: () => Promise<T>,
-        ttl = 3600
+        ttl = 3600,
     ): Promise<T> {
         const cached = await this.get<T>(pattern);
         if (cached !== null) {
@@ -434,7 +434,7 @@ class SessionManager {
         await this.kv.put(
             `session:${sessionId}`,
             JSON.stringify(data),
-            { expirationTtl: 86400 } // 24時間
+            { expirationTtl: 86400 }, // 24時間
         );
     }
 
@@ -664,13 +664,13 @@ wrangler d1 migrations apply next-mastra-chat --remote
 class CloudflareLogger {
     constructor(
         private analytics: AnalyticsEngineDataset,
-        private kv: KVNamespace
+        private kv: KVNamespace,
     ) {}
 
     async logRequest(
         request: Request,
         response: Response,
-        startTime: number
+        startTime: number,
     ): Promise<void> {
         const endTime = Date.now();
         const duration = endTime - startTime;
@@ -701,7 +701,7 @@ class CloudflareLogger {
             await this.kv.put(
                 `error:${Date.now()}:${Math.random()}`,
                 JSON.stringify(errorData),
-                { expirationTtl: 86400 * 7 } // 7日間保持
+                { expirationTtl: 86400 * 7 }, // 7日間保持
             );
         }
 

@@ -380,7 +380,7 @@ async function verifyJWT(token: string): Promise<JWTVerificationResult> {
 
 ```typescript
 export async function authenticateRequest(
-    request: Request
+    request: Request,
 ): Promise<AuthContext> {
     const token = extractTokenFromHeader(request);
 
@@ -418,7 +418,7 @@ export function securityHeaders(request: NextRequest) {
     response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
     response.headers.set(
         'Content-Security-Policy',
-        "default-src 'self'; script-src 'self' 'unsafe-inline' https://clerk.com; style-src 'self' 'unsafe-inline';"
+        "default-src 'self'; script-src 'self' 'unsafe-inline' https://clerk.com; style-src 'self' 'unsafe-inline';",
     );
 
     return response;
@@ -497,11 +497,11 @@ interface SuspiciousActivityDetector {
     checkMultipleFailedLogins(userId: string): Promise<boolean>;
     checkUnusualLocation(
         userId: string,
-        location: GeoLocation
+        location: GeoLocation,
     ): Promise<boolean>;
     checkDeviceFingerprint(
         userId: string,
-        deviceInfo: DeviceInfo
+        deviceInfo: DeviceInfo,
     ): Promise<boolean>;
 }
 ```
@@ -528,14 +528,14 @@ describe('Authentication', () => {
     test('Expired token rejection', async () => {
         const expiredToken = await generateExpiredJWT(testUser);
         await expect(
-            authenticateRequest(createRequestWithToken(expiredToken))
+            authenticateRequest(createRequestWithToken(expiredToken)),
         ).rejects.toThrow(UnauthorizedError);
     });
 
     test('Role-based access control', async () => {
         const userToken = await generateJWT(normalUser);
         await expect(
-            requireRole(UserRole.ADMIN)(createRequestWithToken(userToken))
+            requireRole(UserRole.ADMIN)(createRequestWithToken(userToken)),
         ).rejects.toThrow(ForbiddenError);
     });
 });

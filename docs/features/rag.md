@@ -138,7 +138,7 @@ interface VectorStore {
     query(
         queryVector: number[],
         topK: number,
-        filter?: MetadataFilter
+        filter?: MetadataFilter,
     ): Promise<QueryResult[]>;
     delete(vectorIds: string[]): Promise<void>;
     update(vectorId: string, metadata: VectorMetadata): Promise<void>;

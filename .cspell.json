@@ -23,7 +23,7 @@
     ],
     "ignorePaths": [
         "**/node_modules/**",
-        "**/dist/**",
+        "**/distaaa/**",
         "**/build/**",
         "**/.next/**",
         "**/coverage/**",
