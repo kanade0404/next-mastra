@@ -38,3 +38,45 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 This directory contains example API routes for the headless API app.
 
 For more details, see [route.js file convention](https://nextjs.org/docs/app/api-reference/file-conventions/route).
+
+## 開発環境
+
+### 必要な環境
+
+- Node.js 18+
+- pnpm 8+
+
+### セットアップ
+
+```bash
+# 依存関係のインストール
+pnpm install
+
+# 開発サーバー起動
+pnpm dev
+
+# リント・フォーマット実行
+pnpm lint
+pnpm format
+
+# テスト実行
+pnpm test
+
+# ビルド
+pnpm build
+```
+
+### Git安全機能
+
+push済みコミットの誤ったamendを防ぐため、`safe-amend`スクリプトを提供：
+
+```bash
+# 安全なamend実行
+pnpm safe-amend
+```
+
+### 詳細なドキュメント
+
+- [Git安全システム](./docs/archives/git-safety-implementation.md)
+- [actionlint統合](./docs/archives/actionlint-integration.md)
+- [ESLint最適化](./docs/archives/eslint-optimization.md)

@@ -1,0 +1,156 @@
+name: CI/CD Pipeline
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+    workflow_dispatch: # 手動実行を許可
+
+env:
+    PNPM_VERSION: '8'
+
+jobs:
+    # プルリクエスト時の品質チェック
+    pr-quality-check:
+        if: github.event_name == 'pull_request'
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: 'package.json'
+                  cache: 'pnpm'
+
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: ${{ env.PNPM_VERSION }}
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Setup environment variables
+              run: |
+                  echo "NODE_ENV=test" >> "$GITHUB_ENV"
+                  echo "SKIP_ENV_VALIDATION=true" >> "$GITHUB_ENV"
+
+            - name: Run comprehensive validation
+              run: pnpm validate
+              env:
+                  NODE_ENV: test
+                  SKIP_ENV_VALIDATION: true
+
+            - name: Comment PR with results
+              if: github.event_name == 'pull_request'
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const { owner, repo } = context.repo;
+                      const prNumber = context.payload.pull_request.number;
+
+                      const comment = `
+                      ## 🚀 CI/CD Results
+
+                      ✅ **品質ゲート**: すべてのチェックが完了しました
+                      - リント: ✓
+                      - 型チェック: ✓  
+                      - テスト: ✓
+                      - ビルド: ✓
+
+                      このプルリクエストはマージ準備完了です！
+                      `;
+
+                      await github.rest.issues.createComment({
+                        owner,
+                        repo,
+                        issue_number: prNumber,
+                        body: comment
+                      });
+
+    # メインブランチへのマージ時のデプロイ準備
+    deploy-preparation:
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        runs-on: ubuntu-latest
+        timeout-minutes: 20
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: 'package.json'
+                  cache: 'pnpm'
+
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: ${{ env.PNPM_VERSION }}
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Setup production environment
+              run: |
+                  echo "NODE_ENV=production" >> "$GITHUB_ENV"
+                  echo "SKIP_ENV_VALIDATION=true" >> "$GITHUB_ENV"
+
+            - name: Run full validation suite
+              run: pnpm validate
+              env:
+                  NODE_ENV: production
+                  SKIP_ENV_VALIDATION: true
+
+            - name: Build for production
+              run: pnpm build
+              env:
+                  NODE_ENV: production
+                  SKIP_ENV_VALIDATION: true
+
+            - name: Generate deployment artifacts
+              run: |
+                  # アーティファクトの準備
+                  echo "📦 Building deployment artifacts..."
+                  tar -czf build-artifacts.tar.gz .next/ package.json pnpm-lock.yaml
+
+            - name: Upload build artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: build-artifacts-${{ github.sha }}
+                  path: build-artifacts.tar.gz
+                  retention-days: 30
+
+            - name: Deployment notification
+              run: |
+                  echo "🚀 Deployment preparation completed!"
+                  echo "Build artifacts are ready for Cloudflare Pages deployment"
+                  echo "SHA: ${{ github.sha }}"
+                  echo "Ref: ${{ github.ref }}"
+
+    # ブランチ保護ルール用のステータスチェック
+    status-check:
+        runs-on: ubuntu-latest
+        needs: [pr-quality-check]
+        if: always() && github.event_name == 'pull_request'
+
+        steps:
+            - name: Check overall status
+              run: |
+                  if [[ "${{ needs.pr-quality-check.result }}" == "success" ]]; then
+                    echo "✅ All checks passed - PR is ready to merge"
+                    exit 0
+                  else
+                    echo "❌ Some checks failed - PR needs attention"
+                    exit 1
+                  fi

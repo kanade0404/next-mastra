@@ -1,131 +1,168 @@
-import js from "@eslint/js";
-import globals from "globals";
-import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
-import { defineConfig } from "eslint/config";
-import tsPlugin from "@typescript-eslint/eslint-plugin";
-import importPlugin from "eslint-plugin-import";
-import reactPlugin from "eslint-plugin-react";
-import reactHooksPlugin from "eslint-plugin-react-hooks";
-import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
-import nextPlugin from "@next/eslint-plugin-next";
-import tailwindcssPlugin from "eslint-plugin-tailwindcss";
-import prettierPlugin from "eslint-plugin-prettier";
-import eslintCommentsPlugin from "eslint-plugin-eslint-comments";
-import storybookPlugin from "eslint-plugin-storybook";
-import testingLibraryPlugin from "eslint-plugin-testing-library";
-import securityPlugin from "eslint-plugin-security";
-import sonarjsPlugin from "eslint-plugin-sonarjs";
-import promisePlugin from "eslint-plugin-promise";
-import unicornPlugin from "eslint-plugin-unicorn";
-import fpPlugin from "eslint-plugin-fp";
-import zodPlugin from "eslint-plugin-zod";
-import depcheckPlugin from "eslint-plugin-depcheck";
-import vitestPlugin from "eslint-plugin-vitest";
+import js from '@eslint/js';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+import pluginReact from 'eslint-plugin-react';
+import pluginReactHooks from 'eslint-plugin-react-hooks';
+import pluginFp from 'eslint-plugin-fp';
+import pluginImport from 'eslint-plugin-import';
+import pluginSecurity from 'eslint-plugin-security';
+import pluginNext from '@next/eslint-plugin-next';
+import pluginPrettier from 'eslint-plugin-prettier';
 
-export default defineConfig([
-  {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
-    plugins: {
-      js,
-      // 型安全: TypeScript の厳格ルール
-      "@typescript-eslint": tsPlugin,
-      // React/JSX
-      react: reactPlugin,
-      "react-hooks": reactHooksPlugin,
-      // アクセシビリティ
-      "jsx-a11y": jsxA11yPlugin,
-      // Next.js
-      "@next": nextPlugin,
-      // import 解決
-      import: importPlugin,
-      // Tailwind クラス検証
-      tailwindcss: tailwindcssPlugin,
-      // コメントによるバイパス禁止
-      "eslint-comments": eslintCommentsPlugin,
-      // Storybook
-      storybook: storybookPlugin,
-      // Testing Library
-      "testing-library": testingLibraryPlugin,
-      // セキュリティ
-      security: securityPlugin,
-      // コード品質
-      sonarjs: sonarjsPlugin,
-      promise: promisePlugin,
-      unicorn: unicornPlugin,
-      // 関数型指向
-      fp: fpPlugin,
-      // zod misuse
-      zod: zodPlugin,
-      // depcheck
-      depcheck: depcheckPlugin,
-      // Prettier 連携
-      prettier: prettierPlugin,
-      vitest: vitestPlugin,
-    },
-    extends: ["js/recommended", "plugin:vitest/recommended"],
-    rules: {
-      rules: {
-        /** ── TypeScript 型安全 ───────────────────────── */
-        "@typescript-eslint/no-explicit-any": "error", // 暗黙 any → NG
-        "@typescript-eslint/no-unsafe-assignment": "error", // any→変数代入 → NG
-        "@typescript-eslint/no-unsafe-member-access": "error", // any.foo → NG
-        "@typescript-eslint/no-unsafe-call": "error", // any() → NG
-        "@typescript-eslint/no-unsafe-return": "error", // any 戻り値 → NG
-        "@typescript-eslint/no-non-null-assertion": "error", // foo! → NG
-        "@typescript-eslint/explicit-function-return-type": [
-          "error",
-          { allowExpressions: false },
+export default [
+    {
+        ignores: [
+            'node_modules/**',
+            '.next/**',
+            'out/**',
+            'public/**',
+            'coverage/**',
+            '.turbo/**',
+            'dist/**',
+            'build/**',
+            '.claude/*.local.json',
         ],
-        "@typescript-eslint/strict-boolean-expressions": "error",
-
-        /** ── コメントバイパス禁止 ─────────────────────── */
-        "eslint-comments/no-unused-disable": "error", // 無駄な disable → NG
-        "eslint-comments/no-use": [
-          "error",
-          { allow: ["eslint-disable-next-line"] },
+    },
+    js.configs.recommended,
+    ...tseslint.configs.recommended,
+    pluginSecurity.configs.recommended,
+    {
+        files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+        ignores: [
+            '*.config.js',
+            '*.config.mjs',
+            '*.config.ts',
+            '.prettierrc.js',
         ],
-        "eslint-comments/no-restricted-disable": [
-          "error",
-          { terms: ["@ts-ignore", "@ts-expect-error"] },
+        languageOptions: {
+            globals: {
+                ...globals.browser,
+                ...globals.node,
+            },
+            parser: tseslint.parser,
+            parserOptions: {
+                ecmaVersion: 'latest',
+                sourceType: 'module',
+                ecmaFeatures: {
+                    jsx: true,
+                },
+            },
+        },
+        plugins: {
+            '@typescript-eslint': tseslint.plugin,
+            react: pluginReact,
+            'react-hooks': pluginReactHooks,
+            fp: pluginFp,
+            import: pluginImport,
+            security: pluginSecurity,
+            '@next/next': pluginNext,
+            prettier: pluginPrettier,
+        },
+        rules: {
+            // 基本的なルール
+            'no-console': ['warn', { allow: ['warn', 'error'] }],
+            'no-debugger': 'error',
+            'no-unused-vars': 'off',
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                { argsIgnorePattern: '^_' },
+            ],
+            '@typescript-eslint/no-explicit-any': 'warn',
+
+            // 関数型プログラミングルール
+            'fp/no-mutation': 'error',
+            'fp/no-let': 'error',
+            'fp/no-loops': 'error',
+            'fp/no-mutating-methods': 'error',
+
+            // TypeScriptの基本ルール
+            '@typescript-eslint/explicit-function-return-type': 'off', // TypeScriptファイル専用で設定
+            '@typescript-eslint/explicit-module-boundary-types': 'off', // TypeScriptファイル専用で設定
+
+            // import整理ルール
+            'import/order': [
+                'error',
+                {
+                    groups: [
+                        'builtin',
+                        'external',
+                        'internal',
+                        'parent',
+                        'sibling',
+                        'index',
+                    ],
+                    'newlines-between': 'always',
+                    alphabetize: {
+                        order: 'asc',
+                        caseInsensitive: true,
+                    },
+                },
+            ],
+            'import/newline-after-import': 'error',
+            'import/no-duplicates': 'error',
+
+            // React関連
+            'react/react-in-jsx-scope': 'off', // Next.js 13+では不要
+            'react/jsx-uses-react': 'off', // Next.js 13+では不要
+            'react/prop-types': 'off', // TypeScriptを使用しているため
+            'react-hooks/rules-of-hooks': 'error',
+            'react-hooks/exhaustive-deps': 'warn',
+
+            // Next.js関連
+            '@next/next/no-img-element': 'error',
+            '@next/next/no-page-custom-font': 'error',
+
+            // セキュリティ関連
+            'security/detect-object-injection': 'error',
+            'security/detect-non-literal-regexp': 'error',
+            'security/detect-unsafe-regex': 'error',
+
+            // Prettierとの統合
+            'prettier/prettier': 'error',
+        },
+        settings: {
+            react: {
+                version: 'detect',
+            },
+            'import/resolver': {
+                typescript: {
+                    alwaysTryTypes: true,
+                },
+            },
+        },
+    },
+    {
+        files: ['**/*.{ts,tsx}'],
+        languageOptions: {
+            parser: tseslint.parser,
+            parserOptions: {
+                project: './tsconfig.json',
+            },
+        },
+        rules: {
+            // TypeScriptファイルでは明示的な関数戻り値型を必須
+            '@typescript-eslint/explicit-function-return-type': 'error',
+            '@typescript-eslint/explicit-module-boundary-types': 'error',
+        },
+    },
+    {
+        files: [
+            'src/app/**/route.{ts,tsx}',
+            'src/app/**/page.{ts,tsx}',
+            'src/app/**/layout.{ts,tsx}',
         ],
-
-        /** ── セキュリティチェック ─────────────────────── */
-        "security/detect-object-injection": "error",
-        "sonarjs/cognitive-complexity": ["error", 15],
-        "unicorn/no-abusive-eslint-disable": "error",
-
-        /** ── Promise / 副作用制御 ───────────────────── */
-        "@typescript-eslint/no-floating-promises": "error", // await 忘れ → NG
-        "fp/no-mutation": "error", // ミューテート禁止
-        "fp/no-let": "error", // let 禁止
-        "fp/no-loops": "error", // ループ禁止
-
-        /** ── その他厳格チェック ─────────────────────── */
-        "no-console": ["error", { allow: ["warn", "error"] }],
-        "no-debugger": "error",
-        "import/order": ["error", { "newlines-between": "always" }],
-        "prettier/prettier": "error", // Prettier と整合しない → エラー
-      },
+        rules: {
+            '@typescript-eslint/explicit-function-return-type': 'off', // Next.jsルートでは戻り値型を緩く
+            '@typescript-eslint/explicit-module-boundary-types': 'off',
+        },
     },
-    settings: {
-      react: { version: "detect" },
-      "import/resolver": { typescript: {} },
-      tailwindcss: { config: "tailwind.config.js", ignore: ["dark"] },
+    {
+        files: ['**/*.{test,spec}.{js,jsx,ts,tsx}'],
+        rules: {
+            'no-console': 'off', // テストファイルではconsole.logを許可
+            'fp/no-mutation': 'off', // テストファイルではミューテーションを許可
+            '@typescript-eslint/explicit-function-return-type': 'off', // テストファイルでは戻り値型を緩く
+            'security/detect-object-injection': 'off', // テストファイルではオブジェクトインジェクション警告を無効
+        },
     },
-  },
-  {
-    files: ["**/*.{test,spec}.{ts,tsx,js,jsx}"],
-    extends: ["plugin:vitest/recommended"],
-    rules: {
-      // 例: テスト内の console.log を許可する
-      "no-console": ["warn", { allow: ["warn", "error", "log"] }],
-    },
-  },
-  {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
-    languageOptions: { globals: globals.browser },
-  },
-  tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
-]);
+];

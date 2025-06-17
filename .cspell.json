@@ -1,0 +1,36 @@
+{
+    "version": "0.2",
+    "language": "en",
+    "words": [
+        "Aiven",
+        "BREVO",
+        "Brevo",
+        "brevo",
+        "Debugg",
+        "elif",
+        "lefthook",
+        "Mastra",
+        "mastra",
+        "Miniflare",
+        "miniflare",
+        "neverthrow",
+        "nosniff",
+        "rhysd",
+        "Svix",
+        "turbopack",
+        "Turbopack",
+        "vercel"
+    ],
+    "ignorePaths": [
+        "**/node_modules/**",
+        "**/distaaa/**",
+        "**/build/**",
+        "**/.next/**",
+        "**/coverage/**",
+        "**/pnpm-lock.yaml",
+        "**/tsconfig.tsbuildinfo",
+        "**/*.min.js",
+        "**/*.min.css",
+        "**/*.svg"
+    ]
+}
