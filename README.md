@@ -2,16 +2,29 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+### Requirements
+
+- Node.js 18+
+- pnpm 8+
+
+### Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Install dependencies
+pnpm install
+
+# Run the development server
 pnpm dev
-# or
-bun dev
+
+# Lint and format
+pnpm lint
+pnpm format
+
+# Run tests
+pnpm test
+
+# Build the project
+pnpm build
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -38,33 +51,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 This directory contains example API routes for the headless API app.
 
 For more details, see [route.js file convention](https://nextjs.org/docs/app/api-reference/file-conventions/route).
-
-## 開発環境
-
-### 必要な環境
-
-- Node.js 18+
-- pnpm 8+
-
-### セットアップ
-
-```bash
-# 依存関係のインストール
-pnpm install
-
-# 開発サーバー起動
-pnpm dev
-
-# リント・フォーマット実行
-pnpm lint
-pnpm format
-
-# テスト実行
-pnpm test
-
-# ビルド
-pnpm build
-```
 
 ### Git安全機能
 
