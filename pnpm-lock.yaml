@@ -127,7 +127,7 @@ importers:
         specifier: ^10.1.0
         version: 10.1.0
       '@types/node':
-        specifier: ^24.0.1
+        specifier: 24.0.1
         version: 24.0.1
       '@types/pdf-parse':
         specifier: ^1.1.4

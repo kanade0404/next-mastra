@@ -44,7 +44,7 @@
         "@secretlint/secretlint-rule-no-dotenv": "^10.1.0",
         "@secretlint/secretlint-rule-pattern": "^10.1.0",
         "@secretlint/secretlint-rule-preset-recommend": "^10.1.0",
-        "@types/node": "^24.0.1",
+        "@types/node": "24.0.1",
         "@types/pdf-parse": "^1.1.4",
         "@types/react": "^19.1.8",
         "@typescript-eslint/eslint-plugin": "8.34.0",
@@ -94,7 +94,7 @@
         "wrangler": "^4.20.0"
     },
     "engines": {
-        "node": ">=18.0.0",
+        "node": "24.2.0",
         "pnpm": ">=8.0.0"
     },
     "main": "index.js",
