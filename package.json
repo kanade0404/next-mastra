@@ -61,7 +61,7 @@
         "eslint-plugin-eslint-comments": "^3.2.0",
         "eslint-plugin-fp": "^2.3.0",
         "eslint-plugin-import": "^2.31.0",
-        "eslint-plugin-jest": "^28.13.5",
+        "eslint-plugin-jest": "28.13.5",
         "eslint-plugin-jsx-a11y": "^6.10.2",
         "eslint-plugin-prettier": "^5.4.1",
         "eslint-plugin-promise": "^7.2.1",
@@ -90,7 +90,7 @@
         "typedoc": "^0.28.5",
         "typescript": "5.8.3",
         "typescript-eslint": "8.34.0",
-        "vitest": "^3.2.3",
+        "vitest": "3.2.3",
         "wrangler": "^4.20.0"
     },
     "engines": {
