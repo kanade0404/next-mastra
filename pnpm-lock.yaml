@@ -9,76 +9,76 @@ importers:
   .:
     dependencies:
       '@clerk/nextjs':
-        specifier: ^6.22.0
+        specifier: 6.22.0
         version: 6.22.0(next@15.3.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@cloudflare/d1':
-        specifier: ^1.4.1
+        specifier: 1.4.1
         version: 1.4.1
       '@cloudflare/workers-types':
-        specifier: ^4.20250614.0
+        specifier: 4.20250614.0
         version: 4.20250614.0
       '@opentelemetry/api':
-        specifier: ^1.9.0
+        specifier: 1.9.0
         version: 1.9.0
       '@opentelemetry/sdk-node':
-        specifier: ^0.202.0
+        specifier: 0.202.0
         version: 0.202.0(@opentelemetry/api@1.9.0)
       '@pinecone-database/pinecone':
-        specifier: ^4.0.1
+        specifier: 4.1.0
         version: 4.1.0
       '@prisma/client':
-        specifier: ^6.9.0
+        specifier: 6.9.0
         version: 6.9.0(prisma@6.9.0(typescript@5.8.3))(typescript@5.8.3)
       '@sentry/nextjs':
-        specifier: ^9.29.0
+        specifier: 9.29.0
         version: 9.29.0(@opentelemetry/context-async-hooks@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.57.2(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.0))(encoding@0.1.13)(next@15.3.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(webpack@5.99.9(esbuild@0.25.5))
       '@tailwindcss/postcss':
-        specifier: ^4.1.10
+        specifier: 4.1.10
         version: 4.1.10
       '@tanstack/react-query':
-        specifier: ^5.80.7
+        specifier: 5.80.7
         version: 5.80.7(react@19.1.0)
       autoprefixer:
-        specifier: ^10.4.21
+        specifier: 10.4.21
         version: 10.4.21(postcss@8.5.5)
       brevo:
-        specifier: ^1.0.0
+        specifier: 1.0.0
         version: 1.0.0
       clsx:
-        specifier: ^2.1.1
+        specifier: 2.1.1
         version: 2.1.1
       csurf:
-        specifier: ^1.11.0
+        specifier: 1.11.0
         version: 1.11.0
       helmet:
-        specifier: ^8.1.0
+        specifier: 8.1.0
         version: 8.1.0
       jose:
-        specifier: ^6.0.11
+        specifier: 6.0.11
         version: 6.0.11
       ladle:
-        specifier: ^0.0.0
+        specifier: 0.0.0
         version: 0.0.0
       mastra:
-        specifier: ^0.10.5
+        specifier: 0.10.5
         version: 0.10.5(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64))(@opentelemetry/api@1.9.0)(react@19.1.0)(typescript@5.8.3)
       neverthrow:
-        specifier: ^8.2.0
+        specifier: 8.2.0
         version: 8.2.0
       next:
         specifier: 15.3.3
         version: 15.3.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       openai:
-        specifier: ^4.82.1
+        specifier: 4.104.0
         version: 4.104.0(encoding@0.1.13)(ws@8.18.2)(zod@3.25.64)
       pdf-parse:
-        specifier: ^1.1.1
+        specifier: 1.1.1
         version: 1.1.1
       pino:
-        specifier: ^9.7.0
+        specifier: 9.7.0
         version: 9.7.0
       postcss:
-        specifier: ^8.5.5
+        specifier: 8.5.5
         version: 8.5.5
       react:
         specifier: ^19.1.0
@@ -87,23 +87,23 @@ importers:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
       superjson:
-        specifier: ^2.2.2
+        specifier: 2.2.2
         version: 2.2.2
       tailwindcss:
-        specifier: ^4.1.10
+        specifier: 4.1.10
         version: 4.1.10
       zod:
-        specifier: ^3.25.64
+        specifier: 3.25.64
         version: 3.25.64
       zustand:
-        specifier: ^5.0.5
+        specifier: 5.0.5
         version: 5.0.5(@types/react@19.1.8)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
     devDependencies:
       '@cloudflare/next-on-pages':
-        specifier: ^1.13.7
+        specifier: 1.13.12
         version: 1.13.12(@cloudflare/workers-types@4.20250614.0)(vercel@43.1.0(encoding@0.1.13)(rollup@4.43.0))(wrangler@4.20.0(@cloudflare/workers-types@4.20250614.0))
       '@commitlint/config-conventional':
-        specifier: ^19.8.1
+        specifier: 19.8.1
         version: 19.8.1
       '@eslint/eslintrc':
         specifier: ^3
@@ -115,22 +115,22 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0(jiti@2.4.2)
       '@next/eslint-plugin-next':
-        specifier: ^15.3.3
+        specifier: 15.3.3
         version: 15.3.3
       '@secretlint/secretlint-rule-no-dotenv':
-        specifier: ^10.1.0
+        specifier: 10.1.0
         version: 10.1.0
       '@secretlint/secretlint-rule-pattern':
-        specifier: ^10.1.0
+        specifier: 10.1.0
         version: 10.1.0
       '@secretlint/secretlint-rule-preset-recommend':
-        specifier: ^10.1.0
+        specifier: 10.1.0
         version: 10.1.0
       '@types/node':
         specifier: 24.0.1
         version: 24.0.1
       '@types/pdf-parse':
-        specifier: ^1.1.4
+        specifier: 1.1.5
         version: 1.1.5
       '@types/react':
         specifier: ^19.1.8
@@ -142,22 +142,22 @@ importers:
         specifier: 8.34.0
         version: 8.34.0(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3)
       commitlint:
-        specifier: ^19.8.1
+        specifier: 19.8.1
         version: 19.8.1(@types/node@24.0.1)(typescript@5.8.3)
       cross-env:
-        specifier: ^7.0.3
+        specifier: 7.0.3
         version: 7.0.3
       cspell:
-        specifier: ^9.1.1
+        specifier: 9.1.1
         version: 9.1.1
       depcheck:
-        specifier: ^1.4.7
+        specifier: 1.4.7
         version: 1.4.7
       dotenv:
-        specifier: ^16.5.0
+        specifier: 16.5.0
         version: 16.5.0
       esbuild:
-        specifier: ^0.25.5
+        specifier: 0.25.5
         version: 0.25.5
       eslint:
         specifier: ^9.29.0
@@ -220,19 +220,19 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0(eslint@9.29.0(jiti@2.4.2))
       fixpack:
-        specifier: ^4.0.0
+        specifier: 4.0.0
         version: 4.0.0
       globals:
-        specifier: ^16.2.0
+        specifier: 16.2.0
         version: 16.2.0
       lefthook:
-        specifier: ^1.11.13
+        specifier: 1.11.13
         version: 1.11.13
       msw:
-        specifier: ^2.10.2
+        specifier: 2.10.2
         version: 2.10.2(@types/node@24.0.1)(typescript@5.8.3)
       npm-check-updates:
-        specifier: ^18.0.1
+        specifier: 18.0.1
         version: 18.0.1
       npm-run-all2:
         specifier: 5.0.0
@@ -241,22 +241,22 @@ importers:
         specifier: 3.5.3
         version: 3.5.3
       prisma:
-        specifier: ^6.9.0
+        specifier: 6.9.0
         version: 6.9.0(typescript@5.8.3)
       react-docgen:
         specifier: ^8.0.0
         version: 8.0.0
       renovate:
-        specifier: ^40.55.0
+        specifier: 40.55.1
         version: 40.55.1(encoding@0.1.13)(typanion@3.14.0)
       secretlint:
-        specifier: ^10.0.0
+        specifier: 10.1.0
         version: 10.1.0
       testcontainers:
-        specifier: ^11.0.3
+        specifier: 11.0.3
         version: 11.0.3
       typedoc:
-        specifier: ^0.28.5
+        specifier: 0.28.5
         version: 0.28.5(typescript@5.8.3)
       typescript:
         specifier: 5.8.3
@@ -268,7 +268,7 @@ importers:
         specifier: 3.2.3
         version: 3.2.3(@edge-runtime/vm@3.2.0)(@types/node@24.0.1)(jiti@2.4.2)(lightningcss@1.30.1)(msw@2.10.2(@types/node@24.0.1)(typescript@5.8.3))(terser@5.42.0)(yaml@2.8.0)
       wrangler:
-        specifier: ^4.20.0
+        specifier: 4.20.0
         version: 4.20.0(@cloudflare/workers-types@4.20250614.0)
 
 packages:
