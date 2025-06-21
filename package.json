@@ -80,7 +80,7 @@
         "lefthook": "1.11.14",
         "msw": "2.10.2",
         "npm-check-updates": "18.0.1",
-        "npm-run-all2": "5.0.0",
+        "npm-run-all2": "5.0.2",
         "prettier": "3.5.3",
         "prisma": "6.9.0",
         "react-docgen": "8.0.0",
