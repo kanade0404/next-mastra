@@ -1,14 +1,14 @@
 pre-commit:
     parallel: true
     commands:
-        eslint:
+        oxlint:
             glob: '*.{js,mjs,ts,tsx,jsx}'
-            run: pnpm exec eslint {staged_files}
+            run: npx oxlint --fix {staged_files}
             stage_fixed: true
 
-        prettier:
-            glob: '*.{js,mjs,ts,tsx,jsx,json,md,css,yml,yaml,toml}'
-            run: pnpm exec prettier --write {staged_files}
+        dprint:
+            glob: '*.{js,mjs,ts,tsx,jsx,json,md}'
+            run: pnpm exec dprint fmt {staged_files}
             stage_fixed: true
 
         secretlint:

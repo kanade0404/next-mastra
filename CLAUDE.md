@@ -10,8 +10,8 @@
 
 - **開発サーバー**: `pnpm dev` (高速ビルドのためTurbopackを使用)
 - **ビルド**: `pnpm build`
-- **リント**: `pnpm lint` (ESLint、Prettierチェック、CSpellを並列実行)
-- **フォーマット**: `pnpm format` (ESLint、Prettier、fixpackの問題を自動修正)
+- **リント**: `pnpm lint` (oxlint、dprintチェック、CSpellを並列実行)
+- **フォーマット**: `pnpm format` (oxlint、dprint、sort-package-jsonの問題を自動修正)
 
 ## アーキテクチャ概要
 
@@ -37,21 +37,20 @@
 
 ### コード品質基準
 
-- **非常に厳格なESLint設定**と関数型プログラミングルール:
-    - ミューテーション禁止 (`fp/no-mutation`)
-    - `let`宣言禁止 (`fp/no-let`)
-    - ループ禁止 (`fp/no-loops`)
-    - 明示的な関数戻り値型が必須
-    - 追加の安全性チェック付きTypeScript strict mode
-- **セキュリティ重視**: CSRF保護、Helmet.js、セキュリティリントルール
-- **import整理**: importグループ間の改行が必須
+- **高性能リンティング**: oxlint (Rust製、ESLintの10-100倍高速)
+  - 基本的な正確性・疑わしいコードパターンの検出
+  - TypeScript strict mode準拠
+  - 明示的な関数戻り値型が必須
+  - デバッガー・any型の使用禁止
+- **セキュリティ重視**: secretlint、セキュアな設定管理
+- **コードフォーマット**: dprint（Rust製、高速）、sort-package-json
 
 ### TypeScript設定
 
 - 追加の安全機能を有効にしたstrictモード:
-    - `noUncheckedIndexedAccess`
-    - `exactOptionalPropertyTypes`
-    - `noImplicitReturns`
-    - `noFallthroughCasesInSwitch`
+  - `noUncheckedIndexedAccess`
+  - `exactOptionalPropertyTypes`
+  - `noImplicitReturns`
+  - `noFallthroughCasesInSwitch`
 
-このコードベースで作業する際は、ESLintルールで強制される関数型プログラミングパラダイムに従い、すべての関数に明示的な戻り値型を確実に指定してください。
+このコードベースで作業する際は、oxlintルールとTypeScript strict modeに従い、すべての関数に明示的な戻り値型を確実に指定してください。

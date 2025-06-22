@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z, } from 'zod';
 
 /**
  * 環境変数バリデーションスキーマ
@@ -10,149 +10,205 @@ const envSchema = z.object({
     // Next.js Configuration
     // =======================
     NODE_ENV: z
-        .enum(['development', 'production', 'test'])
-        .default('development'),
-    NEXT_PUBLIC_APP_URL: z.string().url().default('http://localhost:3000'),
+        .enum(['development', 'production', 'test',],)
+        .default('development',),
+    NEXT_PUBLIC_APP_URL: z.string().url().default('http://localhost:3000',),
 
     // =======================
     // Cloudflare Configuration
     // =======================
-    CLOUDFLARE_ACCOUNT_ID: z
-        .string()
-        .min(1, 'Cloudflare Account ID is required'),
+    CLOUDFLARE_ACCOUNT_ID: z.string().optional(),
 
     // Cloudflare D1 Database
-    DATABASE_URL: z.string().min(1, 'Database URL is required'),
-    CLOUDFLARE_D1_DATABASE_ID: z.string().min(1, 'D1 Database ID is required'),
+    DATABASE_URL: z.string().min(1, 'Database URL is required',),
+    CLOUDFLARE_D1_DATABASE_ID: z.string().optional(),
+    CLOUDFLARE_D1_TOKEN: z.string().optional(),
 
     // Cloudflare R2 Storage
-    CLOUDFLARE_R2_BUCKET_NAME: z.string().min(1, 'R2 Bucket name is required'),
-    CLOUDFLARE_R2_ACCESS_KEY_ID: z
-        .string()
-        .min(1, 'R2 Access Key ID is required'),
-    CLOUDFLARE_R2_SECRET_ACCESS_KEY: z
-        .string()
-        .min(1, 'R2 Secret Access Key is required'),
-    CLOUDFLARE_R2_ENDPOINT: z.string().url('R2 Endpoint must be a valid URL'),
+    CLOUDFLARE_R2_BUCKET_NAME: z.string().optional(),
+    CLOUDFLARE_R2_ACCESS_KEY_ID: z.string().optional(),
+    CLOUDFLARE_R2_SECRET_ACCESS_KEY: z.string().optional(),
+    CLOUDFLARE_R2_ENDPOINT: z.string().optional(),
 
     // Cloudflare KV Storage
-    CLOUDFLARE_KV_NAMESPACE_ID: z
-        .string()
-        .min(1, 'KV Namespace ID is required'),
-    CLOUDFLARE_KV_PREVIEW_ID: z.string().optional(),
+    CLOUDFLARE_KV_NAMESPACE_ID: z.string().optional(),
 
-    // Cloudflare Analytics Engine
-    CLOUDFLARE_ANALYTICS_ENGINE_DATASET: z
-        .string()
-        .min(1, 'Analytics Engine Dataset is required'),
+    // Cloudflare Analytics
+    CLOUDFLARE_ANALYTICS_TOKEN: z.string().optional(),
+    CLOUDFLARE_ZONE_ID: z.string().optional(),
 
     // Cloudflare API Token
-    CLOUDFLARE_API_TOKEN: z.string().min(1, 'Cloudflare API Token is required'),
+    CLOUDFLARE_API_TOKEN: z.string().optional(),
 
     // =======================
     // Authentication (Clerk)
     // =======================
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z
-        .string()
-        .min(1, 'Clerk Publishable Key is required'),
-    CLERK_SECRET_KEY: z.string().min(1, 'Clerk Secret Key is required'),
-    NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().default('/sign-in'),
-    NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().default('/sign-up'),
-    NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL: z
-        .string()
-        .default('/dashboard'),
-    NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL: z
-        .string()
-        .default('/dashboard'),
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().optional(),
+    CLERK_SECRET_KEY: z.string().optional(),
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().default('/sign-in',),
+    NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().default('/sign-up',),
+    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: z.string().default('/dashboard',),
+    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: z.string().default('/dashboard',),
+    CLERK_JWT_KEY: z.string().optional(),
+    CLERK_WEBHOOK_SECRET: z.string().optional(),
 
     // =======================
-    // OpenAI API
+    // AI/LLM設定
     // =======================
-    OPENAI_API_KEY: z.string().min(1, 'OpenAI API Key is required'),
+    OPENAI_API_KEY: z.string().optional(),
+    OPENAI_MODEL: z.string().default('gpt-4',),
+    OPENAI_MAX_TOKENS: z
+        .string()
+        .transform(Number,)
+        .pipe(z.number().min(1,),)
+        .default('4000',),
+    OPENAI_TEMPERATURE: z
+        .string()
+        .transform(Number,)
+        .pipe(z.number().min(0,).max(2,),)
+        .default('0.7',),
     OPENAI_ORGANIZATION_ID: z.string().optional(),
 
     // =======================
-    // Pinecone Vector Database
+    // ベクトル検索設定 (Pinecone)
     // =======================
-    PINECONE_API_KEY: z.string().min(1, 'Pinecone API Key is required'),
-    PINECONE_ENVIRONMENT: z.string().min(1, 'Pinecone Environment is required'),
-    PINECONE_INDEX_NAME: z.string().min(1, 'Pinecone Index Name is required'),
+    PINECONE_API_KEY: z.string().optional(),
+    PINECONE_ENVIRONMENT: z.string().optional(),
+    PINECONE_INDEX_NAME: z.string().optional(),
 
     // =======================
-    // Brevo Email Service
+    // メール設定 (Brevo)
     // =======================
-    BREVO_API_KEY: z.string().min(1, 'Brevo API Key is required'),
-    BREVO_SENDER_EMAIL: z.string().email('Brevo Sender Email must be valid'),
-    BREVO_SENDER_NAME: z.string().default('Next Mastra Chat'),
+    BREVO_API_KEY: z.string().optional(),
+    BREVO_SENDER_EMAIL: z.string().optional(),
+    BREVO_SENDER_NAME: z.string().default('Next Mastra App',),
+    BREVO_WELCOME_TEMPLATE_ID: z
+        .string()
+        .transform(Number,)
+        .pipe(z.number().min(1,),)
+        .optional(),
+    BREVO_ALERT_TEMPLATE_ID: z
+        .string()
+        .transform(Number,)
+        .pipe(z.number().min(1,),)
+        .optional(),
 
     // =======================
-    // Error Monitoring (Sentry)
+    // 監視・ログ設定
     // =======================
-    SENTRY_DSN: z.string().url('Sentry DSN must be a valid URL'),
+    NEXT_PUBLIC_SENTRY_DSN: z.string().optional(),
     SENTRY_ORG: z.string().optional(),
     SENTRY_PROJECT: z.string().optional(),
     SENTRY_AUTH_TOKEN: z.string().optional(),
 
     // =======================
-    // Observability (OpenTelemetry)
+    // OpenTelemetry設定
     // =======================
-    GRAFANA_CLOUD_ENDPOINT: z
-        .string()
-        .url('Grafana Cloud Endpoint must be a valid URL')
-        .optional(),
-    GRAFANA_CLOUD_API_KEY: z.string().optional(),
-    GRAFANA_CLOUD_INSTANCE_ID: z.string().optional(),
-
-    OTEL_SERVICE_NAME: z.string().default('next-mastra-chat'),
-    OTEL_SERVICE_VERSION: z.string().default('1.0.0'),
-    OTEL_RESOURCE_ATTRIBUTES: z.string().optional(),
+    OTEL_SERVICE_NAME: z.string().default('next-mastra',),
+    OTEL_SERVICE_VERSION: z.string().default('1.0.0',),
+    OTEL_EXPORTER_OTLP_ENDPOINT: z.string().optional(),
+    OTEL_EXPORTER_OTLP_HEADERS: z.string().optional(),
 
     // =======================
-    // MCP (Model Context Protocol) Servers
+    // セキュリティ設定
     // =======================
-    MCP_FILESYSTEM_ROOT_PATH: z.string().default('/tmp/mcp'),
-    MCP_FETCH_USER_AGENT: z.string().default('NextMastraBot/1.0'),
-    MCP_SERVERS_CONFIG_PATH: z.string().default('./mcp-servers.json'),
+    JWT_SECRET: z.string().optional(),
+    SESSION_SECRET: z.string().optional(),
+    CSRF_SECRET: z.string().optional(),
+
+    // API レート制限設定
+    RATE_LIMIT_MAX_REQUESTS: z
+        .string()
+        .transform(Number,)
+        .pipe(z.number().min(1,),)
+        .default('100',),
+    RATE_LIMIT_WINDOW_MS: z
+        .string()
+        .transform(Number,)
+        .pipe(z.number().min(1,),)
+        .default('900000',),
 
     // =======================
-    // Development & Testing
+    // MCP (Model Context Protocol) サーバー設定
     // =======================
-    LOG_LEVEL: z.enum(['debug', 'info', 'warn', 'error']).default('info'),
-    ENABLE_ANALYTICS: z
-        .preprocess((v) => v === 'true', z.boolean())
-        .default(true),
-    ENABLE_ERROR_REPORTING: z
-        .preprocess((v) => v === 'true', z.boolean())
-        .default(true),
+    MCP_FILESYSTEM_ROOT_PATH: z.string().default('./data',),
+    MCP_FILESYSTEM_MAX_FILE_SIZE: z
+        .string()
+        .transform(Number,)
+        .pipe(z.number().min(1,),)
+        .default('5242880',),
+    MCP_FILESYSTEM_ALLOWED_EXTENSIONS: z
+        .string()
+        .default('.txt,.md,.json,.csv,.log',),
 
-    // Rate Limiting
-    RATE_LIMIT_REQUESTS_PER_MINUTE: z
+    MCP_FETCH_USER_AGENT: z.string().default('NextMastraBot/1.0',),
+    MCP_FETCH_TIMEOUT: z
         .string()
-        .transform(Number)
-        .pipe(z.number().min(1))
-        .default('60'),
-    RATE_LIMIT_BURST_SIZE: z
+        .transform(Number,)
+        .pipe(z.number().min(1,),)
+        .default('10000',),
+    MCP_FETCH_MAX_SIZE: z
         .string()
-        .transform(Number)
-        .pipe(z.number().min(1))
-        .default('10'),
+        .transform(Number,)
+        .pipe(z.number().min(1,),)
+        .default('1048576',),
 
-    // Security
-    CSRF_SECRET: z
+    // MCP外部データベース設定
+    MCP_AIVEN_POSTGRES_URL: z.string().optional(),
+    MCP_AIVEN_API_TOKEN: z.string().optional(),
+    MCP_CLICKHOUSE_URL: z.string().optional(),
+    MCP_CLICKHOUSE_USER: z.string().optional(),
+    MCP_CLICKHOUSE_PASSWORD: z.string().optional(),
+    MCP_CLICKHOUSE_DATABASE: z.string().optional(),
+    MCP_DEBUGGING_API_KEY: z.string().optional(),
+    MCP_DEBUGGING_PROJECT_ID: z.string().optional(),
+
+    // =======================
+    // 開発・テスト設定
+    // =======================
+    TEST_DATABASE_URL: z.string().optional(),
+    TEST_CLERK_PUBLISHABLE_KEY: z.string().optional(),
+    TEST_CLERK_SECRET_KEY: z.string().optional(),
+    DEBUG: z
+        .preprocess((v,) => v === 'true', z.boolean(),)
+        .default(false,),
+    VERBOSE_LOGGING: z
+        .preprocess((v,) => v === 'true', z.boolean(),)
+        .default(false,),
+    LOG_LEVEL: z
+        .enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace',],)
+        .default('info',),
+
+    // =======================
+    // パフォーマンス・キャッシュ設定
+    // =======================
+    REDIS_URL: z.string().optional(),
+    REDIS_PASSWORD: z.string().optional(),
+    CACHE_TTL: z
         .string()
-        .min(32, 'CSRF Secret must be at least 32 characters'),
-    ENCRYPTION_KEY: z
+        .transform(Number,)
+        .pipe(z.number().min(1,),)
+        .default('3600',),
+    CACHE_MAX_SIZE: z
         .string()
-        .min(32, 'Encryption Key must be at least 32 characters'),
+        .transform(Number,)
+        .pipe(z.number().min(1,),)
+        .default('100',),
+
+    // =======================
+    // 外部API設定
+    // =======================
+    GITHUB_TOKEN: z.string().optional(),
+    SLACK_WEBHOOK_URL: z.string().optional(),
 
     // =======================
     // Optional: Development
     // =======================
     NEXT_PUBLIC_VERCEL_URL: z.string().optional(),
     SKIP_ENV_VALIDATION: z
-        .preprocess((v) => v === 'true', z.boolean())
-        .default(false),
-});
+        .preprocess((v,) => v === 'true', z.boolean(),)
+        .default(false,),
+},);
 
 /**
  * 環境変数の型定義
@@ -165,29 +221,46 @@ export type Env = z.infer<typeof envSchema>;
 function validateEnv(): Env {
     // 環境変数バリデーションをスキップする場合
     if (process.env.SKIP_ENV_VALIDATION === 'true') {
-        console.warn('⚠️  環境変数バリデーションがスキップされました');
+        console.warn('⚠️  環境変数バリデーションがスキップされました',);
         return process.env as unknown as Env;
     }
 
     try {
-        const validatedEnv = envSchema.parse(process.env);
-        console.warn('✅ 環境変数バリデーションが完了しました');
+        const validatedEnv = envSchema.parse(process.env,);
+        console.warn('✅ 環境変数バリデーションが完了しました',);
         return validatedEnv;
     } catch (error) {
-        if (error instanceof z.ZodError) {
-            const errorMessages = error.errors.map((err) => {
-                const path = err.path.join('.');
-                return `  - ${path}: ${err.message}`;
-            });
+        // ビルド時は警告のみ表示してデフォルト値を使用
+        if (
+            process.env.NODE_ENV === 'production'
+            || process.env.NEXT_PHASE === 'phase-production-build'
+        ) {
+            console.warn(
+                '⚠️  環境変数の一部が未設定です。デフォルト値を使用します。',
+            );
+            return envSchema.parse({
+                ...process.env,
+                NODE_ENV: process.env.NODE_ENV || 'production',
+                NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL
+                    || 'http://localhost:3000',
+                DATABASE_URL: process.env.DATABASE_URL || 'file:./dev.db',
+            },);
+        }
 
-            console.error('❌ 環境変数バリデーションエラー:');
-            console.error(errorMessages.join('\n'));
-            console.error('\n💡 設定方法:');
+        if (error instanceof z.ZodError) {
+            const errorMessages = error.errors.map((err,) => {
+                const path = err.path.join('.',);
+                return `  - ${path}: ${err.message}`;
+            },);
+
+            console.error('❌ 環境変数バリデーションエラー:',);
+            console.error(errorMessages.join('\n',),);
+            console.error('\n💡 設定方法:',);
             console.error(
                 '1. .env.local.example をコピーして .env.local を作成',
             );
-            console.error('2. 必要な環境変数を設定');
-            console.error('3. 各サービスのAPIキーを取得して設定\n');
+            console.error('2. 必要な環境変数を設定',);
+            console.error('3. 各サービスのAPIキーを取得して設定\n',);
 
             throw new Error(
                 '環境変数の設定が不正です。上記のエラーを修正してください。',
@@ -229,43 +302,64 @@ export const clientEnv = {
     CLERK_PUBLISHABLE_KEY: env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
     CLERK_SIGN_IN_URL: env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
     CLERK_SIGN_UP_URL: env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
-    CLERK_SIGN_IN_FORCE_REDIRECT_URL:
-        env.NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL,
-    CLERK_SIGN_UP_FORCE_REDIRECT_URL:
-        env.NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL,
+    CLERK_AFTER_SIGN_IN_URL: env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL,
+    CLERK_AFTER_SIGN_UP_URL: env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
+    SENTRY_DSN: env.NEXT_PUBLIC_SENTRY_DSN,
     VERCEL_URL: env.NEXT_PUBLIC_VERCEL_URL,
 } as const;
 
 /**
  * 環境変数の設定状況を確認する関数
  */
-export function checkEnvHealth(): boolean {
-    const requiredKeys = [
-        'CLOUDFLARE_ACCOUNT_ID',
-        'DATABASE_URL',
+export function checkEnvHealth(): {
+    isHealthy: boolean;
+    missing: string[];
+    warnings: string[];
+} {
+    const criticalKeys = ['DATABASE_URL',] as const;
+
+    const importantKeys = [
         'NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY',
         'CLERK_SECRET_KEY',
         'OPENAI_API_KEY',
-        'PINECONE_API_KEY',
     ] as const;
 
-    // eslint-disable-next-line security/detect-object-injection
-    const missing = requiredKeys.filter((key) => !env[key]);
+    const optionalKeys = [
+        'PINECONE_API_KEY',
+        'BREVO_API_KEY',
+        'NEXT_PUBLIC_SENTRY_DSN',
+        'CLOUDFLARE_ACCOUNT_ID',
+    ] as const;
 
-    if (missing.length > 0) {
-        console.warn('⚠️  以下の重要な環境変数が設定されていません:');
-        missing.forEach((key) => console.warn(`  - ${key}`));
-        return false;
+    const missing = criticalKeys.filter((key,) => !env[key]);
+    const warnings = [
+        ...importantKeys.filter((key,) => !env[key]),
+        ...optionalKeys.filter((key,) => !env[key]),
+    ];
+
+    const isHealthy = missing.length === 0;
+
+    if (!isHealthy) {
+        console.error('❌ 以下の必須環境変数が設定されていません:',);
+        missing.forEach((key,) => console.error(`  - ${key}`,));
     }
 
-    console.warn('✅ 重要な環境変数がすべて設定されています');
-    return true;
+    if (warnings.length > 0) {
+        console.warn('⚠️  以下の推奨環境変数が設定されていません:',);
+        warnings.forEach((key,) => console.warn(`  - ${key}`,));
+    }
+
+    if (isHealthy && warnings.length === 0) {
+        console.warn('✅ すべての環境変数が設定されています',);
+    }
+
+    return { isHealthy, missing, warnings, };
 }
 
 /**
  * エラーハンドリング付きの環境変数取得
  */
-export function getEnvVar(key: keyof Env, fallback?: string): string {
+export function getEnvVar(key: keyof Env, fallback?: string,): string {
     // eslint-disable-next-line security/detect-object-injection
     const value = env[key];
 
@@ -276,8 +370,8 @@ export function getEnvVar(key: keyof Env, fallback?: string): string {
             );
             return fallback;
         }
-        throw new Error(`環境変数 ${key} が設定されていません`);
+        throw new Error(`環境変数 ${key} が設定されていません`,);
     }
 
-    return String(value);
+    return String(value,);
 }

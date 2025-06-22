@@ -38,7 +38,7 @@ import fp from 'eslint-plugin-fp';
 
 export default [
     {
-        plugins: { fp },
+        plugins: { fp, },
         rules: {
             'fp/no-mutation': 'error', // ミューテーション禁止
             'fp/no-let': 'error', // let宣言禁止

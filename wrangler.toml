@@ -37,10 +37,12 @@ database_id = "your_d1_database_id_here"
 migrations_dir = "./prisma/migrations"
 
 # Development用のローカルD1データベース
-[env.development.d1_databases]
-binding = "DB"
+[env.development]
+[[env.development.d1_databases]]
+binding = "DB" 
 database_name = "next-mastra-chat-db-dev"
 database_id = "your_dev_d1_database_id_here"
+migrations_dir = "./prisma/migrations"
 
 # ======================
 # Cloudflare R2 Storage

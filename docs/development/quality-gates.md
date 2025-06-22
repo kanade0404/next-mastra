@@ -87,25 +87,25 @@ pnpm validate
 
 ```typescript
 // src/lib/example.test.ts
-import { describe, it, expect } from 'vitest';
-import { exampleFunction } from './example';
+import { describe, expect, it, } from 'vitest';
+import { exampleFunction, } from './example';
 
 describe('exampleFunction', () => {
     it('正常なケースで期待される結果を返す', () => {
-        const result = exampleFunction('valid input');
-        expect(result).toBe('expected output');
+        const result = exampleFunction('valid input',);
+        expect(result,).toBe('expected output',);
     });
 
     it('不正な入力でエラーを投げる', () => {
-        expect(() => exampleFunction('')).toThrow('Input cannot be empty');
+        expect(() => exampleFunction('',)).toThrow('Input cannot be empty',);
     });
 
     it('エッジケースを適切に処理する', () => {
-        const result = exampleFunction('edge case');
-        expect(result).toMatchObject({
+        const result = exampleFunction('edge case',);
+        expect(result,).toMatchObject({
             success: true,
-            data: expect.any(String),
-        });
+            data: expect.any(String,),
+        },);
     });
 });
 ```
@@ -114,29 +114,29 @@ describe('exampleFunction', () => {
 
 ```typescript
 // src/app/api/v1/example/route.test.ts
-import { describe, it, expect, beforeEach } from 'vitest';
-import { testClient } from '@/lib/test/client';
+import { testClient, } from '@/lib/test/client';
+import { beforeEach, describe, expect, it, } from 'vitest';
 
 describe('GET /api/v1/example', () => {
     beforeEach(async () => {
         await setupTestDatabase();
-    });
+    },);
 
     it('認証済みユーザーが正常なレスポンスを受け取る', async () => {
         const response = await testClient
-            .get('/api/v1/example')
-            .set('Authorization', 'Bearer valid-token');
+            .get('/api/v1/example',)
+            .set('Authorization', 'Bearer valid-token',);
 
-        expect(response.status).toBe(200);
-        expect(response.body.success).toBe(true);
-        expect(response.body.data).toBeDefined();
+        expect(response.status,).toBe(200,);
+        expect(response.body.success,).toBe(true,);
+        expect(response.body.data,).toBeDefined();
     });
 
     it('未認証ユーザーが401エラーを受け取る', async () => {
-        const response = await testClient.get('/api/v1/example');
+        const response = await testClient.get('/api/v1/example',);
 
-        expect(response.status).toBe(401);
-        expect(response.body.error.code).toBe('UNAUTHORIZED');
+        expect(response.status,).toBe(401,);
+        expect(response.body.error.code,).toBe('UNAUTHORIZED',);
     });
 });
 ```
@@ -145,24 +145,24 @@ describe('GET /api/v1/example', () => {
 
 ```typescript
 // src/components/ExampleComponent.test.tsx
-import { describe, it, expect } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { ExampleComponent } from './ExampleComponent';
+import { fireEvent, render, screen, } from '@testing-library/react';
+import { describe, expect, it, } from 'vitest';
+import { ExampleComponent, } from './ExampleComponent';
 
 describe('ExampleComponent', () => {
-  it('プロパティが正しく表示される', () => {
-    render(<ExampleComponent title="Test Title" />);
+    it('プロパティが正しく表示される', () => {
+        render(<ExampleComponent title='Test Title' />,);
 
-    expect(screen.getByText('Test Title')).toBeInTheDocument();
-  });
+        expect(screen.getByText('Test Title',),).toBeInTheDocument();
+    });
 
-  it('ボタンクリックで適切なイベントが発生する', () => {
-    const handleClick = vi.fn();
-    render(<ExampleComponent onClick={handleClick} />);
+    it('ボタンクリックで適切なイベントが発生する', () => {
+        const handleClick = vi.fn();
+        render(<ExampleComponent onClick={handleClick} />,);
 
-    fireEvent.click(screen.getByRole('button'));
-    expect(handleClick).toHaveBeenCalledTimes(1);
-  });
+        fireEvent.click(screen.getByRole('button',),);
+        expect(handleClick,).toHaveBeenCalledTimes(1,);
+    });
 });
 ```
 
@@ -170,23 +170,24 @@ describe('ExampleComponent', () => {
 
 ```typescript
 // tests/e2e/chat.spec.ts
-import { test, expect } from '@playwright/test';
+import { expect, test, } from '@playwright/test';
 
 test.describe('チャット機能', () => {
-    test.beforeEach(async ({ page }) => {
-        await page.goto('/');
-        await page.click('[data-testid="login-button"]');
+    test.beforeEach(async ({ page, },) => {
+        await page.goto('/',);
+        await page.click('[data-testid="login-button"]',);
         // 認証フローの完了を待機
-    });
+    },);
 
-    test('新しいメッセージを送信できる', async ({ page }) => {
-        await page.fill('[data-testid="message-input"]', 'Hello, AI!');
-        await page.click('[data-testid="send-button"]');
+    test('新しいメッセージを送信できる', async ({ page, },) => {
+        await page.fill('[data-testid="message-input"]', 'Hello, AI!',);
+        await page.click('[data-testid="send-button"]',);
 
         await expect(
-            page.locator('[data-testid="message"]').last(),
-        ).toContainText('Hello, AI!');
-        await expect(page.locator('[data-testid="ai-response"]')).toBeVisible();
+            page.locator('[data-testid="message"]',).last(),
+        ).toContainText('Hello, AI!',);
+        await expect(page.locator('[data-testid="ai-response"]',),)
+            .toBeVisible();
     });
 });
 ```
@@ -196,17 +197,17 @@ test.describe('チャット機能', () => {
 ### Vitest 設定 (vitest.config.ts)
 
 ```typescript
-import { defineConfig } from 'vitest/config';
-import { resolve } from 'path';
+import { resolve, } from 'path';
+import { defineConfig, } from 'vitest/config';
 
 export default defineConfig({
     test: {
         environment: 'jsdom',
         globals: true,
-        setupFiles: ['./src/test/setup.ts'],
+        setupFiles: ['./src/test/setup.ts',],
         coverage: {
             provider: 'v8',
-            reporter: ['text', 'json', 'html'],
+            reporter: ['text', 'json', 'html',],
             exclude: [
                 'node_modules/',
                 'src/test/',
@@ -225,17 +226,17 @@ export default defineConfig({
     },
     resolve: {
         alias: {
-            '@': resolve(__dirname, './src'),
+            '@': resolve(__dirname, './src',),
         },
     },
-});
+},);
 ```
 
 ### テストセットアップ (src/test/setup.ts)
 
 ```typescript
 import '@testing-library/jest-dom';
-import { vi } from 'vitest';
+import { vi, } from 'vitest';
 
 // モック設定
 vi.mock('@clerk/nextjs', () => ({
@@ -243,8 +244,8 @@ vi.mock('@clerk/nextjs', () => ({
         isSignedIn: true,
         userId: 'test-user-id',
     }),
-    ClerkProvider: ({ children }: { children: React.ReactNode }) => children,
-}));
+    ClerkProvider: ({ children, }: { children: React.ReactNode; },) => children,
+}),);
 
 // 環境変数のモック
 vi.mock('@/lib/env', () => ({
@@ -253,7 +254,7 @@ vi.mock('@/lib/env', () => ({
         PINECONE_API_KEY: 'test-pinecone-key',
         DATABASE_URL: 'file:./test.db',
     },
-}));
+}),);
 
 // グローバルfetchのモック
 global.fetch = vi.fn();
@@ -265,7 +266,7 @@ global.fetch = vi.fn();
 
 ```typescript
 // src/test/mocks/openai.ts
-import { vi } from 'vitest';
+import { vi, } from 'vitest';
 
 export const mockOpenAI = {
     chat: {
@@ -278,17 +279,17 @@ export const mockOpenAI = {
                         },
                     },
                 ],
-            }),
+            },),
         },
     },
     embeddings: {
         create: vi.fn().mockResolvedValue({
             data: [
                 {
-                    embedding: new Array(1536).fill(0.1),
+                    embedding: new Array(1536,).fill(0.1,),
                 },
             ],
-        }),
+        },),
     },
 };
 ```
@@ -297,7 +298,7 @@ export const mockOpenAI = {
 
 ```typescript
 // src/test/mocks/database.ts
-import { vi } from 'vitest';
+import { vi, } from 'vitest';
 
 export const mockPrisma = {
     user: {

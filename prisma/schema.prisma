@@ -1,0 +1,483 @@
+// ==============================================================================
+// Prisma データベーススキーマ
+// ==============================================================================
+// Next.js + Mastra Chat LLM アプリケーション用のデータベーススキーマ
+// Cloudflare D1 (SQLite) 対応
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+// ==============================================================================
+// ユーザー管理
+// ==============================================================================
+
+/// ユーザー情報
+/// Clerkと連携してユーザー認証・管理を行う
+model User {
+    /// 内部ID（Prisma管理）
+    id String @id @default(cuid())
+
+    /// Clerk ユーザーID（外部キー）
+    clerkId String @unique
+
+    /// メールアドレス
+    email String @unique
+
+    /// 表示名（オプション）
+    displayName String?
+
+    /// プロフィール画像URL（オプション）
+    avatarUrl String?
+
+    /// ユーザーの言語設定
+    locale String @default("ja")
+
+    /// ユーザーのタイムゾーン
+    timezone String @default("Asia/Tokyo")
+
+    /// 利用状況
+    /// - active: アクティブ
+    /// - suspended: 一時停止
+    /// - deleted: 削除済み
+    status String @default("active")
+
+    /// アカウント作成日時
+    createdAt DateTime @default(now())
+
+    /// 最終更新日時
+    updatedAt DateTime @updatedAt
+
+    /// 最終ログイン日時
+    lastLoginAt DateTime?
+
+    // ==============================================================================
+    // リレーション
+    // ==============================================================================
+
+    /// このユーザーの会話一覧
+    conversations Conversation[]
+
+    /// このユーザーの使用量記録
+    usageRecords UsageRecord[]
+
+    /// このユーザーの設定
+    userSettings UserSettings?
+
+    @@map("users")
+}
+
+/// ユーザー設定
+model UserSettings {
+    /// ユーザーID（主キー兼外部キー）
+    userId String @id
+
+    /// AIモデル設定
+    preferredModel String @default("gpt-4")
+
+    /// レスポンスの最大トークン数
+    maxTokens Int @default(4000)
+
+    /// レスポンスの創造性レベル（0.0-2.0）
+    temperature Float @default(0.7)
+
+    /// チャット履歴の保持期間（日数）
+    chatRetentionDays Int @default(90)
+
+    /// メール通知設定
+    emailNotifications Boolean @default(true)
+
+    /// 使用量アラート設定
+    usageAlerts Boolean @default(true)
+
+    /// ダークモード設定
+    darkMode Boolean @default(false)
+
+    /// 作成日時
+    createdAt DateTime @default(now())
+
+    /// 更新日時
+    updatedAt DateTime @updatedAt
+
+    // リレーション
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("user_settings")
+}
+
+// ==============================================================================
+// 会話管理
+// ==============================================================================
+
+/// 会話（チャットセッション）
+model Conversation {
+    /// 会話ID
+    id String @id @default(cuid())
+
+    /// 所有者のユーザーID
+    userId String
+
+    /// 会話のタイトル
+    /// 最初のメッセージから自動生成されるか、ユーザーが手動設定
+    title String
+
+    /// 会話の要約（オプション）
+    summary String?
+
+    /// 使用AIモデル
+    model String @default("gpt-4")
+
+    /// モデル設定（JSON形式）
+    /// 例: {"temperature": 0.7, "max_tokens": 4000}
+    modelConfig String @default("{}")
+
+    /// 会話のステータス
+    /// - active: アクティブ
+    /// - archived: アーカイブ済み
+    /// - deleted: 削除済み
+    status String @default("active")
+
+    /// メッセージ数（パフォーマンス最適化用）
+    messageCount Int @default(0)
+
+    /// 最後のメッセージ日時
+    lastMessageAt DateTime?
+
+    /// 作成日時
+    createdAt DateTime @default(now())
+
+    /// 更新日時
+    updatedAt DateTime @updatedAt
+
+    // ==============================================================================
+    // リレーション
+    // ==============================================================================
+
+    /// 所有者
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    /// この会話のメッセージ一覧
+    messages Message[]
+
+    /// この会話の使用量記録
+    usageRecords UsageRecord[]
+
+    /// インデックス
+    @@index([userId])
+    @@index([status])
+    @@index([lastMessageAt])
+    @@map("conversations")
+}
+
+/// メッセージ
+model Message {
+    /// メッセージID
+    id String @id @default(cuid())
+
+    /// 会話ID
+    conversationId String
+
+    /// メッセージの送信者
+    /// - user: ユーザー
+    /// - assistant: AI
+    /// - system: システム
+    role String
+
+    /// メッセージ内容
+    content String
+
+    /// メッセージのメタデータ（JSON形式）
+    /// 例: {"model": "gpt-4", "tokens": 150, "finish_reason": "stop"}
+    metadata String @default("{}")
+
+    /// 使用トークン数（推定値）
+    tokenCount Int?
+
+    /// レスポンス時間（ミリ秒）
+    responseTime Int?
+
+    /// 親メッセージID（編集・返信機能用）
+    parentMessageId String?
+
+    /// 作成日時
+    createdAt DateTime @default(now())
+
+    /// 更新日時
+    updatedAt DateTime @updatedAt
+
+    // ==============================================================================
+    // リレーション
+    // ==============================================================================
+
+    /// 所属する会話
+    conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+    /// 親メッセージ（自己参照）
+    parentMessage Message? @relation("MessageThread", fields: [parentMessageId], references: [id])
+
+    /// 子メッセージ一覧
+    childMessages Message[] @relation("MessageThread")
+
+    /// インデックス
+    @@index([conversationId])
+    @@index([role])
+    @@index([createdAt])
+    @@map("messages")
+}
+
+// ==============================================================================
+// 使用量管理
+// ==============================================================================
+
+/// 使用量記録
+/// API使用量、トークン消費量等を記録
+model UsageRecord {
+    /// 記録ID
+    id String @id @default(cuid())
+
+    /// ユーザーID
+    userId String
+
+    /// 会話ID（オプション）
+    conversationId String?
+
+    /// 使用したAIモデル
+    model String
+
+    /// 使用目的
+    /// - chat: チャット
+    /// - summary: 要約生成
+    /// - title_generation: タイトル生成
+    /// - embedding: ベクトル化
+    purpose String @default("chat")
+
+    /// 入力トークン数
+    inputTokens Int @default(0)
+
+    /// 出力トークン数
+    outputTokens Int @default(0)
+
+    /// 合計トークン数
+    totalTokens Int @default(0)
+
+    /// コスト（USD、推定値）
+    estimatedCost Float @default(0.0)
+
+    /// 処理時間（ミリ秒）
+    processingTime Int?
+
+    /// APIリクエストが成功したかどうか
+    success Boolean @default(true)
+
+    /// エラーメッセージ（失敗時）
+    errorMessage String?
+
+    /// 記録日時
+    createdAt DateTime @default(now())
+
+    // ==============================================================================
+    // リレーション
+    // ==============================================================================
+
+    /// ユーザー
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    /// 会話（オプション）
+    conversation Conversation? @relation(fields: [conversationId], references: [id], onDelete: SetNull)
+
+    /// インデックス
+    @@index([userId])
+    @@index([model])
+    @@index([purpose])
+    @@index([createdAt])
+    @@map("usage_records")
+}
+
+// ==============================================================================
+// ベクトル検索（RAG機能用）
+// ==============================================================================
+
+/// ドキュメント
+/// RAG機能で使用するドキュメントの管理
+model Document {
+    /// ドキュメントID
+    id String @id @default(cuid())
+
+    /// ユーザーID（ドキュメントの所有者）
+    userId String
+
+    /// ドキュメントのタイトル
+    title String
+
+    /// ドキュメントの内容
+    content String
+
+    /// ドキュメントの種類
+    /// - upload: アップロードファイル
+    /// - url: Web URL
+    /// - manual: 手動入力
+    type String
+
+    /// 元ファイル名またはURL
+    source String?
+
+    /// ファイルサイズ（バイト）
+    fileSize Int?
+
+    /// MIMEタイプ
+    mimeType String?
+
+    /// ドキュメントのステータス
+    /// - processing: 処理中
+    /// - ready: 利用可能
+    /// - error: エラー
+    status String @default("processing")
+
+    /// ベクトル化完了フラグ
+    vectorized Boolean @default(false)
+
+    /// Pineconeインデックス内のID
+    vectorId String?
+
+    /// 作成日時
+    createdAt DateTime @default(now())
+
+    /// 更新日時
+    updatedAt DateTime @updatedAt
+
+    // ==============================================================================
+    // リレーション
+    // ==============================================================================
+
+    /// ドキュメントチャンク
+    chunks DocumentChunk[]
+
+    /// インデックス
+    @@index([userId])
+    @@index([status])
+    @@index([vectorized])
+    @@map("documents")
+}
+
+/// ドキュメントチャンク
+/// 大きなドキュメントを小さな検索可能な単位に分割
+model DocumentChunk {
+    /// チャンクID
+    id String @id @default(cuid())
+
+    /// 所属するドキュメントID
+    documentId String
+
+    /// チャンクの内容
+    content String
+
+    /// チャンクの位置（0から始まる）
+    position Int
+
+    /// トークン数（推定値）
+    tokenCount Int?
+
+    /// ベクトル化完了フラグ
+    vectorized Boolean @default(false)
+
+    /// PineconeでのベクトルID
+    vectorId String?
+
+    /// 作成日時
+    createdAt DateTime @default(now())
+
+    /// 更新日時
+    updatedAt DateTime @updatedAt
+
+    // ==============================================================================
+    // リレーション
+    // ==============================================================================
+
+    /// 所属するドキュメント
+    document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+    /// インデックス
+    @@index([documentId])
+    @@index([vectorized])
+    @@map("document_chunks")
+}
+
+// ==============================================================================
+// システム管理
+// ==============================================================================
+
+/// システム設定
+model SystemSetting {
+    /// 設定キー（主キー）
+    key String @id
+
+    /// 設定値
+    value String
+
+    /// 設定の説明
+    description String?
+
+    /// 設定カテゴリ
+    category String @default("general")
+
+    /// 設定の型
+    /// - string: 文字列
+    /// - number: 数値
+    /// - boolean: 真偽値
+    /// - json: JSON
+    valueType String @default("string")
+
+    /// 設定が公開可能かどうか（クライアントサイドで使用可能）
+    isPublic Boolean @default(false)
+
+    /// 作成日時
+    createdAt DateTime @default(now())
+
+    /// 更新日時
+    updatedAt DateTime @updatedAt
+
+    @@map("system_settings")
+}
+
+/// API キー管理
+/// 外部サービスのAPIキー使用状況を記録
+model ApiKeyUsage {
+    /// 記録ID
+    id String @id @default(cuid())
+
+    /// APIキーのサービス名
+    /// - openai: OpenAI
+    /// - pinecone: Pinecone
+    /// - brevo: Brevo
+    service String
+
+    /// 使用されたエンドポイント
+    endpoint String
+
+    /// HTTPステータスコード
+    statusCode Int
+
+    /// レスポンス時間（ミリ秒）
+    responseTime Int?
+
+    /// 使用量メトリクス（JSON形式）
+    /// 例: {"tokens": 150, "requests": 1}
+    metrics String @default("{}")
+
+    /// エラーメッセージ（エラー時）
+    errorMessage String?
+
+    /// 記録日時
+    createdAt DateTime @default(now())
+
+    /// インデックス
+    @@index([service])
+    @@index([statusCode])
+    @@index([createdAt])
+    @@map("api_key_usage")
+}

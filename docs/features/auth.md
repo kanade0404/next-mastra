@@ -174,38 +174,38 @@ interface SessionActivity {
 
 ```typescript
 // middleware.ts
-import { authMiddleware } from '@clerk/nextjs';
+import { authMiddleware, } from '@clerk/nextjs';
 
 export default authMiddleware({
-    publicRoutes: ['/', '/api/health'],
-    ignoredRoutes: ['/api/webhooks/(.*)'],
-    afterAuth(auth, req) {
+    publicRoutes: ['/', '/api/health',],
+    ignoredRoutes: ['/api/webhooks/(.*)',],
+    afterAuth(auth, req,) {
         // カスタム認証ロジック
         if (!auth.userId && !auth.isPublicRoute) {
-            return redirectToSignIn({ returnBackUrl: req.url });
+            return redirectToSignIn({ returnBackUrl: req.url, },);
         }
 
         // 管理者限定ルート
-        if (req.nextUrl.pathname.startsWith('/admin')) {
-            return enforceAdminAccess(auth);
+        if (req.nextUrl.pathname.startsWith('/admin',)) {
+            return enforceAdminAccess(auth,);
         }
     },
-});
+},);
 ```
 
 #### API 認証ガード
 
 ```typescript
 interface AuthGuard {
-    requireAuth(): (req: Request) => Promise<User | null>;
-    requireRole(role: UserRole): (req: Request) => Promise<User | null>;
-    requireOwnership(resourceId: string): (req: Request) => Promise<boolean>;
+    requireAuth(): (req: Request,) => Promise<User | null>;
+    requireRole(role: UserRole,): (req: Request,) => Promise<User | null>;
+    requireOwnership(resourceId: string,): (req: Request,) => Promise<boolean>;
 }
 
 // 使用例
-const authenticatedUser = await requireAuth()(request);
-const adminUser = await requireRole(UserRole.ADMIN)(request);
-const hasAccess = await requireOwnership(conversationId)(request);
+const authenticatedUser = await requireAuth()(request,);
+const adminUser = await requireRole(UserRole.ADMIN,)(request,);
+const hasAccess = await requireOwnership(conversationId,)(request,);
 ```
 
 ## API仕様
@@ -255,7 +255,7 @@ PATCH /api/v1/auth/profile
 GET / api / v1 / auth / sessions;
 
 // 特定セッション無効化
-DELETE / api / v1 / auth / sessions / { sessionId };
+DELETE / api / v1 / auth / sessions / { sessionId, };
 
 // 全セッション無効化（現在除く）
 DELETE / api / v1 / auth / sessions / others;
@@ -354,7 +354,7 @@ CREATE INDEX idx_activity_action_type ON user_activity(action_type);
 ### JWT 検証
 
 ```typescript
-import { ClerkJWTVerifier } from '@clerk/nextjs';
+import { ClerkJWTVerifier, } from '@clerk/nextjs';
 
 interface JWTVerificationResult {
     valid: boolean;
@@ -362,16 +362,16 @@ interface JWTVerificationResult {
     error?: string;
 }
 
-async function verifyJWT(token: string): Promise<JWTVerificationResult> {
+async function verifyJWT(token: string,): Promise<JWTVerificationResult> {
     try {
         const verifier = ClerkJWTVerifier({
             secretKey: process.env.CLERK_SECRET_KEY,
-        });
+        },);
 
-        const payload = await verifier.verify(token);
-        return { valid: true, payload };
+        const payload = await verifier.verify(token,);
+        return { valid: true, payload, };
     } catch (error) {
-        return { valid: false, error: error.message };
+        return { valid: false, error: error.message, };
     }
 }
 ```
@@ -382,26 +382,26 @@ async function verifyJWT(token: string): Promise<JWTVerificationResult> {
 export async function authenticateRequest(
     request: Request,
 ): Promise<AuthContext> {
-    const token = extractTokenFromHeader(request);
+    const token = extractTokenFromHeader(request,);
 
     if (!token) {
-        throw new UnauthorizedError('Authentication token required');
+        throw new UnauthorizedError('Authentication token required',);
     }
 
-    const verification = await verifyJWT(token);
+    const verification = await verifyJWT(token,);
     if (!verification.valid) {
-        throw new UnauthorizedError('Invalid authentication token');
+        throw new UnauthorizedError('Invalid authentication token',);
     }
 
-    const user = await getUserByClerkId(verification.payload.sub);
+    const user = await getUserByClerkId(verification.payload.sub,);
     if (!user || !user.isActive) {
-        throw new ForbiddenError('User account is inactive');
+        throw new ForbiddenError('User account is inactive',);
     }
 
     return {
         user,
         session: verification.payload,
-        permissions: await getUserPermissions(user.id),
+        permissions: await getUserPermissions(user.id,),
     };
 }
 ```
@@ -410,15 +410,15 @@ export async function authenticateRequest(
 
 ```typescript
 // middleware.ts
-export function securityHeaders(request: NextRequest) {
+export function securityHeaders(request: NextRequest,) {
     const response = NextResponse.next();
 
-    response.headers.set('X-Frame-Options', 'DENY');
-    response.headers.set('X-Content-Type-Options', 'nosniff');
-    response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+    response.headers.set('X-Frame-Options', 'DENY',);
+    response.headers.set('X-Content-Type-Options', 'nosniff',);
+    response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin',);
     response.headers.set(
         'Content-Security-Policy',
-        "default-src 'self'; script-src 'self' 'unsafe-inline' https://clerk.com; style-src 'self' 'unsafe-inline';",
+        'default-src \'self\'; script-src \'self\' \'unsafe-inline\' https://clerk.com; style-src \'self\' \'unsafe-inline\';',
     );
 
     return response;
@@ -439,7 +439,7 @@ export function securityHeaders(request: NextRequest) {
 interface PrivacyRights {
     dataAccess(): Promise<UserDataExport>; // データ取得権
     dataPortability(): Promise<ExportFile>; // データポータビリティ権
-    dataRectification(updates: Partial<UserProfile>): Promise<void>; // 訂正権
+    dataRectification(updates: Partial<UserProfile>,): Promise<void>; // 訂正権
     dataErasure(): Promise<void>; // 削除権（忘れられる権利）
     processingRestriction(): Promise<void>; // 処理制限権
 }
@@ -448,26 +448,26 @@ interface PrivacyRights {
 ### データ削除
 
 ```typescript
-async function deleteUserData(userId: string): Promise<void> {
+async function deleteUserData(userId: string,): Promise<void> {
     // 1. 関連データの削除
     await Promise.all([
-        deleteUserConversations(userId),
-        deleteUserDocuments(userId),
-        deleteUserSessions(userId),
-        deleteUserActivity(userId),
-    ]);
+        deleteUserConversations(userId,),
+        deleteUserDocuments(userId,),
+        deleteUserSessions(userId,),
+        deleteUserActivity(userId,),
+    ],);
 
     // 2. Vector DB からの削除
-    await deleteUserVectorData(userId);
+    await deleteUserVectorData(userId,);
 
     // 3. ファイルストレージからの削除
-    await deleteUserFiles(userId);
+    await deleteUserFiles(userId,);
 
     // 4. ユーザーアカウントの削除
-    await deleteUser(userId);
+    await deleteUser(userId,);
 
     // 5. Clerk からの削除
-    await clerkClient.users.deleteUser(clerkId);
+    await clerkClient.users.deleteUser(clerkId,);
 }
 ```
 
@@ -494,7 +494,7 @@ interface AuthEvent {
 
 // 不審なアクティビティの検出
 interface SuspiciousActivityDetector {
-    checkMultipleFailedLogins(userId: string): Promise<boolean>;
+    checkMultipleFailedLogins(userId: string,): Promise<boolean>;
     checkUnusualLocation(
         userId: string,
         location: GeoLocation,
@@ -520,23 +520,25 @@ interface SuspiciousActivityDetector {
 ```typescript
 describe('Authentication', () => {
     test('Valid JWT token authentication', async () => {
-        const token = await generateValidJWT(testUser);
-        const result = await authenticateRequest(createRequestWithToken(token));
-        expect(result.user.id).toBe(testUser.id);
+        const token = await generateValidJWT(testUser,);
+        const result = await authenticateRequest(
+            createRequestWithToken(token,),
+        );
+        expect(result.user.id,).toBe(testUser.id,);
     });
 
     test('Expired token rejection', async () => {
-        const expiredToken = await generateExpiredJWT(testUser);
+        const expiredToken = await generateExpiredJWT(testUser,);
         await expect(
-            authenticateRequest(createRequestWithToken(expiredToken)),
-        ).rejects.toThrow(UnauthorizedError);
+            authenticateRequest(createRequestWithToken(expiredToken,),),
+        ).rejects.toThrow(UnauthorizedError,);
     });
 
     test('Role-based access control', async () => {
-        const userToken = await generateJWT(normalUser);
+        const userToken = await generateJWT(normalUser,);
         await expect(
-            requireRole(UserRole.ADMIN)(createRequestWithToken(userToken)),
-        ).rejects.toThrow(ForbiddenError);
+            requireRole(UserRole.ADMIN,)(createRequestWithToken(userToken,),),
+        ).rejects.toThrow(ForbiddenError,);
     });
 });
 ```

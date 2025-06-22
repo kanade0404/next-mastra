@@ -1,13 +1,26 @@
 {
     "mcpServers": {
+        "filesystem": {
+            "command": "node",
+            "args": ["--loader", "tsx/esm", "src/lib/mcp/filesystem.ts"],
+            "env": {
+                "MCP_FILESYSTEM_ROOT_PATH": "./data",
+                "MCP_FILESYSTEM_MAX_FILE_SIZE": "5242880",
+                "MCP_FILESYSTEM_ALLOWED_EXTENSIONS": ".txt,.md,.json,.csv,.log"
+            }
+        },
+        "fetch": {
+            "command": "node",
+            "args": ["--loader", "tsx/esm", "src/lib/mcp/fetch.ts"],
+            "env": {
+                "MCP_FETCH_USER_AGENT": "NextMastraBot/1.0",
+                "MCP_FETCH_TIMEOUT": "10000",
+                "MCP_FETCH_MAX_SIZE": "1048576"
+            }
+        },
         "context7": {
             "command": "npx",
             "args": ["-y", "@upstash/context7-mcp"],
-            "env": {}
-        },
-        "eslint": {
-            "command": "pnpm",
-            "args": ["eslint", "--mcp"],
             "env": {}
         },
         "prisma": {

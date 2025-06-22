@@ -1,0 +1,42 @@
+{
+    "$schema": "https://dprint.dev/schemas/v0.json",
+    "projectType": "openSource",
+    "incremental": true,
+    "includes": ["**/*.{ts,tsx,js,jsx,json,md}"],
+    "excludes": [
+        "**/node_modules",
+        "**/.next",
+        "**/dist",
+        "**/build",
+        "**/coverage",
+        "**/.turbo",
+        "**/out",
+        "**/public",
+        "**/*.min.js",
+        "**/*.min.css",
+        "**/.claude/*.local.json"
+    ],
+    "plugins": [
+        "https://plugins.dprint.dev/typescript-0.95.1.wasm",
+        "https://plugins.dprint.dev/json-0.19.3.wasm",
+        "https://plugins.dprint.dev/markdown-0.17.8.wasm"
+    ],
+    "typescript": {
+        "semiColons": "always",
+        "quoteStyle": "alwaysSingle",
+        "indentWidth": 4,
+        "lineWidth": 80,
+        "useTabs": false,
+        "newLineKind": "lf",
+        "trailingCommas": "always"
+    },
+    "json": {
+        "indentWidth": 4,
+        "useTabs": false,
+        "newLineKind": "lf"
+    },
+    "markdown": {
+        "lineWidth": 80,
+        "newLineKind": "lf"
+    }
+}

@@ -1,0 +1,64 @@
+{
+    "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/crates/oxc_linter/src/schemas/oxlint.json",
+    "rules": {
+        "correctness": "error",
+        "suspicious": "error",
+        "perf": "warn",
+        "style": "warn",
+        "pedantic": "warn",
+        "nursery": "off",
+        "restriction": "warn"
+    },
+    "allow": [
+        "style/prefer-const",
+        "pedantic/prefer-destructuring",
+        "restriction/prefer-node-protocol"
+    ],
+    "deny": [
+        "correctness/no-debugger",
+        "suspicious/no-explicit-any",
+        "correctness/no-unused-vars",
+        "correctness/no-unsafe-regex",
+        "suspicious/no-array-reduce",
+        "suspicious/no-async-promise-executor",
+        "correctness/no-new-object",
+        "correctness/no-new-wrappers",
+        "pedantic/prefer-object-spread",
+        "pedantic/no-unescaped-entities",
+        "restriction/no-restricted-globals",
+        "correctness/no-global-assign",
+        "correctness/no-unreachable",
+        "correctness/no-unused-labels",
+        "suspicious/no-control-regex",
+        "suspicious/no-duplicate-case",
+        "suspicious/no-empty-character-class",
+        "suspicious/no-fallthrough",
+        "suspicious/no-global-assign",
+        "suspicious/no-misleading-character-class",
+        "suspicious/no-prototype-builtins",
+        "suspicious/no-regex-spaces",
+        "suspicious/no-shadow-restricted-names",
+        "suspicious/no-sparse-arrays",
+        "suspicious/use-isnan"
+    ],
+    "include": [
+        "src/**/*.{ts,tsx,js,jsx}",
+        "app/**/*.{ts,tsx,js,jsx}",
+        "examples/**/*.{ts,tsx,js,jsx}",
+        "scripts/**/*.{ts,tsx,js,jsx}",
+        "*.{ts,tsx,js,jsx,mjs}"
+    ],
+    "ignore": [
+        "node_modules/**",
+        ".next/**",
+        "dist/**",
+        "build/**",
+        "coverage/**",
+        "**/*.min.js",
+        "**/*.d.ts",
+        ".turbo/**",
+        "out/**",
+        "public/**",
+        ".claude/*.local.json"
+    ]
+}

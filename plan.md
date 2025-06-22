@@ -66,131 +66,131 @@ ChatGPTのようなチャット形式のLLMアプリケーションを構築し�
 
 1. **MCP サーバー設定**
 
-    - Filesystem server: ファイル操作機能
-    - Fetch server: Web コンテンツ取得
-    - 開発環境での MCP 統合設定
+   - Filesystem server: ファイル操作機能
+   - Fetch server: Web コンテンツ取得
+   - 開発環境での MCP 統合設定
 
 2. **lefthook 設定**
 
-    - pre-commit フック（ESLint、Prettier、secretlint、cspell）
-    - pre-push フック（型チェック、テスト）
-    - 自動フォーマット・品質チェック
+   - pre-commit フック（ESLint、Prettier、secretlint、cspell）
+   - pre-push フック（型チェック、テスト）
+   - 自動フォーマット・品質チェック
 
 3. **環境変数設定**
 
-    - Clerk認証キー
-    - OpenAI APIキー
-    - Cloudflare D1設定
-    - Brevo APIキー
-    - Sentry DSN
+   - Clerk認証キー
+   - OpenAI APIキー
+   - Cloudflare D1設定
+   - Brevo APIキー
+   - Sentry DSN
 
 4. **データベーススキーマ設計**
 
-    ```prisma
-    model User {
-      id            String   @id @default(cuid())
-      clerkId       String   @unique
-      email         String   @unique
-      conversations Conversation[]
-      createdAt     DateTime @default(now())
-    }
+   ```prisma
+   model User {
+     id            String   @id @default(cuid())
+     clerkId       String   @unique
+     email         String   @unique
+     conversations Conversation[]
+     createdAt     DateTime @default(now())
+   }
 
-    model Conversation {
-      id        String    @id @default(cuid())
-      userId    String
-      title     String
-      user      User      @relation(fields: [userId], references: [id])
-      messages  Message[]
-      createdAt DateTime  @default(now())
-    }
+   model Conversation {
+     id        String    @id @default(cuid())
+     userId    String
+     title     String
+     user      User      @relation(fields: [userId], references: [id])
+     messages  Message[]
+     createdAt DateTime  @default(now())
+   }
 
-    model Message {
-      id             String       @id @default(cuid())
-      conversationId String
-      role           String       // "user" | "assistant"
-      content        String
-      conversation   Conversation @relation(fields: [conversationId], references: [id])
-      createdAt      DateTime     @default(now())
-    }
-    ```
+   model Message {
+     id             String       @id @default(cuid())
+     conversationId String
+     role           String       // "user" | "assistant"
+     content        String
+     conversation   Conversation @relation(fields: [conversationId], references: [id])
+     createdAt      DateTime     @default(now())
+   }
+   ```
 
 5. **Clerk設定**
-    - ミドルウェアでルート保護
-    - ユーザープロファイルページ
-    - サインイン/サインアップページ
+   - ミドルウェアでルート保護
+   - ユーザープロファイルページ
+   - サインイン/サインアップページ
 
 ### フェーズ2: チャット機能
 
 1. **チャットUI構築**
 
-    - メッセージ一覧表示
-    - メッセージ入力フォーム
-    - 会話履歴サイドバー
-    - ストリーミングレスポンス表示
+   - メッセージ一覧表示
+   - メッセージ入力フォーム
+   - 会話履歴サイドバー
+   - ストリーミングレスポンス表示
 
 2. **Mastra LLM統合**
 
-    - OpenAI GPT-4統合
-    - ストリーミングAPI実装
-    - プロンプトテンプレート管理
+   - OpenAI GPT-4統合
+   - ストリーミングAPI実装
+   - プロンプトテンプレート管理
 
 3. **API エンドポイント（/api/v1 から開始）**
-    - `POST /api/v1/chat` - メッセージ送信
-    - `GET /api/v1/conversations` - 会話一覧
-    - `POST /api/v1/conversations` - 新規会話作成
-    - `DELETE /api/v1/conversations/[id]` - 会話削除
+   - `POST /api/v1/chat` - メッセージ送信
+   - `GET /api/v1/conversations` - 会話一覧
+   - `POST /api/v1/conversations` - 新規会話作成
+   - `DELETE /api/v1/conversations/[id]` - 会話削除
 
 ### フェーズ3: 状態管理・最適化
 
 1. **Zustand ストア**
 
-    - チャット状態管理
-    - UI状態管理
+   - チャット状態管理
+   - UI状態管理
 
 2. **TanStack Query**
 
-    - 会話データキャッシュ
-    - リアルタイム更新
-    - 楽観的更新
+   - 会話データキャッシュ
+   - リアルタイム更新
+   - 楽観的更新
 
 3. **Zod バリデーション**
-    - API入力バリデーション
-    - フォームバリデーション
+   - API入力バリデーション
+   - フォームバリデーション
 
 ### フェーズ4: 通知・監視
 
 1. **Brevo メール統合**
 
-    - 新規登録ウェルカムメール
-    - 使用量上限通知
-    - メール送信例のAPI実装
+   - 新規登録ウェルカムメール
+   - 使用量上限通知
+   - メール送信例のAPI実装
 
 2. **Sentry エラー監視**
 
-    - フロントエンド・バックエンドエラー監視
-    - パフォーマンス監視設定
+   - フロントエンド・バックエンドエラー監視
+   - パフォーマンス監視設定
 
 3. **OpenTelemetry**
-    - トレーシング設定
-    - メトリクス収集
+   - トレーシング設定
+   - メトリクス収集
 
 ### フェーズ5: セキュリティ・最終調整
 
 1. **セキュリティ強化**
 
-    - CSRF保護実装
-    - セキュリティヘッダー設定
-    - レート制限
+   - CSRF保護実装
+   - セキュリティヘッダー設定
+   - レート制限
 
 2. **ログシステム**
 
-    - 構造化ログ実装
-    - ログレベル設定
+   - 構造化ログ実装
+   - ログレベル設定
 
 3. **ドキュメント整備**
-    - README更新
-    - 各ライブラリの使用例説明
-    - 環境変数設定ガイド
+   - README更新
+   - 各ライブラリの使用例説明
+   - 環境変数設定ガイド
 
 ## ディレクトリ構成
 

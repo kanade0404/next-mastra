@@ -16,6 +16,7 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "jsx": "preserve",
+        "jsxImportSource": "react",
         "incremental": true,
         "plugins": [
             {
@@ -31,5 +32,5 @@
         "src",
         "types"
     ],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", "examples"]
 }

@@ -53,7 +53,7 @@ name = "next-mastra-chat-preview"
 
 ```typescript
 // next.config.ts
-import { setupDevPlatform } from '@cloudflare/next-on-pages/next-dev';
+import { setupDevPlatform, } from '@cloudflare/next-on-pages/next-dev';
 
 const nextConfig = {
     experimental: {
@@ -94,11 +94,11 @@ wrangler pages secret put OPENAI_API_KEY --env preview
 
 ```typescript
 // functions/api/v1/[[...route]].ts
-export async function onRequest(context: EventContext<Env, string, {}>) {
-    const { request, env, params } = context;
+export async function onRequest(context: EventContext<Env, string, {}>,) {
+    const { request, env, params, } = context;
 
     // Next.js API ルートの処理
-    return await handleRequest(request, env, params);
+    return await handleRequest(request, env, params,);
 }
 
 interface Env {
@@ -132,17 +132,17 @@ interface Env {
 
 ```typescript
 // 大容量処理の分割実装例
-async function processLargeDocument(file: File, env: Env): Promise<void> {
+async function processLargeDocument(file: File, env: Env,): Promise<void> {
     const chunks = await splitDocumentIntoChunks(file, {
         maxSize: 1024 * 1024,
-    }); // 1MB chunks
+    },); // 1MB chunks
 
     for (const chunk of chunks) {
         // 各チャンクを個別のリクエストで処理
-        await processChunk(chunk, env);
+        await processChunk(chunk, env,);
 
         // CPU時間制限を回避するための待機
-        await new Promise((resolve) => setTimeout(resolve, 100));
+        await new Promise((resolve,) => setTimeout(resolve, 100,));
     }
 }
 ```
@@ -169,24 +169,24 @@ database_id = "your-preview-database-id"
 ```typescript
 // src/lib/db/d1.ts
 interface D1Client {
-    query<T = any>(sql: string, params?: any[]): Promise<D1Result<T>>;
-    batch<T = any>(statements: D1PreparedStatement[]): Promise<D1Result<T>[]>;
-    prepare(sql: string): D1PreparedStatement;
+    query<T = any,>(sql: string, params?: any[],): Promise<D1Result<T>>;
+    batch<T = any,>(statements: D1PreparedStatement[],): Promise<D1Result<T>[]>;
+    prepare(sql: string,): D1PreparedStatement;
     dump(): Promise<ArrayBuffer>;
-    exec(sql: string): Promise<D1ExecResult>;
+    exec(sql: string,): Promise<D1ExecResult>;
 }
 
 class DatabaseManager {
-    constructor(private db: D1Database) {}
+    constructor(private db: D1Database,) {}
 
     // トランザクション処理
-    async transaction<T>(queries: () => Promise<T>): Promise<T> {
+    async transaction<T,>(queries: () => Promise<T>,): Promise<T> {
         const statements: D1PreparedStatement[] = [];
 
         try {
             const result = await queries();
             if (statements.length > 0) {
-                await this.db.batch(statements);
+                await this.db.batch(statements,);
             }
             return result;
         } catch (error) {
@@ -196,16 +196,16 @@ class DatabaseManager {
     }
 
     // バッチ挿入最適化
-    async batchInsert<T>(table: string, records: T[]): Promise<void> {
+    async batchInsert<T,>(table: string, records: T[],): Promise<void> {
         const batchSize = 100; // D1 バッチ制限考慮
 
         for (let i = 0; i < records.length; i += batchSize) {
-            const batch = records.slice(i, i + batchSize);
-            const statements = batch.map((record) =>
-                this.prepareBatchInsertStatement(table, record),
+            const batch = records.slice(i, i + batchSize,);
+            const statements = batch.map((record,) =>
+                this.prepareBatchInsertStatement(table, record,)
             );
 
-            await this.db.batch(statements);
+            await this.db.batch(statements,);
         }
     }
 }
@@ -269,7 +269,7 @@ bucket_name = "next-mastra-files-preview"
 ```typescript
 // src/lib/storage/r2.ts
 class R2FileManager {
-    constructor(private bucket: R2Bucket) {}
+    constructor(private bucket: R2Bucket,) {}
 
     async uploadFile(
         key: string,
@@ -278,33 +278,35 @@ class R2FileManager {
     ): Promise<void> {
         await this.bucket.put(key, file, {
             httpMetadata: {
-                contentType:
-                    file instanceof File
-                        ? file.type
-                        : 'application/octet-stream',
+                contentType: file instanceof File
+                    ? file.type
+                    : 'application/octet-stream',
                 cacheControl: 'public, max-age=31536000', // 1年キャッシュ
             },
             customMetadata: metadata,
-        });
+        },);
     }
 
-    async getFile(key: string): Promise<R2ObjectBody | null> {
-        return await this.bucket.get(key);
+    async getFile(key: string,): Promise<R2ObjectBody | null> {
+        return await this.bucket.get(key,);
     }
 
-    async deleteFile(key: string): Promise<void> {
-        await this.bucket.delete(key);
+    async deleteFile(key: string,): Promise<void> {
+        await this.bucket.delete(key,);
     }
 
-    async listFiles(prefix?: string, limit = 1000): Promise<R2Objects> {
+    async listFiles(prefix?: string, limit = 1000,): Promise<R2Objects> {
         return await this.bucket.list({
             prefix,
             limit,
-        });
+        },);
     }
 
     // プリサインドURL生成（将来実装）
-    async generatePresignedUrl(key: string, expiresIn = 3600): Promise<string> {
+    async generatePresignedUrl(
+        key: string,
+        expiresIn = 3600,
+    ): Promise<string> {
         // R2 API でのプリサインドURL生成
         // 現在は直接アクセスURLを返す
         return `https://your-domain.com/api/v1/files/${key}`;
@@ -331,17 +333,17 @@ class FileKeyGenerator implements FileNamingStrategy {
         originalName: string,
     ): string {
         const timestamp = Date.now();
-        const sanitizedName = this.sanitizeFileName(originalName);
-        const extension = this.getFileExtension(originalName);
+        const sanitizedName = this.sanitizeFileName(originalName,);
+        const extension = this.getFileExtension(originalName,);
 
         return `${fileType}/${userId}/${timestamp}-${sanitizedName}.${extension}`;
     }
 
-    private sanitizeFileName(name: string): string {
+    private sanitizeFileName(name: string,): string {
         return name
-            .replace(/[^a-zA-Z0-9.-]/g, '_')
-            .replace(/_{2,}/g, '_')
-            .substring(0, 100);
+            .replace(/[^a-zA-Z0-9.-]/g, '_',)
+            .replace(/_{2,}/g, '_',)
+            .substring(0, 100,);
     }
 }
 ```
@@ -370,46 +372,46 @@ id = "your-preview-cache-namespace-id"
 ```typescript
 // src/lib/cache/kv.ts
 class KVCacheManager {
-    constructor(private kv: KVNamespace) {}
+    constructor(private kv: KVNamespace,) {}
 
-    async get<T>(key: string): Promise<T | null> {
-        const value = await this.kv.get(key, { type: 'json' });
+    async get<T,>(key: string,): Promise<T | null> {
+        const value = await this.kv.get(key, { type: 'json', },);
         return value as T | null;
     }
 
-    async set<T>(
+    async set<T,>(
         key: string,
         value: T,
-        options?: { ttl?: number; expirationTtl?: number },
+        options?: { ttl?: number; expirationTtl?: number; },
     ): Promise<void> {
-        await this.kv.put(key, JSON.stringify(value), {
+        await this.kv.put(key, JSON.stringify(value,), {
             expirationTtl: options?.ttl || options?.expirationTtl || 3600, // 1時間デフォルト
-        });
+        },);
     }
 
-    async delete(key: string): Promise<void> {
-        await this.kv.delete(key);
+    async delete(key: string,): Promise<void> {
+        await this.kv.delete(key,);
     }
 
     async list(
         prefix?: string,
     ): Promise<KVNamespaceListResult<unknown, string>> {
-        return await this.kv.list({ prefix });
+        return await this.kv.list({ prefix, },);
     }
 
     // パターンベースキャッシュ
-    async cacheWithPattern<T>(
+    async cacheWithPattern<T,>(
         pattern: string,
         generator: () => Promise<T>,
         ttl = 3600,
     ): Promise<T> {
-        const cached = await this.get<T>(pattern);
+        const cached = await this.get<T>(pattern,);
         if (cached !== null) {
             return cached;
         }
 
         const fresh = await generator();
-        await this.set(pattern, fresh, { ttl });
+        await this.set(pattern, fresh, { ttl, },);
         return fresh;
     }
 }
@@ -428,32 +430,32 @@ interface SessionData {
 }
 
 class SessionManager {
-    constructor(private kv: KVNamespace) {}
+    constructor(private kv: KVNamespace,) {}
 
-    async storeSession(sessionId: string, data: SessionData): Promise<void> {
+    async storeSession(sessionId: string, data: SessionData,): Promise<void> {
         await this.kv.put(
             `session:${sessionId}`,
-            JSON.stringify(data),
-            { expirationTtl: 86400 }, // 24時間
+            JSON.stringify(data,),
+            { expirationTtl: 86400, }, // 24時間
         );
     }
 
-    async getSession(sessionId: string): Promise<SessionData | null> {
+    async getSession(sessionId: string,): Promise<SessionData | null> {
         const data = await this.kv.get(`session:${sessionId}`, {
             type: 'json',
-        });
+        },);
         return data as SessionData | null;
     }
 
-    async invalidateSession(sessionId: string): Promise<void> {
-        await this.kv.delete(`session:${sessionId}`);
+    async invalidateSession(sessionId: string,): Promise<void> {
+        await this.kv.delete(`session:${sessionId}`,);
     }
 
-    async refreshSession(sessionId: string): Promise<void> {
-        const session = await this.getSession(sessionId);
+    async refreshSession(sessionId: string,): Promise<void> {
+        const session = await this.getSession(sessionId,);
         if (session) {
             session.lastActivityAt = new Date().toISOString();
-            await this.storeSession(sessionId, session);
+            await this.storeSession(sessionId, session,);
         }
     }
 }
@@ -481,7 +483,7 @@ interface MetricEvent {
 }
 
 class MetricsCollector {
-    constructor(private analytics: AnalyticsEngineDataset) {}
+    constructor(private analytics: AnalyticsEngineDataset,) {}
 
     async trackChatMessage(data: {
         userId: string;
@@ -490,7 +492,7 @@ class MetricsCollector {
         responseTime: number;
         model: string;
         hasRAG: boolean;
-    }): Promise<void> {
+    },): Promise<void> {
         await this.analytics.writeDataPoint({
             timestamp: Date.now(),
             blobs: [
@@ -499,9 +501,9 @@ class MetricsCollector {
                 data.model,
                 data.hasRAG ? 'rag' : 'normal',
             ],
-            doubles: [data.messageLength, data.responseTime],
-            indexes: ['chat_message'],
-        });
+            doubles: [data.messageLength, data.responseTime,],
+            indexes: ['chat_message',],
+        },);
     }
 
     async trackSearchQuery(data: {
@@ -510,17 +512,17 @@ class MetricsCollector {
         resultCount: number;
         searchTime: number;
         searchType: 'semantic' | 'keyword' | 'hybrid';
-    }): Promise<void> {
+    },): Promise<void> {
         await this.analytics.writeDataPoint({
             timestamp: Date.now(),
             blobs: [
                 data.userId,
                 data.searchType,
-                this.hashQuery(data.query), // プライバシー考慮
+                this.hashQuery(data.query,), // プライバシー考慮
             ],
-            doubles: [data.resultCount, data.searchTime],
-            indexes: ['search_query'],
-        });
+            doubles: [data.resultCount, data.searchTime,],
+            indexes: ['search_query',],
+        },);
     }
 
     async trackFileUpload(data: {
@@ -528,18 +530,18 @@ class MetricsCollector {
         fileSize: number;
         fileType: string;
         processingTime: number;
-    }): Promise<void> {
+    },): Promise<void> {
         await this.analytics.writeDataPoint({
             timestamp: Date.now(),
-            blobs: [data.userId, data.fileType],
-            doubles: [data.fileSize, data.processingTime],
-            indexes: ['file_upload'],
-        });
+            blobs: [data.userId, data.fileType,],
+            doubles: [data.fileSize, data.processingTime,],
+            indexes: ['file_upload',],
+        },);
     }
 
-    private hashQuery(query: string): string {
+    private hashQuery(query: string,): string {
         // クエリのハッシュ化（プライバシー保護）
-        return btoa(query).substring(0, 10);
+        return btoa(query,).substring(0, 10,);
     }
 }
 ```
@@ -559,7 +561,7 @@ interface AnalyticsQuery {
 }
 
 class AnalyticsDashboard {
-    async getChatMetrics(timeRange: { start: string; end: string }) {
+    async getChatMetrics(timeRange: { start: string; end: string; },) {
         // GraphQL クエリで Analytics Engine データ取得
         const query = `
       query ChatMetrics($start: String!, $end: String!) {
@@ -582,7 +584,7 @@ class AnalyticsDashboard {
       }
     `;
 
-        return await this.executeGraphQLQuery(query, timeRange);
+        return await this.executeGraphQLQuery(query, timeRange,);
     }
 }
 ```
@@ -679,16 +681,16 @@ class CloudflareLogger {
             timestamp: startTime,
             blobs: [
                 request.method,
-                new URL(request.url).pathname,
+                new URL(request.url,).pathname,
                 response.status.toString(),
-                request.headers.get('user-agent') || 'unknown',
+                request.headers.get('user-agent',) || 'unknown',
             ],
-            doubles: [duration],
-            indexes: ['api_request'],
-        });
+            doubles: [duration,],
+            indexes: ['api_request',],
+        },);
     }
 
-    async logError(error: Error, context: Record<string, any>): Promise<void> {
+    async logError(error: Error, context: Record<string, any>,): Promise<void> {
         const errorData = {
             message: error.message,
             stack: error.stack,
@@ -697,11 +699,11 @@ class CloudflareLogger {
         };
 
         // 重要なエラーは KV にも保存（詳細分析用）
-        if (this.isCriticalError(error)) {
+        if (this.isCriticalError(error,)) {
             await this.kv.put(
                 `error:${Date.now()}:${Math.random()}`,
-                JSON.stringify(errorData),
-                { expirationTtl: 86400 * 7 }, // 7日間保持
+                JSON.stringify(errorData,),
+                { expirationTtl: 86400 * 7, }, // 7日間保持
             );
         }
 
@@ -709,12 +711,12 @@ class CloudflareLogger {
             timestamp: Date.now(),
             blobs: [
                 error.name,
-                error.message.substring(0, 100),
-                JSON.stringify(context).substring(0, 200),
+                error.message.substring(0, 100,),
+                JSON.stringify(context,).substring(0, 200,),
             ],
-            doubles: [1], // エラーカウント
-            indexes: ['error_log'],
-        });
+            doubles: [1,], // エラーカウント
+            indexes: ['error_log',],
+        },);
     }
 }
 ```
@@ -737,16 +739,16 @@ interface CloudflareCosts {
 }
 
 class CostMonitor {
-    async trackUsage(metrics: CloudflareCosts): Promise<void> {
+    async trackUsage(metrics: CloudflareCosts,): Promise<void> {
         // 使用量の閾値チェック
         if (metrics.requests > 100000) {
             // 月100K制限の80%
-            await this.sendCostAlert('Functions requests approaching limit');
+            await this.sendCostAlert('Functions requests approaching limit',);
         }
 
         if (metrics.kvWrites > 800) {
             // 日1K制限の80%
-            await this.sendCostAlert('KV writes approaching daily limit');
+            await this.sendCostAlert('KV writes approaching daily limit',);
         }
     }
 }

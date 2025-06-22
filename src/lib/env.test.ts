@@ -1,16 +1,16 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { z } from 'zod';
+import { afterEach, beforeEach, describe, expect, it, vi, } from 'vitest';
+import { z, } from 'zod';
 
 // モジュールをモック化
 vi.mock('./env', async () => {
     // 実際のモジュールを取得
-    const actual = await vi.importActual('./env');
+    const actual = await vi.importActual('./env',);
     return {
         ...actual,
         // validateEnv関数のみモック化
         validateEnv: vi.fn(),
     };
-});
+},);
 
 describe('環境変数バリデーション', () => {
     const originalEnv = process.env;
@@ -18,13 +18,13 @@ describe('環境変数バリデーション', () => {
     beforeEach(() => {
         // テスト前に環境変数をクリア
         vi.resetModules();
-        process.env = { ...originalEnv };
-    });
+        process.env = { ...originalEnv, };
+    },);
 
     afterEach(() => {
         // テスト後に環境変数を復元
         process.env = originalEnv;
-    });
+    },);
 
     describe('必須環境変数のバリデーション', () => {
         it('全ての必須環境変数が設定されている場合、バリデーションが成功する', async () => {
@@ -55,10 +55,10 @@ describe('環境変数バリデーション', () => {
                 ENCRYPTION_KEY: 'placeholder_encryption_key_32_chars',
             };
 
-            Object.assign(process.env, validEnv);
+            Object.assign(process.env, validEnv,);
 
             // Act & Assert: モジュールを動的にインポートしてバリデーション実行
-            const { checkEnvHealth } = await import('./env');
+            const { checkEnvHealth, } = await import('./env');
 
             expect(() => checkEnvHealth()).not.toThrow();
         });
@@ -73,36 +73,40 @@ describe('環境変数バリデーション', () => {
             // Act & Assert: zodスキーマを直接テスト
             expect(() => {
                 const testSchema = z.object({
-                    NODE_ENV: z.enum(['development', 'production', 'test']),
-                    CLOUDFLARE_ACCOUNT_ID: z.string().min(1),
-                    DATABASE_URL: z.string().min(1),
-                });
-                testSchema.parse(incompleteEnv);
-            }).toThrow();
+                    NODE_ENV: z.enum(['development', 'production', 'test',],),
+                    CLOUDFLARE_ACCOUNT_ID: z.string().min(1,),
+                    DATABASE_URL: z.string().min(1,),
+                },);
+                testSchema.parse(incompleteEnv,);
+            },).toThrow();
         });
     });
 
     describe('個別環境変数のバリデーション', () => {
         it('NODE_ENVが有効な値の場合、バリデーションが成功する', () => {
-            const validValues = ['development', 'production', 'test'];
+            const validValues = ['development', 'production', 'test',];
 
-            validValues.forEach((value) => {
+            validValues.forEach((value,) => {
                 expect(() => {
                     const envSchema = z.object({
-                        NODE_ENV: z.enum(['development', 'production', 'test']),
-                    });
-                    envSchema.parse({ NODE_ENV: value });
-                }).not.toThrow();
-            });
+                        NODE_ENV: z.enum([
+                            'development',
+                            'production',
+                            'test',
+                        ],),
+                    },);
+                    envSchema.parse({ NODE_ENV: value, },);
+                },).not.toThrow();
+            },);
         });
 
         it('無効なNODE_ENVの場合、バリデーションが失敗する', () => {
             expect(() => {
                 const envSchema = z.object({
-                    NODE_ENV: z.enum(['development', 'production', 'test']),
-                });
-                envSchema.parse({ NODE_ENV: 'invalid-env' });
-            }).toThrow();
+                    NODE_ENV: z.enum(['development', 'production', 'test',],),
+                },);
+                envSchema.parse({ NODE_ENV: 'invalid-env', },);
+            },).toThrow();
         });
 
         it('URL形式の環境変数が有効な場合、バリデーションが成功する', () => {
@@ -112,30 +116,30 @@ describe('環境変数バリデーション', () => {
                 'https://subdomain.example.com/path',
             ];
 
-            validUrls.forEach((url) => {
+            validUrls.forEach((url,) => {
                 expect(() => {
                     const urlSchema = z.string().url();
-                    urlSchema.parse(url);
-                }).not.toThrow();
-            });
+                    urlSchema.parse(url,);
+                },).not.toThrow();
+            },);
         });
 
         it('無効なURL形式の場合、バリデーションが失敗する', () => {
-            const invalidUrls = ['not-a-url', 'http://', ''];
+            const invalidUrls = ['not-a-url', 'http://', '',];
 
-            invalidUrls.forEach((url) => {
+            invalidUrls.forEach((url,) => {
                 expect(() => {
                     const urlSchema = z.string().url();
-                    urlSchema.parse(url);
-                }).toThrow();
-            });
+                    urlSchema.parse(url,);
+                },).toThrow();
+            },);
         });
 
         it('最小長要件を満たさない場合、バリデーションが失敗する', () => {
             expect(() => {
-                const schema = z.string().min(32);
-                schema.parse('short-string'); // 32文字未満
-            }).toThrow();
+                const schema = z.string().min(32,);
+                schema.parse('short-string',); // 32文字未満
+            },).toThrow();
         });
 
         it('Eメール形式が有効な場合、バリデーションが成功する', () => {
@@ -145,18 +149,18 @@ describe('環境変数バリデーション', () => {
                 'admin+system@company.org',
             ];
 
-            validEmails.forEach((email) => {
+            validEmails.forEach((email,) => {
                 expect(() => {
                     const emailSchema = z.string().email();
-                    emailSchema.parse(email);
-                }).not.toThrow();
-            });
+                    emailSchema.parse(email,);
+                },).not.toThrow();
+            },);
         });
     });
 
     describe('ユーティリティ関数', () => {
         it('isDevelopment が正しく動作する', async () => {
-            Object.assign(process.env, { NODE_ENV: 'development' });
+            Object.assign(process.env, { NODE_ENV: 'development', },);
 
             // 環境変数の最小セットを設定
             const minimalEnv = {
@@ -185,45 +189,45 @@ describe('環境変数バリデーション', () => {
                 SKIP_ENV_VALIDATION: 'true', // バリデーションをスキップ
             };
 
-            Object.assign(process.env, minimalEnv);
+            Object.assign(process.env, minimalEnv,);
 
-            const { isDevelopment } = await import('./env');
-            expect(isDevelopment).toBe(true);
+            const { isDevelopment, } = await import('./env');
+            expect(isDevelopment,).toBe(true,);
         });
 
         it('getEnvVar がフォールバック値を正しく返す', async () => {
             // モック環境でテスト用の関数を作成
-            const getEnvVarMock = (key: string, fallback?: string): string => {
+            const getEnvVarMock = (key: string, fallback?: string,): string => {
                 const value = process.env[key];
                 if (!value) {
                     if (fallback !== undefined) {
                         return fallback;
                     }
-                    throw new Error(`環境変数 ${key} が設定されていません`);
+                    throw new Error(`環境変数 ${key} が設定されていません`,);
                 }
                 return value;
             };
 
             // 存在しない環境変数でフォールバック値を使用
-            const result = getEnvVarMock('NON_EXISTENT_VAR', 'fallback-value');
-            expect(result).toBe('fallback-value');
+            const result = getEnvVarMock('NON_EXISTENT_VAR', 'fallback-value',);
+            expect(result,).toBe('fallback-value',);
         });
 
         it('getEnvVar がフォールバック値がない場合エラーを投げる', () => {
-            const getEnvVarMock = (key: string, fallback?: string): string => {
+            const getEnvVarMock = (key: string, fallback?: string,): string => {
                 const value = process.env[key];
                 if (!value) {
                     if (fallback !== undefined) {
                         return fallback;
                     }
-                    throw new Error(`環境変数 ${key} が設定されていません`);
+                    throw new Error(`環境変数 ${key} が設定されていません`,);
                 }
                 return value;
             };
 
             expect(() => {
-                getEnvVarMock('NON_EXISTENT_VAR');
-            }).toThrow('環境変数 NON_EXISTENT_VAR が設定されていません');
+                getEnvVarMock('NON_EXISTENT_VAR',);
+            },).toThrow('環境変数 NON_EXISTENT_VAR が設定されていません',);
         });
     });
 
@@ -235,7 +239,7 @@ describe('環境変数バリデーション', () => {
             };
 
             // バリデーションスキップ時はエラーが発生しない
-            await expect(import('./env')).resolves.not.toThrow();
+            await expect(import('./env'),).resolves.not.toThrow();
         });
     });
 
@@ -248,13 +252,13 @@ describe('環境変数バリデーション', () => {
                 SKIP_ENV_VALIDATION: 'true',
             };
 
-            Object.assign(process.env, testEnv);
+            Object.assign(process.env, testEnv,);
 
-            const { clientEnv } = await import('./env');
+            const { clientEnv, } = await import('./env');
 
-            expect(clientEnv).toHaveProperty('APP_URL');
-            expect(clientEnv).toHaveProperty('CLERK_PUBLISHABLE_KEY');
-            expect(clientEnv).not.toHaveProperty('PRIVATE_API_KEY');
+            expect(clientEnv,).toHaveProperty('APP_URL',);
+            expect(clientEnv,).toHaveProperty('CLERK_PUBLISHABLE_KEY',);
+            expect(clientEnv,).not.toHaveProperty('PRIVATE_API_KEY',);
         });
     });
 });
@@ -264,28 +268,28 @@ describe('エッジケースとエラーハンドリング', () => {
     it('数値変換が正しく動作する', () => {
         const numberSchema = z
             .string()
-            .transform(Number)
-            .pipe(z.number().min(1));
+            .transform(Number,)
+            .pipe(z.number().min(1,),);
 
-        expect(numberSchema.parse('60')).toBe(60);
-        expect(() => numberSchema.parse('0')).toThrow();
-        expect(() => numberSchema.parse('not-a-number')).toThrow();
+        expect(numberSchema.parse('60',),).toBe(60,);
+        expect(() => numberSchema.parse('0',)).toThrow();
+        expect(() => numberSchema.parse('not-a-number',)).toThrow();
     });
 
     it('ブール値変換が正しく動作する', () => {
         const booleanSchema = z
             .string()
-            .transform((val: string) => val === 'true');
+            .transform((val: string,) => val === 'true');
 
-        expect(booleanSchema.parse('true')).toBe(true);
-        expect(booleanSchema.parse('false')).toBe(false);
-        expect(booleanSchema.parse('other')).toBe(false);
+        expect(booleanSchema.parse('true',),).toBe(true,);
+        expect(booleanSchema.parse('false',),).toBe(false,);
+        expect(booleanSchema.parse('other',),).toBe(false,);
     });
 
     it('オプショナル値の処理が正しく動作する', () => {
         const optionalSchema = z.string().optional();
 
-        expect(optionalSchema.parse(undefined)).toBeUndefined();
-        expect(optionalSchema.parse('value')).toBe('value');
+        expect(optionalSchema.parse(undefined,),).toBeUndefined();
+        expect(optionalSchema.parse('value',),).toBe('value',);
     });
 });

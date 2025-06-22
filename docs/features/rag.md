@@ -30,9 +30,9 @@ Context + Query → LLM Prompt → Generated Response → Citation Links
 
 ```typescript
 interface DocumentProcessor {
-    extractText(file: File): Promise<string>;
-    validateFormat(file: File): boolean;
-    extractMetadata(file: File): DocumentMetadata;
+    extractText(file: File,): Promise<string>;
+    validateFormat(file: File,): boolean;
+    extractMetadata(file: File,): DocumentMetadata;
 }
 
 interface DocumentMetadata {
@@ -88,9 +88,9 @@ interface ChunkMetadata {
 
 ```typescript
 interface EmbeddingService {
-    generateEmbedding(text: string): Promise<number[]>;
-    generateBatchEmbeddings(texts: string[]): Promise<number[][]>;
-    estimateTokens(text: string): number;
+    generateEmbedding(text: string,): Promise<number[]>;
+    generateBatchEmbeddings(texts: string[],): Promise<number[][]>;
+    estimateTokens(text: string,): number;
 }
 
 interface EmbeddingConfig {
@@ -134,14 +134,14 @@ interface VectorMetadata {
 
 ```typescript
 interface VectorStore {
-    upsert(vectors: Vector[]): Promise<void>;
+    upsert(vectors: Vector[],): Promise<void>;
     query(
         queryVector: number[],
         topK: number,
         filter?: MetadataFilter,
     ): Promise<QueryResult[]>;
-    delete(vectorIds: string[]): Promise<void>;
-    update(vectorId: string, metadata: VectorMetadata): Promise<void>;
+    delete(vectorIds: string[],): Promise<void>;
+    update(vectorId: string, metadata: VectorMetadata,): Promise<void>;
 }
 
 interface QueryResult {
@@ -169,7 +169,7 @@ interface SearchParams {
     filter?: {
         documentIds?: string[];
         fileTypes?: string[];
-        dateRange?: [string, string];
+        dateRange?: [string, string,];
     };
 }
 
@@ -243,9 +243,9 @@ const RAG_SYSTEM_PROMPT = `
 
 ```typescript
 interface ContextOptimizer {
-    buildContext(chunks: RelevantChunk[], maxTokens: number): string;
-    deduplicateChunks(chunks: RelevantChunk[]): RelevantChunk[];
-    prioritizeChunks(chunks: RelevantChunk[]): RelevantChunk[];
+    buildContext(chunks: RelevantChunk[], maxTokens: number,): string;
+    deduplicateChunks(chunks: RelevantChunk[],): RelevantChunk[];
+    prioritizeChunks(chunks: RelevantChunk[],): RelevantChunk[];
 }
 ```
 
