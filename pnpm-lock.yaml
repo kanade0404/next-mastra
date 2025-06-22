@@ -61,7 +61,7 @@ importers:
         version: 0.0.0
       mastra:
         specifier: 0.10.6
-        version: 0.10.6(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64))(@opentelemetry/api@1.9.0)(react@19.1.0)(typescript@5.8.3)
+        version: 0.10.6(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67))(@opentelemetry/api@1.9.0)(react@19.1.0)(typescript@5.8.3)
       neverthrow:
         specifier: 8.2.0
         version: 8.2.0
@@ -70,7 +70,7 @@ importers:
         version: 15.3.3(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       openai:
         specifier: 4.104.0
-        version: 4.104.0(encoding@0.1.13)(ws@8.18.2)(zod@3.25.64)
+        version: 4.104.0(encoding@0.1.13)(ws@8.18.2)(zod@3.25.67)
       pdf-parse:
         specifier: 1.1.1
         version: 1.1.1
@@ -93,8 +93,8 @@ importers:
         specifier: 4.1.10
         version: 4.1.10
       zod:
-        specifier: 3.25.64
-        version: 3.25.64
+        specifier: 3.25.67
+        version: 3.25.67
       zustand:
         specifier: 5.0.5
         version: 5.0.5(@types/react@19.1.8)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
@@ -10608,8 +10608,8 @@ packages:
   zod@3.25.56:
     resolution: {integrity: sha512-rd6eEF3BTNvQnR2e2wwolfTmUTnp70aUTqr0oaGbHifzC3BKJsoV+Gat8vxUMR1hwOKBs6El+qWehrHbCpW6SQ==}
 
-  zod@3.25.64:
-    resolution: {integrity: sha512-hbP9FpSZf7pkS7hRVUrOjhwKJNyampPgtXKc3AN6DsWtoHsg2Sb4SQaS4Tcay380zSwd2VPo9G9180emBACp5g==}
+  zod@3.25.67:
+    resolution: {integrity: sha512-idA2YXwpCdqUSKRCACDE6ItZD9TZzy3OZMtpfLoh6oPR47lipysRrJfjzMqFxQ3uJuUPyUeWe1r9vLH33xO/Qw==}
 
   zustand@5.0.5:
     resolution: {integrity: sha512-mILtRfKW9xM47hqxGIxCv12gXusoY/xTSHBYApXozR0HmQv299whhBeeAcRy+KrPPybzosvJBCOmVjq6x12fCg==}
@@ -10636,33 +10636,33 @@ snapshots:
 
   '@adobe/css-tools@4.4.3': {}
 
-  '@ai-sdk/provider-utils@2.2.8(zod@3.25.64)':
+  '@ai-sdk/provider-utils@2.2.8(zod@3.25.67)':
     dependencies:
       '@ai-sdk/provider': 1.1.3
       nanoid: 3.3.11
       secure-json-parse: 2.7.0
-      zod: 3.25.64
+      zod: 3.25.67
 
   '@ai-sdk/provider@1.1.3':
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/react@1.2.12(react@19.1.0)(zod@3.25.64)':
+  '@ai-sdk/react@1.2.12(react@19.1.0)(zod@3.25.67)':
     dependencies:
-      '@ai-sdk/provider-utils': 2.2.8(zod@3.25.64)
-      '@ai-sdk/ui-utils': 1.2.11(zod@3.25.64)
+      '@ai-sdk/provider-utils': 2.2.8(zod@3.25.67)
+      '@ai-sdk/ui-utils': 1.2.11(zod@3.25.67)
       react: 19.1.0
       swr: 2.3.3(react@19.1.0)
       throttleit: 2.1.0
     optionalDependencies:
-      zod: 3.25.64
+      zod: 3.25.67
 
-  '@ai-sdk/ui-utils@1.2.11(zod@3.25.64)':
+  '@ai-sdk/ui-utils@1.2.11(zod@3.25.67)':
     dependencies:
       '@ai-sdk/provider': 1.1.3
-      '@ai-sdk/provider-utils': 2.2.8(zod@3.25.64)
-      zod: 3.25.64
-      zod-to-json-schema: 3.24.5(zod@3.25.64)
+      '@ai-sdk/provider-utils': 2.2.8(zod@3.25.67)
+      zod: 3.25.67
+      zod-to-json-schema: 3.24.5(zod@3.25.67)
 
   '@alloc/quick-lru@5.2.0': {}
 
@@ -12676,7 +12676,7 @@ snapshots:
     dependencies:
       '@modelcontextprotocol/sdk': 1.12.3
       eslint: 9.29.0(jiti@2.4.2)
-      zod: 3.25.64
+      zod: 3.25.67
     transitivePeerDependencies:
       - jiti
       - supports-color
@@ -12983,12 +12983,12 @@ snapshots:
       - encoding
       - supports-color
 
-  '@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64)':
+  '@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67)':
     dependencies:
       '@ai-sdk/provider': 1.1.3
-      '@ai-sdk/provider-utils': 2.2.8(zod@3.25.64)
-      '@ai-sdk/ui-utils': 1.2.11(zod@3.25.64)
-      '@mastra/schema-compat': 0.10.2(ai@4.3.16(react@19.1.0)(zod@3.25.64))(zod@3.25.64)
+      '@ai-sdk/provider-utils': 2.2.8(zod@3.25.67)
+      '@ai-sdk/ui-utils': 1.2.11(zod@3.25.67)
+      '@mastra/schema-compat': 0.10.2(ai@4.3.16(react@19.1.0)(zod@3.25.67))(zod@3.25.67)
       '@opentelemetry/api': 1.9.0
       '@opentelemetry/auto-instrumentations-node': 0.59.0(@opentelemetry/api@1.9.0)(@opentelemetry/core@2.0.1(@opentelemetry/api@1.9.0))(encoding@0.1.13)
       '@opentelemetry/core': 2.0.1(@opentelemetry/api@1.9.0)
@@ -13003,12 +13003,12 @@ snapshots:
       '@opentelemetry/sdk-trace-node': 2.0.1(@opentelemetry/api@1.9.0)
       '@opentelemetry/semantic-conventions': 1.34.0
       '@sindresorhus/slugify': 2.2.1
-      ai: 4.3.16(react@19.1.0)(zod@3.25.64)
+      ai: 4.3.16(react@19.1.0)(zod@3.25.67)
       cohere-ai: 7.17.1(encoding@0.1.13)
       date-fns: 3.6.0
       dotenv: 16.5.0
       hono: 4.7.11
-      hono-openapi: 0.4.8(hono@4.7.11)(openapi-types@12.1.3)(zod@3.25.64)
+      hono-openapi: 0.4.8(hono@4.7.11)(openapi-types@12.1.3)(zod@3.25.67)
       json-schema: 0.4.0
       json-schema-to-zod: 2.6.1
       pino: 9.7.0
@@ -13016,7 +13016,7 @@ snapshots:
       radash: 12.1.0
       sift: 17.1.3
       xstate: 5.19.4
-      zod: 3.25.64
+      zod: 3.25.67
     transitivePeerDependencies:
       - '@hono/arktype-validator'
       - '@hono/effect-validator'
@@ -13035,12 +13035,12 @@ snapshots:
       - valibot
       - zod-openapi
 
-  '@mastra/deployer@0.10.6(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64))(typescript@5.8.3)':
+  '@mastra/deployer@0.10.6(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67))(typescript@5.8.3)':
     dependencies:
       '@babel/core': 7.27.4
       '@babel/helper-module-imports': 7.27.1
-      '@mastra/core': 0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64)
-      '@mastra/server': 0.10.6(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64))(zod@3.25.64)
+      '@mastra/core': 0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67)
+      '@mastra/server': 0.10.6(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67))(zod@3.25.67)
       '@neon-rs/load': 0.1.82
       '@rollup/plugin-alias': 5.1.1(rollup@4.43.0)
       '@rollup/plugin-commonjs': 28.0.5(rollup@4.43.0)
@@ -13061,43 +13061,43 @@ snapshots:
       rollup-plugin-esbuild: 6.2.1(esbuild@0.25.5)(rollup@4.43.0)
       rollup-plugin-node-externals: 8.0.0(rollup@4.43.0)
       typescript-paths: 1.5.1(typescript@5.8.3)
-      zod: 3.25.64
+      zod: 3.25.67
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  '@mastra/loggers@0.10.2(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64))':
+  '@mastra/loggers@0.10.2(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67))':
     dependencies:
-      '@mastra/core': 0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64)
+      '@mastra/core': 0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67)
       pino: 9.7.0
       pino-pretty: 13.0.0
 
-  '@mastra/mcp@0.10.4(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64))(zod@3.25.64)':
+  '@mastra/mcp@0.10.4(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67))(zod@3.25.67)':
     dependencies:
-      '@mastra/core': 0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64)
+      '@mastra/core': 0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67)
       '@modelcontextprotocol/sdk': 1.12.3
       date-fns: 4.1.0
       exit-hook: 4.0.0
       fast-deep-equal: 3.1.3
       hono: 4.7.11
       uuid: 11.1.0
-      zod: 3.25.64
+      zod: 3.25.67
       zod-from-json-schema: 0.0.5
     transitivePeerDependencies:
       - supports-color
 
-  '@mastra/schema-compat@0.10.2(ai@4.3.16(react@19.1.0)(zod@3.25.64))(zod@3.25.64)':
+  '@mastra/schema-compat@0.10.2(ai@4.3.16(react@19.1.0)(zod@3.25.67))(zod@3.25.67)':
     dependencies:
-      ai: 4.3.16(react@19.1.0)(zod@3.25.64)
+      ai: 4.3.16(react@19.1.0)(zod@3.25.67)
       json-schema: 0.4.0
-      zod: 3.25.64
+      zod: 3.25.67
       zod-from-json-schema: 0.0.5
-      zod-to-json-schema: 3.24.5(zod@3.25.64)
+      zod-to-json-schema: 3.24.5(zod@3.25.67)
 
-  '@mastra/server@0.10.6(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64))(zod@3.25.64)':
+  '@mastra/server@0.10.6(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67))(zod@3.25.67)':
     dependencies:
-      '@mastra/core': 0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64)
-      zod: 3.25.64
+      '@mastra/core': 0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67)
+      zod: 3.25.67
 
   '@modelcontextprotocol/sdk@1.12.3':
     dependencies:
@@ -13110,8 +13110,8 @@ snapshots:
       express-rate-limit: 7.5.0(express@5.1.0)
       pkce-challenge: 5.0.0
       raw-body: 3.0.0
-      zod: 3.25.64
-      zod-to-json-schema: 3.24.5(zod@3.25.64)
+      zod: 3.25.67
+      zod-to-json-schema: 3.24.5(zod@3.25.67)
     transitivePeerDependencies:
       - supports-color
 
@@ -14513,7 +14513,7 @@ snapshots:
       fs-extra: 11.3.0
       toml-eslint-parser: 0.10.0
       upath: 2.0.1
-      zod: 3.25.64
+      zod: 3.25.67
 
   '@renovatebot/kbpgp@4.0.1':
     dependencies:
@@ -16577,15 +16577,15 @@ snapshots:
       clean-stack: 2.2.0
       indent-string: 4.0.0
 
-  ai@4.3.16(react@19.1.0)(zod@3.25.64):
+  ai@4.3.16(react@19.1.0)(zod@3.25.67):
     dependencies:
       '@ai-sdk/provider': 1.1.3
-      '@ai-sdk/provider-utils': 2.2.8(zod@3.25.64)
-      '@ai-sdk/react': 1.2.12(react@19.1.0)(zod@3.25.64)
-      '@ai-sdk/ui-utils': 1.2.11(zod@3.25.64)
+      '@ai-sdk/provider-utils': 2.2.8(zod@3.25.67)
+      '@ai-sdk/react': 1.2.12(react@19.1.0)(zod@3.25.67)
+      '@ai-sdk/ui-utils': 1.2.11(zod@3.25.67)
       '@opentelemetry/api': 1.9.0
       jsondiffpatch: 0.6.0
-      zod: 3.25.64
+      zod: 3.25.67
     optionalDependencies:
       react: 19.1.0
 
@@ -19223,13 +19223,13 @@ snapshots:
     dependencies:
       parse-passwd: 1.0.0
 
-  hono-openapi@0.4.8(hono@4.7.11)(openapi-types@12.1.3)(zod@3.25.64):
+  hono-openapi@0.4.8(hono@4.7.11)(openapi-types@12.1.3)(zod@3.25.67):
     dependencies:
       json-schema-walker: 2.0.0
       openapi-types: 12.1.3
     optionalDependencies:
       hono: 4.7.11
-      zod: 3.25.64
+      zod: 3.25.67
 
   hono@4.7.11: {}
 
@@ -20009,14 +20009,14 @@ snapshots:
 
   markdown-table@3.0.4: {}
 
-  mastra@0.10.6(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64))(@opentelemetry/api@1.9.0)(react@19.1.0)(typescript@5.8.3):
+  mastra@0.10.6(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67))(@opentelemetry/api@1.9.0)(react@19.1.0)(typescript@5.8.3):
     dependencies:
       '@clack/prompts': 0.11.0
       '@lukeed/uuid': 2.0.1
-      '@mastra/core': 0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64)
-      '@mastra/deployer': 0.10.6(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64))(typescript@5.8.3)
-      '@mastra/loggers': 0.10.2(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64))
-      '@mastra/mcp': 0.10.4(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.64))(zod@3.25.64)
+      '@mastra/core': 0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67)
+      '@mastra/deployer': 0.10.6(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67))(typescript@5.8.3)
+      '@mastra/loggers': 0.10.2(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67))
+      '@mastra/mcp': 0.10.4(@mastra/core@0.10.5(encoding@0.1.13)(openapi-types@12.1.3)(react@19.1.0)(zod@3.25.67))(zod@3.25.67)
       '@opentelemetry/instrumentation': 0.202.0(@opentelemetry/api@1.9.0)
       '@webcontainer/env': 1.1.1
       commander: 12.1.0
@@ -20037,8 +20037,8 @@ snapshots:
       swr: 2.3.3(react@19.1.0)
       tcp-port-used: 1.0.2
       yocto-spinner: 0.2.3
-      zod: 3.25.64
-      zod-to-json-schema: 3.24.5(zod@3.25.64)
+      zod: 3.25.67
+      zod-to-json-schema: 3.24.5(zod@3.25.67)
     transitivePeerDependencies:
       - '@opentelemetry/api'
       - debug
@@ -20754,7 +20754,7 @@ snapshots:
       is-docker: 2.2.1
       is-wsl: 2.2.0
 
-  openai@4.104.0(encoding@0.1.13)(ws@8.18.2)(zod@3.25.64):
+  openai@4.104.0(encoding@0.1.13)(ws@8.18.2)(zod@3.25.67):
     dependencies:
       '@types/node': 18.19.111
       '@types/node-fetch': 2.6.12
@@ -20765,7 +20765,7 @@ snapshots:
       node-fetch: 2.7.0(encoding@0.1.13)
     optionalDependencies:
       ws: 8.18.2
-      zod: 3.25.64
+      zod: 3.25.67
     transitivePeerDependencies:
       - encoding
 
@@ -23405,17 +23405,17 @@ snapshots:
 
   zod-from-json-schema@0.0.5:
     dependencies:
-      zod: 3.25.64
+      zod: 3.25.67
 
-  zod-to-json-schema@3.24.5(zod@3.25.64):
+  zod-to-json-schema@3.24.5(zod@3.25.67):
     dependencies:
-      zod: 3.25.64
+      zod: 3.25.67
 
   zod@3.22.3: {}
 
   zod@3.25.56: {}
 
-  zod@3.25.64: {}
+  zod@3.25.67: {}
 
   zustand@5.0.5(@types/react@19.1.8)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)):
     optionalDependencies:
