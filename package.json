@@ -95,7 +95,7 @@
     },
     "engines": {
         "node": "24.2.0",
-        "pnpm": "10.12.1"
+        "pnpm": "10.12.2"
     },
     "main": "index.js",
     "private": true,
