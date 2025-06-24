@@ -84,7 +84,7 @@
         "prettier": "3.6.0",
         "prisma": "6.10.1",
         "react-docgen": "8.0.0",
-        "renovate": "41.1.4",
+        "renovate": "41.6.4",
         "secretlint": "10.1.0",
         "testcontainers": "11.0.3",
         "typedoc": "0.28.5",
