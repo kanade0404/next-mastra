@@ -87,7 +87,7 @@
         "renovate": "41.12.1",
         "secretlint": "10.1.1",
         "testcontainers": "11.0.3",
-        "typedoc": "0.28.5",
+        "typedoc": "0.28.6",
         "typescript": "5.8.3",
         "typescript-eslint": "8.35.0",
         "vitest": "3.2.4",
