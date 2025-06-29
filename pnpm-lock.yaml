@@ -69,8 +69,8 @@ importers:
         specifier: 15.3.4
         version: 15.3.4(@babel/core@7.27.4)(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       openai:
-        specifier: 5.6.0
-        version: 5.6.0(ws@8.18.2)(zod@3.25.67)
+        specifier: 5.8.2
+        version: 5.8.2(ws@8.18.2)(zod@3.25.67)
       pdf-parse:
         specifier: 1.1.1
         version: 1.1.1
@@ -8721,8 +8721,8 @@ packages:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
     engines: {node: '>=12'}
 
-  openai@5.6.0:
-    resolution: {integrity: sha512-jNH5z+hYAdOMZXyEt0yZ7246s+UZjg2AwFQqkAhZIPPjxNtHHO5mykOefau6FkOqj16aC94MOdJl/rZBcKj/cQ==}
+  openai@5.8.2:
+    resolution: {integrity: sha512-8C+nzoHYgyYOXhHGN6r0fcb4SznuEn1R7YZMvlqDbnCuE0FM2mm3T1HiYW6WIcMS/F1Of2up/cSPjLPaWt0X9Q==}
     hasBin: true
     peerDependencies:
       ws: ^8.18.0
@@ -21532,7 +21532,7 @@ snapshots:
       is-docker: 2.2.1
       is-wsl: 2.2.0
 
-  openai@5.6.0(ws@8.18.2)(zod@3.25.67):
+  openai@5.8.2(ws@8.18.2)(zod@3.25.67):
     optionalDependencies:
       ws: 8.18.2
       zod: 3.25.67
