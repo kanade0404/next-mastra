@@ -10,7 +10,7 @@
         "@opentelemetry/sdk-node": "0.202.0",
         "@pinecone-database/pinecone": "6.1.1",
         "@prisma/client": "6.10.1",
-        "@sentry/nextjs": "9.30.0",
+        "@sentry/nextjs": "9.33.0",
         "@tailwindcss/postcss": "4.1.11",
         "@tanstack/react-query": "5.81.5",
         "autoprefixer": "10.4.21",
