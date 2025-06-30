@@ -247,8 +247,8 @@ importers:
         specifier: 8.0.0
         version: 8.0.0
       renovate:
-        specifier: 41.16.3
-        version: 41.16.3(encoding@0.1.13)(typanion@3.14.0)
+        specifier: 41.17.2
+        version: 41.17.2(encoding@0.1.13)(typanion@3.14.0)
       secretlint:
         specifier: 10.1.1
         version: 10.1.1
@@ -9397,8 +9397,8 @@ packages:
   remark@15.0.1:
     resolution: {integrity: sha512-Eht5w30ruCXgFmxVUSlNWQ9iiimq07URKeFS3hNc8cUWy1llX4KDWfyEDZRycMc+znsN9Ux5/tJ/BFdgdOwA3A==}
 
-  renovate@41.16.3:
-    resolution: {integrity: sha512-ocINpks7rINiSaPdP9uRTV2vTdhHlkkD2JLvWWaezU6JcLkPFBP36b+MQ6nmBPemdnxKsz8nrDkokoOZ9DzGqA==}
+  renovate@41.17.2:
+    resolution: {integrity: sha512-m4tplXajwxAJ1pIZ5xkUNdwWrN8r53sPFzrNQIJcTylgHR5h72zugr8g8EdrCoIYim2r48gt9diXZNW+MMg0aA==}
     engines: {node: ^22.13.0, pnpm: ^10.0.0}
     hasBin: true
 
@@ -22275,7 +22275,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  renovate@41.16.3(encoding@0.1.13)(typanion@3.14.0):
+  renovate@41.17.2(encoding@0.1.13)(typanion@3.14.0):
     dependencies:
       '@aws-sdk/client-codecommit': 3.821.0
       '@aws-sdk/client-ec2': 3.821.0
