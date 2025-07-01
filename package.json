@@ -76,7 +76,7 @@
         "eslint-plugin-vitest": "^0.5.4",
         "eslint-plugin-zod": "^1.4.0",
         "fixpack": "4.0.0",
-        "globals": "16.2.0",
+        "globals": "16.3.0",
         "lefthook": "1.11.14",
         "msw": "2.10.2",
         "npm-check-updates": "18.0.1",
