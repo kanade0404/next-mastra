@@ -247,8 +247,8 @@ importers:
         specifier: 8.0.0
         version: 8.0.0
       renovate:
-        specifier: 41.26.2
-        version: 41.26.2(encoding@0.1.13)(typanion@3.14.0)
+        specifier: 41.31.1
+        version: 41.31.1(encoding@0.1.13)(typanion@3.14.0)
       secretlint:
         specifier: 10.2.0
         version: 10.2.0
@@ -9615,8 +9615,8 @@ packages:
   remark@15.0.1:
     resolution: {integrity: sha512-Eht5w30ruCXgFmxVUSlNWQ9iiimq07URKeFS3hNc8cUWy1llX4KDWfyEDZRycMc+znsN9Ux5/tJ/BFdgdOwA3A==}
 
-  renovate@41.26.2:
-    resolution: {integrity: sha512-mA+BDbni7u6/smSr/EIfwbXIU3vyJPbncEroFw9OQ4DPkZhjXxg+YzioVAIjc3Z5BdmW81A09FwLPYjs9x7G1g==}
+  renovate@41.31.1:
+    resolution: {integrity: sha512-jPVVTFL+6D1TOQM0mLwRco2B9HjaicbLR0chOTIllf4k/BlnbvJr9gGz4SjZs3Flga9e9/aLur+pEiaJhj/KWA==}
     engines: {node: ^22.13.0, pnpm: ^10.0.0}
     hasBin: true
 
@@ -11160,8 +11160,8 @@ packages:
   zod@3.22.3:
     resolution: {integrity: sha512-EjIevzuJRiRPbVH4mGc8nApb/lVLKVpmUhAaR5R5doKGfAnGJ6Gr3CViAVjP+4FWSxCsybeWQdcgCtbX+7oZug==}
 
-  zod@3.25.67:
-    resolution: {integrity: sha512-idA2YXwpCdqUSKRCACDE6ItZD9TZzy3OZMtpfLoh6oPR47lipysRrJfjzMqFxQ3uJuUPyUeWe1r9vLH33xO/Qw==}
+  zod@3.25.74:
+    resolution: {integrity: sha512-J8poo92VuhKjNknViHRAIuuN6li/EwFbAC8OedzI8uxpEPGiXHGQu9wemIAioIpqgfB4SySaJhdk0mH5Y4ICBg==}
 
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
@@ -22693,7 +22693,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  renovate@41.26.2(encoding@0.1.13)(typanion@3.14.0):
+  renovate@41.31.1(encoding@0.1.13)(typanion@3.14.0):
     dependencies:
       '@aws-sdk/client-codecommit': 3.840.0
       '@aws-sdk/client-ec2': 3.840.0
@@ -22811,7 +22811,7 @@ snapshots:
       vuln-vects: 1.1.0
       xmldoc: 2.0.2
       yaml: 2.8.0
-      zod: 3.25.67
+      zod: 3.25.74
     optionalDependencies:
       better-sqlite3: 12.2.0
       openpgp: 6.1.1
@@ -24678,7 +24678,7 @@ snapshots:
 
   zod@3.22.3: {}
 
-  zod@3.25.67: {}
+  zod@3.25.74: {}
 
   zod@3.25.76: {}
 
