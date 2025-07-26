@@ -91,7 +91,7 @@
         "typescript": "5.8.3",
         "typescript-eslint": "8.38.0",
         "vitest": "3.2.4",
-        "wrangler": "4.25.1"
+        "wrangler": "4.26.0"
     },
     "engines": {
         "node": "24.4.1",
