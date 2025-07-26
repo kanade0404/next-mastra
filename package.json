@@ -3,7 +3,7 @@
     "description": "Next.js + Mastra Chat LLM Template with Cloudflare integration",
     "version": "0.1.0",
     "dependencies": {
-        "@clerk/nextjs": "6.25.5",
+        "@clerk/nextjs": "6.27.1",
         "@cloudflare/d1": "1.4.1",
         "@cloudflare/workers-types": "4.20250722.0",
         "@opentelemetry/api": "1.9.0",
