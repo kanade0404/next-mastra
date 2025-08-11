@@ -247,8 +247,8 @@ importers:
         specifier: 8.0.0
         version: 8.0.0
       renovate:
-        specifier: 41.61.1
-        version: 41.61.1(encoding@0.1.13)(typanion@3.14.0)
+        specifier: 41.62.2
+        version: 41.62.2(encoding@0.1.13)(typanion@3.14.0)
       secretlint:
         specifier: 10.2.2
         version: 10.2.2
@@ -9536,8 +9536,8 @@ packages:
   remark@15.0.1:
     resolution: {integrity: sha512-Eht5w30ruCXgFmxVUSlNWQ9iiimq07URKeFS3hNc8cUWy1llX4KDWfyEDZRycMc+znsN9Ux5/tJ/BFdgdOwA3A==}
 
-  renovate@41.61.1:
-    resolution: {integrity: sha512-o02bTmGCWC1aTqZOF1ODa80vjFiThRHLJNJO8PlVqBpanQRVUVviLcerII+wUv9KcT0tafsmNlnr7ge59a9y1A==}
+  renovate@41.62.2:
+    resolution: {integrity: sha512-cxisvNAwexfSVupDpLeodPWi5JXe9tD9zwrWd9wAfDmbyY8WbOwgsjgdMxsD0snSoMaWTVWatXEXN4m5uyAHDQ==}
     engines: {node: ^22.13.0, pnpm: ^10.0.0}
     hasBin: true
 
@@ -12650,7 +12650,7 @@ snapshots:
   '@commitlint/format@19.8.1':
     dependencies:
       '@commitlint/types': 19.8.1
-      chalk: 5.4.1
+      chalk: 5.5.0
 
   '@commitlint/is-ignored@19.8.1':
     dependencies:
@@ -12670,7 +12670,7 @@ snapshots:
       '@commitlint/execute-rule': 19.8.1
       '@commitlint/resolve-extends': 19.8.1
       '@commitlint/types': 19.8.1
-      chalk: 5.4.1
+      chalk: 5.5.0
       cosmiconfig: 9.0.0(typescript@5.9.2)
       cosmiconfig-typescript-loader: 6.1.0(@types/node@24.2.1)(cosmiconfig@9.0.0(typescript@5.9.2))(typescript@5.9.2)
       lodash.isplainobject: 4.0.6
@@ -15711,7 +15711,7 @@ snapshots:
       '@textlint/linter-formatter': 15.2.0
       '@textlint/module-interop': 15.2.0
       '@textlint/types': 15.2.0
-      chalk: 5.4.1
+      chalk: 5.5.0
       debug: 4.4.1
       pluralize: 8.0.0
       strip-ansi: 7.1.0
@@ -22567,7 +22567,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  renovate@41.61.1(encoding@0.1.13)(typanion@3.14.0):
+  renovate@41.62.2(encoding@0.1.13)(typanion@3.14.0):
     dependencies:
       '@aws-sdk/client-codecommit': 3.858.0
       '@aws-sdk/client-ec2': 3.858.0
