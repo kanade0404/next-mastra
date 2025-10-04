@@ -54,8 +54,8 @@ importers:
         specifier: 8.1.0
         version: 8.1.0
       jose:
-        specifier: 6.0.12
-        version: 6.0.12
+        specifier: 6.0.13
+        version: 6.0.13
       ladle:
         specifier: 0.0.0
         version: 0.0.0
@@ -7607,8 +7607,8 @@ packages:
     resolution: {integrity: sha512-twQoecYPiVA5K/h6SxtORw/Bs3ar+mLUtoPSc7iMXzQzK8d7eJ/R09wmTwAjiamETn1cXYPGfNnu7DMoHgu12w==}
     hasBin: true
 
-  jose@6.0.12:
-    resolution: {integrity: sha512-T8xypXs8CpmiIi78k0E+Lk7T2zlK4zDyg+o1CZ4AkOHgDg98ogdP2BeZ61lTFKFyoEwJ9RgAgN+SdM3iPgNonQ==}
+  jose@6.0.13:
+    resolution: {integrity: sha512-Yms4GpbmdANamS51kKK6w4hRlKx8KTxbWyAAKT/MhUMtqbIqh5mb2HjhTNUbk7TFL8/MBB5zWSDohL7ed4k/UA==}
 
   joycon@3.1.1:
     resolution: {integrity: sha512-34wB/Y7MW7bzjKRjUKTa46I2Z7eV62Rkhva+KkopW7Qvv/OSWBqvkSY7vusOPrNuZcUG3tApvdVgNB8POj3SPw==}
@@ -20027,7 +20027,7 @@ snapshots:
 
   jiti@2.5.1: {}
 
-  jose@6.0.12: {}
+  jose@6.0.13: {}
 
   joycon@3.1.1: {}
 
