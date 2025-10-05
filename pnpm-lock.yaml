@@ -145,8 +145,8 @@ importers:
         specifier: 19.8.1
         version: 19.8.1(@types/node@24.3.3)(typescript@5.9.3)
       cross-env:
-        specifier: 10.0.0
-        version: 10.0.0
+        specifier: 10.1.0
+        version: 10.1.0
       cspell:
         specifier: 9.2.1
         version: 9.2.1
@@ -5793,8 +5793,8 @@ packages:
     resolution: {integrity: sha512-CqpqV5bCei+jmKyIw2Wihz+npXDuSkeExWCItEn5hlpD8+QFMXUU2YW5W3Vh/hFxWwzWhguoGXm5gl1os+L2Hw==}
     hasBin: true
 
-  cross-env@10.0.0:
-    resolution: {integrity: sha512-aU8qlEK/nHYtVuN4p7UQgAwVljzMg8hB4YK5ThRqD2l/ziSnryncPNn7bMLt5cFYsKVKBh8HqLqyCoTupEUu7Q==}
+  cross-env@10.1.0:
+    resolution: {integrity: sha512-GsYosgnACZTADcmEyJctkJIoqAhHjttw7RsFrVoJNXbsWWqaq6Ym+7kZjq6mS45O0jij6vtiReppKQEtqWy6Dw==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -18111,7 +18111,7 @@ snapshots:
 
   cronstrue@3.2.0: {}
 
-  cross-env@10.0.0:
+  cross-env@10.1.0:
     dependencies:
       '@epic-web/invariant': 1.0.0
       cross-spawn: 7.0.6
