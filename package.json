@@ -77,7 +77,7 @@
         "eslint-plugin-zod": "^1.4.0",
         "fixpack": "4.0.0",
         "globals": "16.4.0",
-        "lefthook": "1.12.4",
+        "lefthook": "1.13.6",
         "msw": "2.10.5",
         "npm-check-updates": "18.0.3",
         "npm-run-all2": "8.0.4",
