@@ -86,7 +86,7 @@
         "react-docgen": "8.0.1",
         "renovate": "41.81.6",
         "secretlint": "11.0.2",
-        "testcontainers": "11.5.1",
+        "testcontainers": "11.7.1",
         "typedoc": "0.28.13",
         "typescript": "5.9.3",
         "typescript-eslint": "8.40.0",
