@@ -215,7 +215,7 @@ importers:
         version: 60.0.0(eslint@9.29.0(jiti@2.6.1))
       eslint-plugin-vitest:
         specifier: ^0.5.4
-        version: 0.5.4(@typescript-eslint/eslint-plugin@8.46.0(@typescript-eslint/parser@8.46.0(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3)(vitest@3.2.4(@edge-runtime/vm@3.2.0)(@types/debug@4.1.12)(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(msw@2.11.3(@types/node@24.7.0)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.1))
+        version: 0.5.4(@typescript-eslint/eslint-plugin@8.46.0(@typescript-eslint/parser@8.46.0(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3)(vitest@3.2.4(@edge-runtime/vm@3.2.0)(@types/debug@4.1.12)(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(msw@2.11.4(@types/node@24.7.0)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.1))
       eslint-plugin-zod:
         specifier: ^1.4.0
         version: 1.4.0(eslint@9.29.0(jiti@2.6.1))
@@ -229,8 +229,8 @@ importers:
         specifier: 1.13.6
         version: 1.13.6
       msw:
-        specifier: 2.11.3
-        version: 2.11.3(@types/node@24.7.0)(typescript@5.9.3)
+        specifier: 2.11.4
+        version: 2.11.4(@types/node@24.7.0)(typescript@5.9.3)
       npm-check-updates:
         specifier: 18.3.1
         version: 18.3.1
@@ -266,7 +266,7 @@ importers:
         version: 8.46.0(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3)
       vitest:
         specifier: 3.2.4
-        version: 3.2.4(@edge-runtime/vm@3.2.0)(@types/debug@4.1.12)(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(msw@2.11.3(@types/node@24.7.0)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.1)
+        version: 3.2.4(@edge-runtime/vm@3.2.0)(@types/debug@4.1.12)(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(msw@2.11.4(@types/node@24.7.0)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.1)
       wrangler:
         specifier: 4.42.1
         version: 4.42.1(@cloudflare/workers-types@4.20251008.0)
@@ -813,12 +813,6 @@ packages:
   '@breejs/later@4.2.0':
     resolution: {integrity: sha512-EVMD0SgJtOuFeg0lAVbCwa+qeTKILb87jqvLyUtQswGD9+ce2nB52Y5zbTF1Hc0MDFfbydcMcxb47jSdhikVHA==}
     engines: {node: '>= 10'}
-
-  '@bundled-es-modules/cookie@2.0.1':
-    resolution: {integrity: sha512-8o+5fRPLNbjbdGRRmJj3h6Hh1AQJf2dk3qQ/5ZFb+PXkRNiSoMGGUKlsgLfrxneb72axVJyIYji64E2+nNfYyw==}
-
-  '@bundled-es-modules/statuses@1.0.1':
-    resolution: {integrity: sha512-yn7BklA5acgcBr+7w064fGV+SGIFySjCKpqjcWgBAIfrAkY+4GQTJJHQMeT3V/sgz23VTEVV8TtOmkvJAhFVfg==}
 
   '@cdktf/hcl2json@0.21.0':
     resolution: {integrity: sha512-cwX3i/mSJI/cRrtqwEPRfawB7pXgNioriSlkvou8LWiCrrcDe9ZtTbAbu8W1tEJQpe1pnX9VEgpzf/BbM7xF8Q==}
@@ -4519,9 +4513,6 @@ packages:
 
   '@types/conventional-commits-parser@5.0.1':
     resolution: {integrity: sha512-7uz5EHdzz2TqoMfV7ee61Egf5y6NkcO4FB/1iCCQnbeiI1F3xzv3vK5dBCXUCLQgGYS+mUeigK1iKQzvED+QnQ==}
-
-  '@types/cookie@0.6.0':
-    resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
 
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
@@ -8630,8 +8621,8 @@ packages:
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  msw@2.11.3:
-    resolution: {integrity: sha512-878imp8jxIpfzuzxYfX0qqTq1IFQz/1/RBHs/PyirSjzi+xKM/RRfIpIqHSCWjH0GxidrjhgiiXC+DWXNDvT9w==}
+  msw@2.11.4:
+    resolution: {integrity: sha512-CtRZ76gHVoTZiEhAM4zFJpglZ4Ptbg9g7qHn3wbKe55gCoWucC2CErXv/lAUPvOIr1kQw/V8AH4taOsREiNN/Q==}
     engines: {node: '>=18'}
     hasBin: true
     peerDependencies:
@@ -12445,14 +12436,6 @@ snapshots:
   '@baszalmstra/rattler@0.2.1': {}
 
   '@breejs/later@4.2.0': {}
-
-  '@bundled-es-modules/cookie@2.0.1':
-    dependencies:
-      cookie: 0.7.2
-
-  '@bundled-es-modules/statuses@1.0.1':
-    dependencies:
-      statuses: 2.0.2
 
   '@cdktf/hcl2json@0.21.0':
     dependencies:
@@ -16881,8 +16864,6 @@ snapshots:
     dependencies:
       '@types/node': 24.7.0
 
-  '@types/cookie@0.6.0': {}
-
   '@types/debug@4.1.12':
     dependencies:
       '@types/ms': 2.1.0
@@ -17361,13 +17342,13 @@ snapshots:
       chai: 5.2.0
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.2.4(msw@2.11.3(@types/node@24.7.0)(typescript@5.9.3))(vite@6.3.5(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.42.0)(yaml@2.8.1))':
+  '@vitest/mocker@3.2.4(msw@2.11.4(@types/node@24.7.0)(typescript@5.9.3))(vite@6.3.5(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.42.0)(yaml@2.8.1))':
     dependencies:
       '@vitest/spy': 3.2.4
       estree-walker: 3.0.3
       magic-string: 0.30.17
     optionalDependencies:
-      msw: 2.11.3(@types/node@24.7.0)(typescript@5.9.3)
+      msw: 2.11.4(@types/node@24.7.0)(typescript@5.9.3)
       vite: 6.3.5(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.42.0)(yaml@2.8.1)
 
   '@vitest/pretty-format@3.0.9':
@@ -19442,13 +19423,13 @@ snapshots:
       semver: 7.7.2
       strip-indent: 4.0.0
 
-  eslint-plugin-vitest@0.5.4(@typescript-eslint/eslint-plugin@8.46.0(@typescript-eslint/parser@8.46.0(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3)(vitest@3.2.4(@edge-runtime/vm@3.2.0)(@types/debug@4.1.12)(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(msw@2.11.3(@types/node@24.7.0)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.1)):
+  eslint-plugin-vitest@0.5.4(@typescript-eslint/eslint-plugin@8.46.0(@typescript-eslint/parser@8.46.0(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3)(vitest@3.2.4(@edge-runtime/vm@3.2.0)(@types/debug@4.1.12)(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(msw@2.11.4(@types/node@24.7.0)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.1)):
     dependencies:
       '@typescript-eslint/utils': 7.18.0(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3)
       eslint: 9.29.0(jiti@2.6.1)
     optionalDependencies:
       '@typescript-eslint/eslint-plugin': 8.46.0(@typescript-eslint/parser@8.46.0(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.29.0(jiti@2.6.1))(typescript@5.9.3)
-      vitest: 3.2.4(@edge-runtime/vm@3.2.0)(@types/debug@4.1.12)(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(msw@2.11.3(@types/node@24.7.0)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.1)
+      vitest: 3.2.4(@edge-runtime/vm@3.2.0)(@types/debug@4.1.12)(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(msw@2.11.4(@types/node@24.7.0)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.1)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -21586,15 +21567,13 @@ snapshots:
 
   ms@2.1.3: {}
 
-  msw@2.11.3(@types/node@24.7.0)(typescript@5.9.3):
+  msw@2.11.4(@types/node@24.7.0)(typescript@5.9.3):
     dependencies:
-      '@bundled-es-modules/cookie': 2.0.1
-      '@bundled-es-modules/statuses': 1.0.1
       '@inquirer/confirm': 5.1.12(@types/node@24.7.0)
       '@mswjs/interceptors': 0.39.2
       '@open-draft/deferred-promise': 2.2.0
-      '@types/cookie': 0.6.0
       '@types/statuses': 2.0.6
+      cookie: 1.0.2
       graphql: 16.11.0
       headers-polyfill: 4.0.3
       is-node-process: 1.2.0
@@ -21602,6 +21581,7 @@ snapshots:
       path-to-regexp: 6.3.0
       picocolors: 1.1.1
       rettime: 0.7.0
+      statuses: 2.0.2
       strict-event-emitter: 0.5.1
       tough-cookie: 6.0.0
       type-fest: 4.41.0
@@ -24089,11 +24069,11 @@ snapshots:
       terser: 5.42.0
       yaml: 2.8.1
 
-  vitest@3.2.4(@edge-runtime/vm@3.2.0)(@types/debug@4.1.12)(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(msw@2.11.3(@types/node@24.7.0)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.1):
+  vitest@3.2.4(@edge-runtime/vm@3.2.0)(@types/debug@4.1.12)(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(msw@2.11.4(@types/node@24.7.0)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.1):
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
-      '@vitest/mocker': 3.2.4(msw@2.11.3(@types/node@24.7.0)(typescript@5.9.3))(vite@6.3.5(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.42.0)(yaml@2.8.1))
+      '@vitest/mocker': 3.2.4(msw@2.11.4(@types/node@24.7.0)(typescript@5.9.3))(vite@6.3.5(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.42.0)(yaml@2.8.1))
       '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.2.4
       '@vitest/snapshot': 3.2.4
