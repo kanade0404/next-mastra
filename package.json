@@ -79,7 +79,7 @@
         "globals": "16.4.0",
         "lefthook": "1.13.6",
         "msw": "2.11.5",
-        "npm-check-updates": "19.0.0",
+        "npm-check-updates": "19.1.0",
         "npm-run-all2": "8.0.4",
         "prettier": "3.6.2",
         "prisma": "6.17.1",
