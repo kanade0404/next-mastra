@@ -87,8 +87,8 @@ importers:
         specifier: 19.2.0
         version: 19.2.0(react@19.2.0)
       superjson:
-        specifier: 2.2.3
-        version: 2.2.3
+        specifier: 2.2.5
+        version: 2.2.5
       tailwindcss:
         specifier: 4.1.16
         version: 4.1.16
@@ -10068,8 +10068,8 @@ packages:
     engines: {node: '>= 4.0'}
     deprecated: Please upgrade to superagent v10.2.2+, see release notes at https://github.com/forwardemail/superagent/releases/tag/v10.2.2 - maintenance is supported by Forward Email @ https://forwardemail.net
 
-  superjson@2.2.3:
-    resolution: {integrity: sha512-ay3d+LW/S6yppKoTz3Bq4mG0xrS5bFwfWEBmQfbC7lt5wmtk+Obq0TxVuA9eYRirBTQb1K3eEpBRHMQEo0WyVw==}
+  superjson@2.2.5:
+    resolution: {integrity: sha512-zWPTX96LVsA/eVYnqOM2+ofcdPqdS1dAF1LN4TS2/MWuUpfitd9ctTa87wt4xrYnZnkLtS69xpBdSxVBP5Rm6w==}
     engines: {node: '>=16'}
 
   supports-color@10.0.0:
@@ -23399,7 +23399,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  superjson@2.2.3:
+  superjson@2.2.5:
     dependencies:
       copy-anything: 4.0.5
 
