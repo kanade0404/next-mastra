@@ -142,8 +142,8 @@ importers:
         specifier: 8.46.4
         version: 8.46.4(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       '@vitest/eslint-plugin':
-        specifier: 1.0.5
-        version: 1.0.5(@typescript-eslint/utils@8.52.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.16(@edge-runtime/vm@3.2.0)(@opentelemetry/api@1.9.0)(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(msw@2.12.7(@types/node@24.9.2)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.2))
+        specifier: 1.6.5
+        version: 1.6.5(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.16(@edge-runtime/vm@3.2.0)(@opentelemetry/api@1.9.0)(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(msw@2.12.7(@types/node@24.9.2)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.2))
       commitlint:
         specifier: 20.3.0
         version: 20.3.0(@types/node@24.9.2)(typescript@5.9.3)
@@ -5041,16 +5041,14 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@vitest/eslint-plugin@1.0.5':
-    resolution: {integrity: sha512-F4zlKv5S/aG3kiFyJHbkbInKfGuIs3muDnpNfr62g8tV0ALbP/MYjLKWN92olLCtWUb2cKl0pew0gKkkoHEUqw==}
+  '@vitest/eslint-plugin@1.6.5':
+    resolution: {integrity: sha512-+wKYGmvXQJjq58qBx/AwiZr5bFfMiWBdgHViSQoFW/+wl5MQhJeOGP/3HM7GO7W1+AoiW9Gcyy2Hdwcao4LnfQ==}
+    engines: {node: '>=18'}
     peerDependencies:
-      '@typescript-eslint/utils': '>= 8.0'
-      eslint: '>= 8.57.0'
-      typescript: '>= 5.0.0'
+      eslint: '>=8.57.0'
+      typescript: '>=5.0.0'
       vitest: '*'
     peerDependenciesMeta:
-      '@typescript-eslint/utils':
-        optional: true
       typescript:
         optional: true
       vitest:
@@ -17386,13 +17384,16 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.9.0':
     optional: true
 
-  '@vitest/eslint-plugin@1.0.5(@typescript-eslint/utils@8.52.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.16(@edge-runtime/vm@3.2.0)(@opentelemetry/api@1.9.0)(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(msw@2.12.7(@types/node@24.9.2)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.2))':
+  '@vitest/eslint-plugin@1.6.5(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.16(@edge-runtime/vm@3.2.0)(@opentelemetry/api@1.9.0)(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(msw@2.12.7(@types/node@24.9.2)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.2))':
     dependencies:
+      '@typescript-eslint/scope-manager': 8.52.0
+      '@typescript-eslint/utils': 8.52.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       eslint: 9.39.2(jiti@2.6.1)
     optionalDependencies:
-      '@typescript-eslint/utils': 8.52.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       typescript: 5.9.3
       vitest: 4.0.16(@edge-runtime/vm@3.2.0)(@opentelemetry/api@1.9.0)(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(msw@2.12.7(@types/node@24.9.2)(typescript@5.9.3))(terser@5.42.0)(yaml@2.8.2)
+    transitivePeerDependencies:
+      - supports-color
 
   '@vitest/expect@3.0.9':
     dependencies:

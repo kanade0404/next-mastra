@@ -73,7 +73,7 @@
         "eslint-plugin-tailwindcss": "3.18.2",
         "eslint-plugin-testing-library": "7.15.4",
         "eslint-plugin-unicorn": "62.0.0",
-        "@vitest/eslint-plugin": "1.0.5",
+        "@vitest/eslint-plugin": "1.6.5",
         "eslint-plugin-zod": "1.4.0",
         "fixpack": "4.0.0",
         "globals": "16.5.0",
