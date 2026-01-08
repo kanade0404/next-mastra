@@ -36,7 +36,7 @@
     },
     "devDependencies": {
         "@cloudflare/next-on-pages": "1.13.16",
-        "@commitlint/config-conventional": "20.3.0",
+        "@commitlint/config-conventional": "20.3.1",
         "@eslint/eslintrc": "3.3.3",
         "@eslint/js": "9.39.2",
         "@eslint/mcp": "0.2.0",
@@ -49,7 +49,7 @@
         "@types/react": "19.2.7",
         "@typescript-eslint/eslint-plugin": "8.52.0",
         "@typescript-eslint/parser": "8.52.0",
-        "commitlint": "20.3.0",
+        "commitlint": "20.3.1",
         "cross-env": "10.1.0",
         "cspell": "9.4.0",
         "depcheck": "1.4.7",
