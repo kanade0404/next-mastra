@@ -78,7 +78,7 @@
         "fixpack": "4.0.0",
         "globals": "16.5.0",
         "lefthook": "2.0.16",
-        "msw": "2.12.7",
+        "msw": "2.12.14",
         "npm-check-updates": "19.3.1",
         "npm-run-all2": "8.0.4",
         "prettier": "3.7.4",
