@@ -82,7 +82,7 @@
         "npm-check-updates": "19.3.2",
         "npm-run-all2": "8.0.4",
         "prettier": "3.7.4",
-        "prisma": "6.19.1",
+        "prisma": "6.19.3",
         "react-docgen": "8.0.2",
         "renovate": "41.173.1",
         "secretlint": "11.2.5",
