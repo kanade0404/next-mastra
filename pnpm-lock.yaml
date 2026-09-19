@@ -188,7 +188,7 @@ importers:
         version: 6.10.2(eslint@9.39.5(jiti@2.6.1))
       eslint-plugin-prettier:
         specifier: 5.5.6
-        version: 5.5.6(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.39.5(jiti@2.6.1)))(eslint@9.39.5(jiti@2.6.1))(prettier@3.7.4)
+        version: 5.5.6(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.39.5(jiti@2.6.1)))(eslint@9.39.5(jiti@2.6.1))(prettier@3.9.7)
       eslint-plugin-promise:
         specifier: 7.2.1
         version: 7.2.1(eslint@9.39.5(jiti@2.6.1))
@@ -206,7 +206,7 @@ importers:
         version: 3.0.7(eslint@9.39.5(jiti@2.6.1))
       eslint-plugin-storybook:
         specifier: 9.1.20
-        version: 9.1.20(eslint@9.39.5(jiti@2.6.1))(storybook@9.0.9(@testing-library/dom@10.4.0)(prettier@3.7.4))(typescript@5.9.3)
+        version: 9.1.20(eslint@9.39.5(jiti@2.6.1))(storybook@9.0.9(@testing-library/dom@10.4.0)(prettier@3.9.7))(typescript@5.9.3)
       eslint-plugin-tailwindcss:
         specifier: 3.18.3
         version: 3.18.3(tailwindcss@4.1.18)
@@ -238,8 +238,8 @@ importers:
         specifier: 8.0.4
         version: 8.0.4
       prettier:
-        specifier: 3.7.4
-        version: 3.7.4
+        specifier: 3.9.7
+        version: 3.9.7
       prisma:
         specifier: 6.19.3
         version: 6.19.3(typescript@5.9.3)
@@ -9382,8 +9382,8 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  prettier@3.7.4:
-    resolution: {integrity: sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA==}
+  prettier@3.9.7:
+    resolution: {integrity: sha512-T3mF5P7HFzZVLDQuCUNtJj6WK1pcpLMweMNUVwGb01bLNkH9AkKxtZvmInw8K6bnn2O3d6/5RHl6zSHiBAD0Og==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -19472,10 +19472,10 @@ snapshots:
       safe-regex-test: 1.1.0
       string.prototype.includes: 2.0.1
 
-  eslint-plugin-prettier@5.5.6(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.39.5(jiti@2.6.1)))(eslint@9.39.5(jiti@2.6.1))(prettier@3.7.4):
+  eslint-plugin-prettier@5.5.6(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.39.5(jiti@2.6.1)))(eslint@9.39.5(jiti@2.6.1))(prettier@3.9.7):
     dependencies:
       eslint: 9.39.5(jiti@2.6.1)
-      prettier: 3.7.4
+      prettier: 3.9.7
       prettier-linter-helpers: 1.0.1
       synckit: 0.11.13
     optionalDependencies:
@@ -19538,11 +19538,11 @@ snapshots:
       semver: 7.7.4
       typescript: 5.9.3
 
-  eslint-plugin-storybook@9.1.20(eslint@9.39.5(jiti@2.6.1))(storybook@9.0.9(@testing-library/dom@10.4.0)(prettier@3.7.4))(typescript@5.9.3):
+  eslint-plugin-storybook@9.1.20(eslint@9.39.5(jiti@2.6.1))(storybook@9.0.9(@testing-library/dom@10.4.0)(prettier@3.9.7))(typescript@5.9.3):
     dependencies:
       '@typescript-eslint/utils': 8.52.0(eslint@9.39.5(jiti@2.6.1))(typescript@5.9.3)
       eslint: 9.39.5(jiti@2.6.1)
-      storybook: 9.0.9(@testing-library/dom@10.4.0)(prettier@3.7.4)
+      storybook: 9.0.9(@testing-library/dom@10.4.0)(prettier@3.9.7)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -21157,7 +21157,7 @@ snapshots:
       open: 10.1.2
       picocolors: 1.1.1
       posthog-node: 4.18.0
-      prettier: 3.7.4
+      prettier: 3.9.7
       shell-quote: 1.8.3
       strip-json-comments: 5.0.3
       tcp-port-used: 1.0.2
@@ -22295,7 +22295,7 @@ snapshots:
 
   prettier@3.6.2: {}
 
-  prettier@3.7.4: {}
+  prettier@3.9.7: {}
 
   pretty-format@27.5.1:
     dependencies:
@@ -23389,7 +23389,7 @@ snapshots:
 
   stoppable@1.1.0: {}
 
-  storybook@9.0.9(@testing-library/dom@10.4.0)(prettier@3.7.4):
+  storybook@9.0.9(@testing-library/dom@10.4.0)(prettier@3.9.7):
     dependencies:
       '@storybook/global': 5.0.0
       '@testing-library/jest-dom': 6.6.3
@@ -23403,7 +23403,7 @@ snapshots:
       semver: 7.8.5
       ws: 8.18.2
     optionalDependencies:
-      prettier: 3.7.4
+      prettier: 3.9.7
     transitivePeerDependencies:
       - '@testing-library/dom'
       - bufferutil
